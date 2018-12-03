@@ -40,7 +40,7 @@ export default {
         padding: 0 5px 0px 10px;
         position: relative;
         border-radius: 0 5px 5px 0;
-        margin: 5px 9px 5px 8px;
+        margin: 5px 15px;
 
         i {
             position: absolute;

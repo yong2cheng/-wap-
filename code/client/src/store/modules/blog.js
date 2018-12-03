@@ -8,7 +8,7 @@ const blog = {
         homeList: [],
         info: {},
         currType: '',
-        pagesize: 5,
+        pagesize: 6,
         loadingMore: false,
         loadingBol: true
     },

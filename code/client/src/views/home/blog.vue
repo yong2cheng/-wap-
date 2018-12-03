@@ -1,6 +1,6 @@
 <template>
     <section class="blog-wrapper">
-        <ul v-if="blogList.length > 0">
+        <ul v-if="blogList.length > 0" class="cf">
             <li class="article" v-for="(v, index) in blogList" :style="{'animation-delay': index%5*0.2+'s'}" @click="$router.push(`/article/${v._id}`)">
                 <Github class="github mouse-pointer" background="rgba(186, 164, 119, 0.99)" :link="v.github" v-if="v.github"></Github>
                 <time>{{v.createTime | parseTime('{y}-{m}-{d}')}}</time>
@@ -63,6 +63,7 @@
         },
         watch: {
             $route (to, from) {
+                this.pageindex = 1
                 this.getBlogData()
             }
         }
@@ -81,11 +82,12 @@
             100% {opacity: 1;}
         }
         .article {
+            float: left;
             width: 7rem;
             max-width: 500px;
             padding-bottom: 70px;
             box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.08);
-            margin: 30px auto;
+            margin: 30px;
             transition: box-shadow .4s;
             position: relative;
             opacity: 0.1;
@@ -93,7 +95,7 @@
             animation-fill-mode: forwards;
             color: #42484b;
             background-image: url('../../images/note-bg.jpg');
-            
+            cursor: pointer;
         
             &:hover {
                 box-shadow: 5px 15px 30px 5px rgba(0, 0, 0, 0.15);
@@ -172,7 +174,7 @@
                 margin: 0 auto;
                 text-align: right;
                 img {
-                    width: 30px;
+                    width: 32px;
                 }
             
             }

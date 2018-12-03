@@ -3,13 +3,13 @@
         <h1 class="title">{{blogInfo.title}}</h1>
         <div class="article-wrapper">
             <Back></Back>
-            <div class="content">
+            <div class="content" style="height:calc(100vh - 138px);">
                 <div class="box">
                     <Github class="github" :link="blogInfo.github" v-if="blogInfo.github"></Github>
-                    <div class="entry">
+                    <div class="entry" style="height:calc(100% - 32px);">
                         <h1>{{blogInfo.title}}</h1>
                         <time>{{blogInfo.releaseTime | parseTime('{y}-{m}-{d}')}}</time>
-                        <div class="intro fmt" v-html="blogHtml"></div>
+                        <div class="intro fmt" v-html="blogHtml" style="height:calc(100% - 70px);"></div>
                     </div>
                     <div class="logo">
                         <img :src="require(`src/images/source_single_${blogInfo.source === 1?1:blogInfo.source === 2?2:3}.png`)" alt="">
@@ -80,7 +80,8 @@ export default {
             
 
             .box {
-                padding: 0.3rem 0.6rem;
+                height: 100%;
+                padding:20px 50px;
                 border: 1px dashed #c9c9c7;
                 position: relative;
                 .github {
@@ -91,14 +92,13 @@ export default {
                 .entry {
                     line-height: 30px;
                     h1 {
-                        margin-bottom: 20px;
                         text-align: center;
                         color: @theme-red-color;
                     }
                     time {
                         color: #b2b2ae;
                         font-size: 12px;
-                        margin-bottom: 20px;
+                        margin-bottom: 10px;
                         display: block;
                         text-align: center;
                     }
@@ -113,12 +113,11 @@ export default {
                 }
 
                 .logo {
-                    margin-top: 30px;
-                    margin-right: -20px;
+                    height: 32px;
+                    margin-right: -32px;
                     text-align: right;
-                    // padding-right: 0.3rem;
                     img {
-                        width: 50px;
+                        width: 32px;
                     }
         
                 }

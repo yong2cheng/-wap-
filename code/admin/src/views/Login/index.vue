@@ -30,6 +30,7 @@
         },
         methods: {
             async login() {
+                console.log(this.$store)
                 this.loading = true;
                 if (!this.loginInfo.username) {
                     this.msg = "请输入用户名";
@@ -47,6 +48,7 @@
                 }   
                 try {
                     await this.$store.dispatch('userLogin', this.loginInfo);
+                    console.log(111)
                     this.$router.push('/home')
                 } catch (e) {
                     console.log(e)

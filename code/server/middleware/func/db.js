@@ -91,6 +91,7 @@ export const find = (model, conditions, fields, options = {}) => {
                 reject(err);
                 return false;
             } else {
+                console.log(conditions)
                 if (res.length != 0) {
                     console.log('find success!');
                 } else {

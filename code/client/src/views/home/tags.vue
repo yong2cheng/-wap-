@@ -1,6 +1,6 @@
 <template>
     <div class="tags-wrapper">
-        <ul>
+        <ul class="cf">
             <li v-for="tag in blogTypes"><Tag :text="tag.name" :path="'/blog/'+tag.name"></Tag></li>
         </ul>
     </div>
@@ -26,10 +26,21 @@
 <style lang="less" scoped>
     .tags-wrapper {
         max-width: 7rem;
-        margin: 20px auto;
+        margin: 20px 50PX;
+    }
+    .tags-wrapper .tag-wrapper {
+        font-size: 16px;
+        height: 30px;
+        line-height: 30px;
+        &:after {
+            width: 6px;
+            height: 6px;
+            top: 12px;
+            left: 2px;
+        }
     }
     li {
-        display: inline-block;
+        float: left;
         vertical-align: middle;
     }
 </style>

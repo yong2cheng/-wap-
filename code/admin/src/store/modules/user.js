@@ -1,7 +1,7 @@
 import axios from 'src/utils/fetch'
 import {getToken} from 'src/utils/auth'
 import md5 from 'js-md5'
-import axios1 from 'axios'
+// import axios1 from 'axios'
 
 const user = {
 	state: {
@@ -46,6 +46,7 @@ const user = {
 					username: username,
 					pwd: md5(pwd)
 				}).then( res => {
+					console.log(document.cookie)
 					// console.log(res)
 					state.token = getToken();
 					resolve(res)

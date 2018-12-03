@@ -26,7 +26,6 @@
 
 <style lang="less" scoped>
 	.back-wrapper {
-		// padding: 20px 0;
         width: 40px;
         height: 40px;
         display: inline-block;
@@ -36,8 +35,8 @@
         background: #f9f9f3;
         text-align: center;
         line-height: 40px;
-        margin: 20px 0;
-
+        margin-bottom: 20px;
+        cursor: pointer;
         >* {
             vertical-align: middle;
             color: @vice-color;

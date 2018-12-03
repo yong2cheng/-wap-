@@ -44,7 +44,7 @@ export default {
 			transition: width 0.28s ease-out;
 		}
 		.main-container {
-			min-height: 100%;
+			height: 100vh;
 			margin-left: 200px;
 			transition: margin-left 0.28s ease-out;
 		}

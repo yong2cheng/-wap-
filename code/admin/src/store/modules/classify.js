@@ -7,6 +7,7 @@ export const sources = [
 
 //博客分类
 export const blogTypes = [ 
+    { name: '工具类封装' },
     { name: 'HTML' },
     { name: 'CSS' },
     { name: 'JavaScript' },
@@ -19,6 +20,7 @@ export const blogTypes = [
     { name: '黑科技' }
 ]
 export const blogFilters = [
+    { text: '工具类封装', value: '工具类封装' },
     { text: 'HTML', value: 'HTML' },
     { text: 'CSS', value: 'CSS' },
     { text: 'JavaScript', value: 'JavaScript' },
@@ -29,4 +31,10 @@ export const blogFilters = [
     { text: '算法', value: '算法' },
     { text: '工具', value: '工具' },
     { text: '黑科技', value: '黑科技' }
+]
+
+export const sourcesFilters = [
+    { text: '原创', value: '原创' },
+    { text: '转载', value: '转载' },
+    { text: '翻译', value: '翻译' }
 ]

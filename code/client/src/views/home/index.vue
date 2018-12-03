@@ -4,7 +4,7 @@
         <div :class="{'tags-box': pc_bol}">
             <TagsComponent></TagsComponent>
         </div>
-        <div :class="{'view-box': pc_bol}">
+        <div :class="{'view-box': pc_bol}" style="width:calc(100% - 210px);">
             <router-view>
                 <BlogComponent></BlogComponent>
             </router-view>
@@ -34,7 +34,7 @@
             window.addEventListener('scroll', () => {
                 let distance = document.documentElement.scrollTop || document.body.scrollTop,
                     scrollH = document.documentElement.scrollHeight || document.body.scrollHeight;
-                
+                    
                 if (distance+this.winH >= scrollH) {
                     if (this.blogLoadingBol) {
                         console.log(111)
@@ -54,11 +54,12 @@
 </script>
 <style lang="less" scoped>
     .tags-box {
-        width: 30%;
+        width: 210px;
         float: left;
+        /* overflow: auto */
     }
     .view-box {
-        width: 67%;
-        float: right;
+        float: left;
+        /* overflow: auto */
     }
 </style>

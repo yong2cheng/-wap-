@@ -6,6 +6,7 @@
 <style lang="less" scoped>
 	.none-data-wrapper {
 		text-align: center;
+		margin: 175px 0;
 		.none-data-icon {
 			font-size: 100px;
 		}

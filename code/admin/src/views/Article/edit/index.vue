@@ -1,8 +1,8 @@
 <template>
-    <el-dialog title="歌曲编辑" :visible.sync="dialogTableVisible" class="edit-wrapper" @close="close" width="80%">
+    <el-dialog title="博客编辑" :visible.sync="dialogTableVisible" class="edit-wrapper" @close="close" width="80%">
         <el-form :model="info" :rules="rules" ref="form" label-width="100px" class="form">
-            <el-form-item label="音乐类型" prop="type">
-                <el-select v-model="info.type" multiple clearable placeholder="请选择音乐类型" class="block">
+            <el-form-item label="博客类型" prop="type">
+                <el-select v-model="info.type" multiple clearable placeholder="请选择博客类型" class="block">
                     <el-option v-for="item in blogTypes" :key="item.name" :label="item.name" :value="item.name">
                     </el-option>
                 </el-select>

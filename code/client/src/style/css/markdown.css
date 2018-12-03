@@ -108,7 +108,7 @@
     border: none;
     overflow: auto;
     line-height: 1.45;
-    max-height: 35em;
+    height:calc(100% - 1.5em);
     position: relative;
     background: url('../../images/blueprint.png') #F6F6F6;
     -moz-background-size: 30px,30px;

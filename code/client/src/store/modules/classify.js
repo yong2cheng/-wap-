@@ -7,6 +7,7 @@ export const sources = [
 
 //博客分类
 export const blogTypes = [ 
+    { name: '工具类封装' },
     { name: 'HTML' },
     { name: 'CSS' },
     { name: 'JavaScript' },

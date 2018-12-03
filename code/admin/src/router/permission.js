@@ -19,6 +19,8 @@ router.beforeEach((to, from, next) => {
                         router.addRoutes(store.state.permission.addRouters)
                         next({ ...to }) //hash模式  确保路由加载完成
                     });
+                }).catch( err => {
+                    next('/login')
                 })
             }else{ // 存在信息，直接跳转到该页面
                 next()
