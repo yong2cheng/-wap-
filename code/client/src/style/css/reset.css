@@ -243,9 +243,9 @@ html {
 	box-sizing: border-box;
   }
   html, body{/* 禁止选中文本 */
-	-webkit-user-select: none;
-	user-select: none;
-	font: Oswald, 'Open Sans', Helvetica, Arial, sans-serif
+	/* -webkit-user-select: none;
+	user-select: none;*/
+	font: Oswald, 'Open Sans', Helvetica, Arial, sans-serif 
   }
   /* 禁止长按链接与图片弹出菜单 */
   a, img {
