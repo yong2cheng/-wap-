@@ -279,3 +279,13 @@ html {
   a,button{cursor:pointer;}
   h1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}
   del,ins,u,s,a,a:hover{text-decoration:none;}
+
+  .upload_img .el-upload-list--picture-card .el-upload-list__item {
+    width: 180px;
+    height: 90px;
+}
+.upload_img .el-upload--picture-card {
+    width: 180px;
+    height: 90px;
+    line-height: 90px;
+}

@@ -19,14 +19,14 @@ axios.interceptors.response.use(response => response, err => Promise.resolve(err
 
 // 检查状态码
 function checkStatus(res) { 
-    console.log(document.cookie)
+    console.log(res)
     // 结束
     if (res.status === 200 || res.status === 304) {
         return res.data
     }
     return {
         code: 0,
-        msg: res.data.msg || res.statusText,
+        msg: res.data.message || res.statusText,
         data: res.statusText
     }
     return res
@@ -35,21 +35,20 @@ function checkStatus(res) {
 
 // 检查CODE值
 function checkCode(res) {
-    console.log(document.cookie)
-    if (res.code === 0) {
+    console.log(res)
+    if(res.code === 10000) {
+        return res
+    } else {
         Message({
-          message: res.msg,
-          type: 'error',
-          duration: 2 * 1000
+            message: res.message,
+            type: 'error',
+            duration: 2 * 1000
         })
-        removeToken()
         throw new Error(res.msg)
     }
-    
-    return res
 }
 
-const prefix = '/admin_demo_api/'
+const prefix = 'http://www.sai32m.cn:8080/api/'
 export default {
     get(url, params) {
         if (!url) return
@@ -61,7 +60,7 @@ export default {
         }).then(checkStatus).then(checkCode)
     },
     post(url, data) {
-        console.log(document.cookie)
+        console.log(url)
         if (!url) return
         return axios({
             method: 'post',

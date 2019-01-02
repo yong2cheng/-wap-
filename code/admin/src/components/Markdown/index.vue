@@ -224,7 +224,7 @@ import highlightJs from 'highlight.js'
         }
         .render {
             background-color: @md-bg-color;
-            overflow-y: scroll;
+            overflow: auto;
             padding-top: 60px;
         }
 

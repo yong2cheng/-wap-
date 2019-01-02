@@ -4,7 +4,6 @@ import marked from 'marked'
 
 marked.setOptions({
     renderer: new marked.Renderer(),
-    renderer: new marked.Renderer(),
     gfm: true, //允许 Git Hub标准的markdown.
     tables: true, //允许支持表格语法。该选项要求 gfm 为true。
     breaks: true, //允许回车换行。该选项要求 gfm 为true。

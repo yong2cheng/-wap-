@@ -22,7 +22,8 @@
                 let first = matched[0],
                     second = matched[1];
                 if (first && first.name !== '首页' && first.name !== '') {
-                    matched = [{name: '首页', path: '/'}].concat(matched);
+                    // 要首页时注释注释掉就行
+                    // matched = [{name: '首页', path: '/'}].concat(matched);
                 }
                 if (second && second.name === '首页') {
                     this.levelList = [second];

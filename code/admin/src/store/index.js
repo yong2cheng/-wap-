@@ -4,8 +4,11 @@ import getters from './getters'
 import app from './modules/app'
 import user from './modules/user'
 import permission from './modules/permission'
-import blog from './modules/blog'
+import task from './modules/task'
 import other from './modules/other'
+import integral from './modules/integral'
+import sysSetting from './modules/sysSetting'
+import shopping from './modules/shopping'
 
 Vue.use(Vuex)
 
@@ -14,8 +17,11 @@ const store = new Vuex.Store({
         app,
         user,
         permission,
-        blog,
-        other
+        task,
+        other,
+        integral,
+        sysSetting,
+        shopping
     },
     getters
 })

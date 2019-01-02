@@ -1,11 +1,17 @@
 body {
-    background: rgba(186,164,119,0.3);
     border-top: 1px solid transparent;
     margin-top: -1px;
     font-family: "Source Code Pro",Consolas,Menlo,Monaco,"Courier New",monospace;
+    background: #f8f8f8
 }
-button {
-    border: none;
+.commom_button {
+    width: 90px;
+    height: 40px;
+    padding: 5px;
+    margin-top: 15px;
+    border: 1px double #a9a2a2;
+    font-size: 0.3rem;
+    border-radius: 5px;
     background: none;
     outline: none;
 }
@@ -18,21 +24,23 @@ input, textarea{
     vertical-align: -0.15em;
     fill: currentColor;
     overflow: hidden;
- }
-
-::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
 }
 
-::-webkit-scrollbar-thumb {
-    opacity: .8;
-    background: #c1866a;
-    border-radius: 4px;
-    transition: all .5s;
+.integral_list .el-collapse-item__wrap {
+    width:100%;
 }
-
-
+.integral_list .el-collapse-item__content {
+    padding-bottom:0
+}
+.upload_img .el-upload-list--picture-card .el-upload-list__item {
+    width: 135px;
+    height: 80px;
+}
+.upload_img .el-upload--picture-card {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+}
 /* nprogress styles */
 /* Make clicks pass-through */
 
@@ -95,7 +103,6 @@ input, textarea{
 .nprogress-custom-parent #nprogress .bar {
     position: absolute;
 }
-
 @keyframes nprogress-spinner {
     0% {
         transform: rotate(0deg);

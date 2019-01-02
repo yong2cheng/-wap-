@@ -26,8 +26,11 @@
     export default {
         data() {
             return {
-                isCollapse: false
+                isCollapse: true
             }
+        },
+        created() {
+console.log(this.$store.state.app.slideBar.opened)
         },
         methods: {
             demo (path, child) {

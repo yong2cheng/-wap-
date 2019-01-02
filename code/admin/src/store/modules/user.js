@@ -20,11 +20,12 @@ const user = {
 		SET_USERINFO (state, info) {
 			state.name = info.name;
 			state.username = info.username;
-			state.roles = info.roles;
+			state.roles = [info.username];
 		},
 		USERLIST (state, data) {
+			console.log(data)
 			state.list = data.list
-			state.total = data.total;
+			state.userTotal = data.total;
 		},
 		GET_INFOLIST (state, data) {
 			state.otherList = data;
@@ -37,14 +38,23 @@ const user = {
 	},
 	actions: {
 		clearInfo ({commit}) {
-			commit('CLEARINFO')
+			return new Promise( (resolve, reject) => {
+				axios.get('user/logout').then( res => {
+					commit('CLEARINFO')
+					resolve(res)
+				}).catch( err => {
+					// console.log(err)
+					reject(err)
+				})
+			})
 		},
 		userLogin ({state, commit}, info) {
-			let {username, pwd} = info;
 			return new Promise( (resolve, reject) => {
 				axios.post('user/login',{
-					username: username,
-					pwd: md5(pwd)
+					username: info.username,
+					password: info.password,
+					graphValidateCode: info.graphValidateCode,
+					userType:2
 				}).then( res => {
 					console.log(document.cookie)
 					// console.log(res)
@@ -58,8 +68,8 @@ const user = {
 		},
 		getUserInfo ({state, commit}) {
 			return new Promise( (resolve, reject) => {
-				axios.get('user/info',{
-					token: state.token
+				axios.get('user/datail',{
+					userType:2
 				}).then( res => {
 					console.log(res)
 					commit('SET_USERINFO', res.data)
@@ -72,7 +82,7 @@ const user = {
 		},
 		getUserList ({commit}, params) {
 			return new Promise( (resolve, reject) => {
-				axios.get('user/list', params).then( res => {
+				axios.get('user/query', params).then( res => {
 					console.log(res)
 					commit('USERLIST', res.data)
 					resolve(res)
@@ -115,29 +125,6 @@ const user = {
 					})
 			})
 		}
-		// getAddOtherInfo () {
-		// 	return new Promise( (resolve, reject) => {
-		// 		axios.post('admin_apis/info/add').then( res => {
-		// 			// console.log(res)
-		// 			resolve(res)
-		// 		}).catch( err => {
-		// 			// console.log(err)
-		// 			reject(err)
-		// 		})
-		// 	})
-		// },
-		// getOtherInfoList ({commit}) {
-		// 	return new Promise( (resolve, reject) => {
-		// 		axios.get('admin_apis/info/list').then( res => {
-		// 			// console.log(res)
-		// 			commit('GET_INFOLIST', res.data)
-		// 			resolve(res)
-		// 		}).catch( err => {
-		// 			// console.log(err)
-		// 			reject(err)
-		// 		})
-		// 	})
-		// }
 	}
 }
 

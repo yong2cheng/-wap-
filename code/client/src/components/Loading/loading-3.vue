@@ -3,7 +3,7 @@
     <div class="loading-wrapper-phone">
         <div class="toast toast-loading">
             <div class="toast-loading-wrap">
-                <div class="toast-loading-leaf" v-for="(v, i) in 12" :style="{transform: `rotate(${30*i}deg) translate(7.92px)`, animationDelay: i*0.1+'s'}"></div>
+                <div class="toast-loading-leaf" v-for="(v, i) in 12" :key="i" :style="{transform: `rotate(${30*i}deg) translate(7.92px)`, animationDelay: i*0.1+'s'}"></div>
             </div>
             <p class="toast-loading-text">数据加载中</p>
         </div>
@@ -17,6 +17,7 @@
         height: 100%;
         top: 0;
         left: 0;
+        background: rgba(64, 64, 64, 0.8);
         .toast {
             left: 50%;
             top: 35%;
@@ -28,7 +29,7 @@
             width: 7.6em;
             min-height: 7.6em;
             margin-left: -3.8em;
-            background: rgba(186, 164, 119, .75);
+            // background: rgba(186, 164, 119, .75);
             text-align: center;
             border-radius: 5px;
             color: #fff;
