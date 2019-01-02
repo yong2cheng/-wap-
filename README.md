@@ -18,8 +18,8 @@ npm run server  // 启动服务
 
 
 ## 注意事项： 
-  1. `cnpm run dev:admin` 启动后台管理界面
-  2. `cnpm run dev:client` 启动前台页面
+1. `cnpm run dev:admin` 启动后台管理界面
+2. `cnpm run dev:client` 启动前台页面
 
 
 
