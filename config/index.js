@@ -12,7 +12,7 @@ module.exports = {
                     target: 'http://localhost:3000/admin_demo_api/',
                     changeOrigin: true,
                     pathRewrite: {
-                      '^/admin_demo_api': '/'
+                        '^/admin_demo_api': '/'
                     }
                 }
             }
@@ -41,7 +41,7 @@ module.exports = {
                     target: 'http://localhost:3000/client_demo_api/',
                     changeOrigin: true,
                     pathRewrite: {
-                      '^/client_demo_api': '/'
+                        '^/client_demo_api': '/'
                     }
                 }
             }
