@@ -3,6 +3,12 @@
     <div class="search">
         <el-input placeholder="请输入用户名" prefix-icon="el-icon-search" v-model="keyword" @keydown.enter.native="getUserList" style="width:150px"></el-input>
         <el-input placeholder="请输入真实姓名" prefix-icon="el-icon-search" v-model="keywordRealName" @keydown.enter.native="getUserList" style="width:150px"></el-input>
+        <el-select v-model="vipType" placeholder="请选择会员类型" class="block" style="width:150px">
+            <el-option v-for="(item,index) in vipTypeArr" :key="index" :label="item.name" :value="item.vipType"></el-option>
+        </el-select>
+        <el-select v-model="userStatus" placeholder="请选择用户状态" class="block" style="width:150px">
+            <el-option v-for="(item,index) in userStatusArr" :key="index" :label="item.name" :value="item.status"></el-option>
+        </el-select>
         <el-date-picker
             v-model="dateValue"
             type="daterange"
@@ -28,15 +34,17 @@
                             v-for="(tag, index) in scope.row.roles" :key="index">{{tag}}</el-tag>
                     </div>
                     <div v-else-if="scope.column.property === 'avatar'"><img :src="scope.row[scope.column.property]" alt="" style="height: 40px;"></div>
+                    <div v-else-if="scope.column.property === 'status'">{{scope.row.status ==1?'启用' : '禁用'}}</div>
                     <div v-else>{{scope.row[scope.column.property] || '无'}}</div>
                 </template>
             </el-table-column>
-            <!-- <el-table-column label="操作" header-align="center" align="center" width="250">
+            <el-table-column label="操作" header-align="center" align="center" width="100">
                 <template slot-scope="scope">
-                <el-button size="mini" @click="edit(scope)">编辑</el-button>
-                <el-button size="mini" type="danger" @click="del(scope)">删除</el-button>
+                <el-button size="mini" @click="changStatus(scope,0)" v-if="scope.row.status==1">禁用</el-button>
+                <el-button size="mini" @click="changStatus(scope,1)" v-else>启用</el-button>
+                <!-- <el-button size="mini" type="danger" @click="del(scope)">删除</el-button> -->
                 </template>
-            </el-table-column> -->
+            </el-table-column>
         </el-table>
     </div>
     <el-pagination
@@ -94,7 +102,8 @@
                         hidden: false,
                         headerAlign: 'center',
                         align: 'center',
-                        width: ''                 
+                        width: '',
+                        minWidth:'80px'                 
                     },
                     {
                         label: '会员类型名称',
@@ -103,7 +112,18 @@
                         headerAlign: 'center',
                         align: 'center',
                         width: '',
-                        sort: true                  
+                        sort: true,
+                        minWidth:'120px'                  
+                    },
+                    {
+                        label: '用户状态',
+                        prop: 'status',
+                        hidden: false,
+                        headerAlign: 'center',
+                        align: 'center',
+                        width: '',
+                        sort: true,
+                        minWidth:'80px'                  
                     },
                     {
                         label: '用户层级',
@@ -112,7 +132,8 @@
                         headerAlign: 'center',
                         align: 'center',
                         width: '',
-                        sort: true                  
+                        sort: true ,
+                        minWidth:'80px'                  
                     },
                     {
                         label: '上级姓名',
@@ -121,7 +142,8 @@
                         headerAlign: 'center',
                         align: 'center',
                         width: '',
-                        sort: true                  
+                        sort: true,
+                        minWidth:'80px'                   
                     },
                     {
                         label: '上级手机号',
@@ -139,9 +161,39 @@
                         headerAlign: 'center',
                         align: 'center',
                         width: '',
-                        sort: true                  
+                        sort: true ,
+                        minWidth:'160px'               
                     }
                 ],
+                vipTypeArr:[
+                {
+                    name:'所有会员',
+                    vipType:''
+                },
+                {
+                    name:'非会员',
+                    vipType:0
+                },
+                {
+                    name:'普通会员',
+                    vipType:1
+                },{
+                    name:'高级会员',
+                    vipType:2
+                }],
+                vipType:'',
+                userStatusArr:[
+                {
+                    name:'所有状态',
+                    status:''
+                },{
+                    name:'禁用',
+                    status:0
+                },{
+                    name:'启用',
+                    status:1
+                }],
+                userStatus:'',
                 multipleSelection: []
             }
         },
@@ -182,6 +234,12 @@
                 if(this.keywordRealName) {
                     obj.realName = this.keywordRealName
                 }
+                if(this.vipType || this.vipType==0) {
+                    obj.vipType = this.vipType
+                }
+                if(this.userStatus || this.userStatus==0) {
+                    obj.status = this.userStatus
+                }
                 this.loading = true;
                 try {
                     await this.$store.dispatch('getUserList', obj)
@@ -190,6 +248,34 @@
                     this.loading = false;
                 }
             },
+            async changStatus(scope,type) {
+                let str ='',successMes=''
+                if(type == 1) {
+                    str = '是否启用该用户？'
+                    successMes = '启用成功'
+                } else {
+                    str = '是否禁用该用户'
+                    successMes = '禁用成功'
+                }
+                this.$confirm(str, '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning',
+                    center: true
+                }).then(async () => {
+                    let obj={
+                        id: scope.row.id,
+                        status: type,
+                    }
+                    await this.$store.dispatch('updateStatus', obj)
+                    this.$message({
+                        message: successMes,
+                        type: 'success',
+                        duration:1500
+                    });
+                    this.getUserList()
+                })
+            }
         },
         computed: {
             ...mapGetters([

@@ -40,6 +40,16 @@ const task = {
 					})
 			})
 		},
+		async deleteTask ({commit}, info) {
+			return new Promise( (resolve, reject) => {
+				axios.get('task/delete', info)
+					.then( res => {
+						resolve(res)
+					}).catch( err => {
+						reject(err)
+					})
+			})
+		},
 		async getTaskList ({commit}, params) {
 			return new Promise( (resolve, reject) => {
 				axios.get('task/query', params)
@@ -69,6 +79,18 @@ const task = {
 		async toExamine ({commit}, info) {
 			return new Promise( (resolve, reject) => {
 				axios.post('userTaskRelation/update', info)
+					.then( res => {
+						resolve(res)
+					}).catch( err => {
+						reject(err)
+					})
+			})
+		},
+
+		// 批量审核任务
+		async toExamineBatchUpdate ({commit}, info) {
+			return new Promise( (resolve, reject) => {
+				axios.post('userTaskRelation/batchUpdate', info)
 					.then( res => {
 						resolve(res)
 					}).catch( err => {

@@ -65,7 +65,8 @@ import { mapGetters } from 'vuex'
                             if(this.sysStatus = 10000) {
                                 this.$message({
                                     message: '修改成功',
-                                    type: 'success'
+                                    type: 'success',
+                                    duration:1500
                                 });
                             }
                             this.loading = false

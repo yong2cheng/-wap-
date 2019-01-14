@@ -229,7 +229,8 @@
                     if(this.shoppingStatus = 10000) {
                         this.$message({
                             message: successMes,
-                            type: 'success'
+                            type: 'success',
+                            duration:1500
                         });
                     }
                     this.close()

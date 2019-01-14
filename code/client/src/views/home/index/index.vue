@@ -2,32 +2,35 @@
     <div>
         <div class="home-wrapper">
             <div class="block">
-                <el-carousel trigger="click" height="200px" arrow="never">
+                <el-carousel trigger="click" height="5.9rem" arrow="never" indicator-position="none">
                     <el-carousel-item v-for="(item,index) in bannerImgLst" :key="index">
                         <img  :src="item.url" class="bannerImg"/>
                     </el-carousel-item>
                 </el-carousel>
             </div>
-            <div class="notice">
-                <em></em>
-                <textScroll :lists="textLists"></textScroll>
-            </div>
-            <div class="middle_menu">
-                <ul>
-                    <li @click="getPath('becomeVip','成为VIP')"><img src="../../../images/homeMenu/grid4.png"/><p>成为VIP</p></li>
-                    <li @click="getPath('promotionLinks','推广二维码')"><img src="../../../images/homeMenu/grid2.png"/><p>推广二维码</p></li>
-                    <li @click="getPath('notOpen','如何赚佣')"><img src="../../../images/homeMenu/grid1.png"/><p>如何赚佣</p></li>
-                    <li @click="getPath('notOpen','广告投放')"><img src="../../../images/homeMenu/grid3.png"/><p>广告投放</p></li>
-                    <li @click="getPath('notOpen','100积分抽奖')"><img src="../../../images/homeMenu/grid5.png"/><p>100积分抽奖</p></li>
-                    <li @click="getPath('notOpen','签到赚分')"><img src="../../../images/homeMenu/grid6.png"/><p>签到赚分</p></li>
-                    <li @click="getPath('notOpen','在线充值')"><img src="../../../images/homeMenu/grid7.png"/><p>在线充值</p></li>
-                    <li @click="getPath('notOpen','立即提现')"><img src="../../../images/homeMenu/grid8.png"/><p>立即提现</p></li>
-                    <li @click="getPath('notOpen','在线客服')"><img src="../../../images/homeMenu/grid9.png"/><p>在线客服</p></li>
-                    <li @click="getPath('notOpen','发布任务')"><img src="../../../images/homeMenu/grid10.png"/><p>发布任务</p></li>
-                    <li @click="getPath('notOpen','免费影视')"><img src="../../../images/homeMenu/grid11.png"/><p>免费影视</p></li>
-                    <li @click="getPath('notOpen','淘宝返利')"><img src="../../../images/homeMenu/grid12.png"/><p>淘宝返利</p></li>
-                    <div style="height: 73px;clear: both;background-color: #f8f8f8;"></div>
-                </ul>
+            <div class="mian-contain">
+                <div class="middle_menu">
+                    <ul class="cf">
+                        <li @click="getPath('becomeVip','成为VIP')"><img src="../../../images/homeMenu/icon01.png"/><p>成为VIP</p></li>
+                        <li @click="getPath('promotionLinks','推广二维码')"><img src="../../../images/homeMenu/icon02.png"/><p>推广二维码</p></li>
+                        <li @click="getPath('earnCommission','如何赚佣')"><img src="../../../images/homeMenu/icon03.png"/><p>如何赚佣</p></li>
+                        <li @click="getPath('notOpen','广告投放')"><img src="../../../images/homeMenu/icon04.png"/><p>广告投放</p></li>
+                        <li @click="getPath('notOpen','签到赚分')"><img src="../../../images/homeMenu/icon05.png"/><p>签到赚分</p></li>
+                        <li @click="getPath('notOpen','在线客服')"><img src="../../../images/homeMenu/icon06.png"/><p>在线客服</p></li>
+                        <li @click="getPath('notOpen','发布任务')" style="padding-bottom:0"><img src="../../../images/homeMenu/icon07.png"/><p>发布任务</p></li>
+                        <li @click="getPath('notOpen','免费影视')" style="padding-bottom:0"><img src="../../../images/homeMenu/icon08.png"/><p>免费影视</p></li>
+                        <li @click="getPath('notOpen','淘宝返利')" style="padding-bottom:0"><img src="../../../images/homeMenu/icon09.png"/><p>淘宝返利</p></li>
+                    </ul>
+                </div>
+                <div class="notice">
+                    <em></em>
+                    <!-- <textScroll :lists="textLists"></textScroll> -->
+                    <div class="notice_tip">
+                        <p class="notice_wrapper"><img class="notice_mark" src="../../../images/homeMenu/icon11.png" />公告</p>
+                        <p class="notice_content">欢迎来到巨象优购</p>
+                    </div>
+                </div>
+                <div style="height:1.3rem"></div>
             </div>
         </div>
         <footer-common></footer-common>
@@ -40,9 +43,9 @@
         data () {
             return {
                 bannerImgLst:[
-                    {url:require('../../../images/banner1.jpg')},
-                    {url:require('../../../images/banner2.jpg')},
-                    {url:require('../../../images/banner4.jpg')}
+                    {url:require('../../../images/banner.jpeg')},
+                    // {url:require('../../../images/banner2.jpg')},
+                    // {url:require('../../../images/banner4.jpg')}
                 ],
                 textLists:['新版霸屏天下2.0.3前台UI界面上线了']
             }
@@ -71,44 +74,85 @@
 </script>
 <style lang="css" scoped>
 .home-wrapper {
-    overflow: auto;
+    position: relative;
 }
 .bannerImg {
     width: 100%;
-    height: 200px;
+    height: 5.9rem;
 }
 .home-wrapper .notice{
-    width:100%;
-    height:36px;
-    background:#f7f7fa;
+    width: 100%;
+    margin: 0.2rem 0;
+    padding: 0 .15rem;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    background: #fff;
+    box-shadow: 0px 0px 1px 0px #ddd;
+    box-sizing: border-box;
 }
 .home-wrapper .notice em {
     float:left;
-    width:20px;
-    height:20px;
-    background: url(../../../images/notice.png) no-repeat;
-    background-size:20px 20px;
-    margin: 8px 5px
+    width: 0.72rem;
+    height: 0.72rem;
+    background: url(../../../images/homeMenu/icon10.png) no-repeat;
+    background-size: 0.72rem 0.72rem;
+    margin: 0.24rem 0.1rem;
+}
+.home-wrapper .mian-contain {
+    position: absolute;
+    top: 4.6rem;
+    left: .15rem;
+    right: .15rem;
 }
 .home-wrapper .middle_menu {
     position: relative;
+    padding: .3rem 0rem;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 3px 10px #ccc;
+    z-index: 999;
+}
+.home-wrapper .middle_menu ul {
 }
 .home-wrapper .middle_menu ul li {
-        font-size: 0.3rem;
-        text-align: center;
-        width:33.333%;
-        position: relative;
-        float: left;
-        padding: 20px 10px;
-        box-sizing: border-box;
-        background: #fff;
-    }
+    font-size: 0.3rem;
+    text-align: center;
+    width:33.333%;
+    position: relative;
+    float: left;
+    padding-bottom: 0.39rem;
+}
 .home-wrapper .middle_menu ul li img{
     display: inline-block;
-    width: 28px;
-    height: 28px;
+    width: 1.3rem;
+    height: 1.2rem;
 }
-.home-wrapper .middle_menu:after, .home-wrapper .middle_menu:before {
+.home-wrapper .middle_menu ul li p{
+    margin-top: -5px;
+    text-align: center;
+    font-size: 0.27rem;
+    color: #434343;
+}
+.home-wrapper .notice .notice_tip{
+    float: left;
+    width:calc(100% - 1.22rem);
+    padding-top: 0.2rem;
+    padding-left: 0.3rem;
+}
+.home-wrapper .notice .notice_tip .notice_wrapper {
+    line-height: 0.4rem;
+}
+.home-wrapper .notice .notice_tip .notice_wrapper .notice_mark{
+    margin: 0 0.05rem 0.05rem;
+    width: 0.15rem;
+    height: 0.15rem;
+}
+.home-wrapper .notice .notice_tip .notice_content {
+    line-height: 0.4rem;
+    font-size: .28rem;
+    color: #93969d;
+}
+/* .home-wrapper .middle_menu:after, .home-wrapper .middle_menu:before {
     content: " ";
     position: absolute;
     left: 0;
@@ -136,5 +180,5 @@
     border-bottom: 1px solid #d9d9d9;
     transform-origin: 0 100%;
     transform: scaleY(.5);
-}
+} */
 </style>

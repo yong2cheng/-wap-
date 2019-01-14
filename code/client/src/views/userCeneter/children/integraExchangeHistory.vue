@@ -15,9 +15,11 @@
                             <p class="shopping_img shopping_name cf"><span>{{item.goodsName}}</span><em>{{item.goodsIntegral}}积分</em></p>
                             <p class="shopping_oper"><span>{{item.statusName}}</span></p>
                         </div>
-                        <p style="margin:10px 2.5%">收货地址：{{item.address}}</p>
-                        <p style="margin:10px 2.5%">{{item.receiver}}   {{item.telphone}}</p>
-                        <p class="opertion_but" v-if="item.status == 1"><button class="commom_button" @click.stop="exchange(item)">申请退款</button></p>
+                        <p style="margin:10px 2.5%" v-if="item.status==1||item.status==2">收货地址：{{item.address}}</p>
+                        <p style="margin:10px 2.5%" v-if="item.status==3||item.status==4">支付宝账号：{{item.alipayCard}}</p>
+                        <p style="margin:10px 2.5%" v-if="item.status==3||item.status==4">银行卡号：{{item.bankCard}}</p>
+                        <p style="margin:10px 2.5%" v-if="item.status==1||item.status==2">{{item.receiver}}   {{item.telphone}}</p>
+                        <!-- <p class="opertion_but" v-if="item.status == 1"><button class="commom_button" @click.stop="exchange(item)">申请退款</button></p> -->
                     </li>
                 </ul>
                 <NoneData v-else></NoneData>
@@ -77,7 +79,8 @@
                 } else {
                     this.$message({
                         message: '请先新增银行卡！！！',
-                        type: 'info'
+                        type: 'info',
+                        duration:1500
                     });
                 }
             },
@@ -99,7 +102,8 @@
                     })
                     this.$message({
                         message: '申请退款成功',
-                        type: 'success'
+                        type: 'success',
+                        duration:1500
                     });
                     this.loading = false
                     this.exchangeShooppingList()

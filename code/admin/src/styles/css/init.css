@@ -4,7 +4,9 @@
     fill: currentColor;
     overflow: hidden;
  }
-
+.message_color{
+    color:#FE4B1C
+}
 ::-webkit-scrollbar {
     width: 4px;
     height: 4px;

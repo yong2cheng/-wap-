@@ -93,7 +93,11 @@
                 const isLt2M = file.size / 1024 / 1024 < 2;
 
                 if (!isLt2M) {
-                this.$message.error('上传图片大小不能超过 2MB!');
+                    this.$message({
+                        message: '上传图片大小不能超过 2MB!',
+                        type: 'error',
+                        duration:1500
+                    });
                 }
                 return isLt2M;
             },
@@ -153,7 +157,8 @@
                 await this.$store.dispatch('submitTask',obj)
                 this.$message({
                     message: '提交成功',
-                    type: 'success'
+                    type: 'success',
+                    duration:1500
                 });
                 this.seleteData.userTaskRelationStatus = 2
                 this.seleteData.userTaskRelationStatusName = '待审核'
@@ -241,7 +246,7 @@
 .task_generalt_count .color_red{
     float: right;
     color: #e63512;
-    background:#e9e9e9
+    /* background:#e9e9e9 */
 }
 .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;

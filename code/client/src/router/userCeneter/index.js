@@ -78,6 +78,62 @@ let indexArr = [
                     requiresAuth: true
                 }
             },
+            { 
+                path: '/userSetting/harvestAddress/index',
+                name: 'harvestAddressIndex',
+                component: harvestAddressIndex,
+                meta: {
+                    requiresAuth: true
+                }
+            },
+            { 
+                path: '/userSetting/harvestAddress/add',
+                name: 'harvestAddressAdd',
+                component: harvestAddressAdd,
+                meta: {
+                    requiresAuth: true
+                }
+            },
+            { 
+                path: '/userSetting/harvestAddress/edit',
+                name: 'harvestAddressEdit',
+                component: harvestAddressEdit,
+                meta: {
+                    requiresAuth: true
+                }
+            },
+            { 
+                path: '/userSetting/myBankCard/index',
+                name: 'myBankCardIndex',
+                component: myBankCardIndex,
+                meta: {
+                    requiresAuth: true
+                }
+            },
+            { 
+                path: '/userSetting/myBankCard/add',
+                name: 'myBankCardAdd',
+                component: myBankCardAdd,
+                meta: {
+                    requiresAuth: true
+                }
+            },
+            { 
+                path: '/userSetting/updataPassword/index',
+                name: 'updataPassword',
+                component: updataPassword,
+                meta: {
+                    requiresAuth: true
+                }
+            },
+            { 
+                path: '/userSetting/alipay/index',
+                name: 'alipay',
+                component: alipay,
+                meta: {
+                    requiresAuth: true
+                }
+            },
             { // 设置
                 path: '/userCeneter/userSetting',
                 name: 'userSetting',

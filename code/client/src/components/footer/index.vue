@@ -2,19 +2,22 @@
     <div class="footbar">
         <ul class="cf">
             <li @click="getPath('/')">
-                <img src="../../images/tab1.png"/>
+                <img src="../../images/homeMenu/home.png" v-if="!isHome"/>
+                <img src="../../images/homeMenu/home1.png" v-else/>
                 <p :class="{red_color:isHome}">
                     首页
                 </p>
             </li>
             <li @click="getPath('/taskCenter/index')">
-                <img src="../../images/tab2.png"/>
+                <img src="../../images/homeMenu/center.png" v-if="!isTaskCenter"/>
+                <img src="../../images/homeMenu/center1.png" v-else/>
                 <p :class="{red_color:isTaskCenter}">
                     任务中心
                 </p>
             </li>
             <li @click="getPath('/userCeneter/index')">
-                <img src="../../images/tab3.png"/>
+                <img src="../../images/homeMenu/my.png" v-if="!isUserCenter"/>
+                <img src="../../images/homeMenu/my1.png" v-else/>
                 <p :class="{red_color:isUserCenter}">
                     个人中心
                 </p>
@@ -64,23 +67,27 @@
         width:100%;
         background:#f7f7fa;;
         border-top:1px solid #e6e6e6; 
-        height:62px;
+        height:1.3rem;
+        z-index: 9999;
     }
     .footbar ul {
         margin-top: 5px
     }
     .footbar ul li {
         float: left;
-        font-size: 0.3rem;
+        font-size: 0.28rem;
         text-align: center;
         width:33.333%
     }
     .footbar ul li img{
         display: inline-block;
-        width: 27px;
-        height: 27px;
+        width: 0.5rem;
+        height: 0.5rem;
     }
-    .red_color {
-        color: red
+    .footbar ul li p{
+        color: #75797d
+    }
+    .footbar ul li .red_color {
+        color: #f85836
     }
 </style>

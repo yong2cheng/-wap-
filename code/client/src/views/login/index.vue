@@ -3,31 +3,19 @@
         <div class="login_wrapper">
             <div class="site-header">
                 <router-link :to="{path:'/'}"><img src="../../images/close.png" class="login_img"/></router-link>
+                <img  src="../../images/banner.jpeg" class="bannerImg"/>
             </div>
             <div class="middle_count">
                 <ul class="cf">
-                    <li :class="{current_select:currentView==1}" @click="currentView=1;getValidateCodeLogin()">登陆</li>
-                    <li :class="{current_select:currentView==2}" @click="currentView=2;getValidateCodeRegister()">注册</li>
+                    <li :class="{current_select:currentView==1}" @click="getValidateCodeLogin()">登陆</li>
+                    <li :class="{current_select:currentView==2}" @click="getValidateCodeRegister()">注册</li>
                 </ul>
-                <el-form :model="ruleForm1" status-icon  ref="ruleForm1" label-width="100px" class="login_ruleForm" v-if="currentView==1">
+                <el-form :model="ruleForm1" label-width="100px" class="login_ruleForm">
                     <el-input v-model="ruleForm1.username" placeholder="用户名/手机号" style="margin:10px 0"></el-input>
                     <el-input type="password" v-model="ruleForm1.password" autocomplete="off" placeholder="输入密码" style="margin-bottom:10px"></el-input>
                     <el-input v-model="ruleForm1.graphValidateCode" placeholder="输入验证码" style="display:inline-block;width:calc(100% - 100px)"></el-input>
                     <div class="number_code" @click.stop="getValidateCodeLogin"><img :src="codeImg1"/></div>
-                    <el-button type="primary" @click.stop="userLogin('ruleForm1')" style="margin-top:30px;">登陆</el-button>
-                </el-form>
-                <el-form :model="ruleForm2" status-icon  ref="ruleForm2" label-width="100px" class="login_ruleForm" v-if="currentView==2">
-                    <el-input v-model="ruleForm2.username" placeholder="输入手机号" style="margin:10px 0"></el-input>
-                    <el-input type="password" v-model="ruleForm2.password" autocomplete="off" placeholder="输入密码" style="margin-bottom:10px"></el-input>
-                    <el-input type="password" v-model="ruleForm2.confirmPassword" autocomplete="off" placeholder="输入确认密码" style="margin-bottom:10px"></el-input>
-                    <el-input v-model="ruleForm2.graphValidateCode" placeholder="输入验证码" style="display:inline-block;width:calc(100% - 100px);margin-bottom:10px"></el-input>
-                    <div class="number_code" style="margin-bottom:10px" @click.stop="getValidateCodeRegister"><img :src="codeImg2"/></div>
-                    <el-input v-model="ruleForm2.mobileValidateCode" placeholder="请输入短信验证码" style="display:inline-block;width:calc(100% - 100px)"></el-input>
-                    <div class="number_code send_message" @click.stop="getSendMessage"><button>{{messageTip}}</button></div>
-                    <div v-if="$route.query.currentView==2" class="tjr_name">
-                        推荐人手机号码:     {{$route.query.username}}
-                    </div>
-                    <el-button type="primary" @click.stop="registeredAccountNumber('ruleForm2')" style="margin-top:10px;">确认注册</el-button>
+                    <el-button type="primary" @click.stop="userLogin()" style="margin-top:30px;">登录</el-button>
                 </el-form>
             </div>
         </div>
@@ -45,13 +33,6 @@
                     password: '',
                     graphValidateCode: ''
                 },
-                ruleForm2: {
-                    username: '',
-                    password: '',
-                    confirmPassword: '',
-                    graphValidateCode: '',
-                    mobileValidateCode:''
-                },
                 codeImg1:'',
                 codeImg2:'',
                 intervalId:'',
@@ -62,13 +43,7 @@
             footerCommon,
         },
         mounted () {
-            console.log(this.$route)
-            if(this.$route.query.currentView==2) {
-                this.currentView = 2 
-                this.getValidateCodeRegister()
-            } else {
-                this.getValidateCodeLogin()
-            }
+            this.getValidateCodeLogin()
         },
         computed: {
 
@@ -76,84 +51,48 @@
         methods: {
             // 获取登陆验证码
             getValidateCodeLogin() {
-                this.codeImg1= "http://www.sai32m.cn:8080/api/validateCode?"+Math.random()
+                this.codeImg1= "http://www.sai32m.cn/api/validateCode?"+Math.random()
+                // this.codeImg1= "http://2x3r233961.iask.in/api/validateCode?"+Math.random()
             },
-            // 获取注册验证码
             getValidateCodeRegister() {
-                this.codeImg2= "http://www.sai32m.cn:8080/api/validateCode?"+Math.random()
-            },
-            // 发送短信
-            async getSendMessage() {
-                if(!this.ruleForm2.username) {
-                    this.$message({
-                        message: '请先输入手机号码！',
-                        type: 'error'
-                    });
-
-                    return
-                }
-                try {
-                    if(this.messageTip == '发送验证码') {
-                        this.intervalId = setInterval(() => {
-                            this.timeIndex -=1
-                            if(this.timeIndex == 0) {
-                                clearInterval(this.intervalId)
-                                this.messageTip = '发送验证码'
-                            } else {
-                                this.messageTip = this.timeIndex+'s后再发送'
-                            }
-                        }, 1000)
-                        await this.$store.dispatch('sendMessage', this.ruleForm2.username);
-                    }
-                } catch (e) {
-                    this.messageTip = '发送验证码'
-                    console.log(e)
-                }   
-            },
-            // 注册账号
-            async registeredAccountNumber() {
-                try {
-                    if(this.$route.query.currentView == 2) {
-                        this.ruleForm2.parentId = this.$route.query.parentId
-                    }
-                    console.log(this.ruleForm2)
-                    await this.$store.dispatch('register', this.ruleForm2);
-                    this.$message({
-                        message: '注册成功',
-                        type: 'success'
-                    });
-                    this.currentView = 1
-                    this.getValidateCodeLogin()
-                } catch (e) {
-                    console.log(e)
-                }   
+                this.$router.push('/register')
             },
             // 用户登录
             async userLogin() {
-                try {
-                    await this.$store.dispatch('userLogin', this.ruleForm1);
-                    this.getUserInfo()
-                } catch (e) {
-                    console.log(e)
-                }   
+                await this.$store.dispatch('userLogin', this.ruleForm1);
+                this.getUserInfo()
             },
             // 用户登录
             async getUserInfo() {
-                try {
-                    await this.$store.dispatch('getUserInfo');
-                    this.$message({
-                        message: '登录成功',
-                        type: 'success'
-                    });
-                    this.$router.push('/')
-                } catch (e) {
-                    console.log(e)
-                }   
+                await this.$store.dispatch('getUserInfo');
+                this.$message({
+                    message: '登录成功',
+                    type: 'success',
+                    duration:1500
+                });
+                this.getOpenId()
+                // this.$router.push('/')
             },
+            getOpenId() {
+                let ua = navigator.userAgent.toLowerCase();//获取判断用的对象
+                if (ua.match(/MicroMessenger/i) == "micromessenger") { //在微信中打开
+                    let url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxed39f9ff11a48cf0&redirect_uri=http://www.sai32m.cn/api/wechat/get/callback&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect";
+                    window.location.replace(url);
+                } else {
+                    this.$router.push('/')
+                }
+            }
         }
     }
 </script>
 <style lang="css" scoped>
+    .bannerImg {
+        width: 100%;
+        height: 5.9rem;
+    }
+    .login_wrapper {
+        position: relative;
+    }
     .login_wrapper .middle_count ul li{
         float: left;
         width:50%;
@@ -168,7 +107,12 @@
         border-bottom: 2px solid #FF471B; 
     }
     .login_wrapper .middle_count {
-        background: #fff
+        position: relative;
+        margin: -1.125rem 0.2rem 0.2rem;
+        padding: .3rem 0rem;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 3px 10px #ccc;
     }
     .el-input__inner{
         border:0 !important; 
@@ -184,12 +128,17 @@
     }
     .login_wrapper .site-header {
         position: relative;
-        height: 205px;
+        height: 5.9rem;
         box-sizing: border-box;
-        padding: 36px 20px 0;
         background: #FE4B1C;
         background-size: 100% 100%;
     }
+    .login_wrapper .site-header h3 {
+        text-align: center;
+        color: #fff;
+        line-height: 169px;
+    }
+
     .login_wrapper .site-header .login_img {
         position: absolute;
         width: 16px;

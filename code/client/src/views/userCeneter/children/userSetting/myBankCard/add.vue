@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="password_but">
-                <button @click="updataForm()" :loading="loading" class="commom_button">新增</button>
+                <button @click="updataForm()" class="commom_button">新增</button>
             </div>
         </div>
     </div>
@@ -58,7 +58,6 @@
                     subBranchCode: '',
                     bankCard:''
                 },
-                loading:false,
                 provinceLists:[],
                 cityLists:[]
             }
@@ -116,42 +115,48 @@
                 if(!this.info.realName) {
                     this.$message({
                         message: '请填写姓名',
-                        type: 'error'
+                        type: 'error',
+                        duration:1500
                     });
                     return
                 }
                 if(!this.info.bankCode) {
                     this.$message({
                         message: '请选择银行',
-                        type: 'error'
+                        type: 'error',
+                        duration:1500
                     });
                     return
                 }
                 if(!this.info.pCode) {
                     this.$message({
                         message: '请选择所在省份',
-                        type: 'error'
+                        type: 'error',
+                        duration:1500
                     });
                     return
                 }
                 if(!this.info.cCode) {
                     this.$message({
                         message: '请填选择所在市',
-                        type: 'error'
+                        type: 'error',
+                        duration:1500
                     });
                     return
                 }
                 if(!this.info.subBranchCode) {
                     this.$message({
                         message: '请选择所在支行',
-                        type: 'error'
+                        type: 'error',
+                        duration:1500
                     });
                     return
                 }
                 if(!this.info.bankCard) {
                     this.$message({
                         message: '请输入卡号',
-                        type: 'error'
+                        type: 'error',
+                        duration:1500
                     });
                     return
                 }
@@ -170,11 +175,11 @@
                     center: true,
                     customClass:'message_width'
                 }).then(async () => {
-                    this.loading = true;
                     await this.$store.dispatch('addBank', this.info);
                     this.$message({
                         message: '新增成功',
-                        type: 'success'
+                        type: 'success',
+                        duration:1500
                     });
                     this.info = {
                         realName: '',
@@ -184,7 +189,6 @@
                         subBranchCode: '',
                         bankCard:''
                     }
-                    this.loading = false
                     this.$router.back(-1)
                 })
             }

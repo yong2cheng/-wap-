@@ -13,16 +13,20 @@
                     <span>{{this.detailData.taskReward}}积分</span>
                 </div>
                 <div class="task_detail_derc">
-                    <h3>任务描述</h3>
-                    <p>{{this.detailData.taskDescribe}}</p>
-                    <img :src="'http://www.sai32m.cn:8080/api/'+item" alt="" style="width:96%;height:175px" v-for="(item,index) in this.detailData.taskPicList" :key="index"/>
+                    <div class="cf task_derc_name" style="border-bottom: 1px solid #e9e9e9;padding: 5px 0;"><h3 style="float:left">任务描述</h3><p style="margin:0;color:#fff" ref="copy" data-clipboard-action="copy" data-clipboard-target="#success_form_input" @click="copyLink">一键复制描述</p></div>
+                    <p id="success_form_input">{{this.detailData.taskDescribe}}</p>
+                    <img :src="'http://www.sai32m.cn:8080/api/'+item" alt="" style="width:96%;height:175px" v-for="(item,index) in this.detailData.taskPicList" :key="index" @click="clickTip"/>
                 </div>
                 <div class="task_detail_derc" v-if="this.detailData.applyPicList&&this.detailData.applyPicList.length>0">
                     <h3>完成任务上传图片</h3>
-                    <img :src="'http://www.sai32m.cn:8080/api/'+item" alt="" style="width:96%;height:175px" v-for="(item,index) in this.detailData.applyPicList" :key="index"/>
+                    <img :src="'http://www.sai32m.cn:8080/api/'+item" alt="" style="width:96%;height:175px" v-for="(item,index) in this.detailData.applyPicList" :key="index" @click="clickTip"/>
                 </div>
                 <div class="task_detail_but">
                     <button @click="applyTask()" :class="{color_red:(this.detailData.sourePath != 1&&(this.detailData.userTaskRelationStatus != 0 && this.detailData.userTaskRelationStatus != -2)) || (this.detailData.sourePath == 1 && this.detailData.userTaskRelationStatus!=1)}" class="commom_button">{{this.detailData.sourePath == 1?this.detailData.userTaskRelationStatus==1?'提交审核':this.detailData.userTaskRelationStatusName:this.detailData.userTaskRelationStatusName}}</button>
+                </div>
+                <div style="margin-top:10px">
+                    <!-- <h3>完成任务上传图片</h3> -->
+                    <img src='../../../images/regular.png' alt="" style="width:100%;height:175px;"/>
                 </div>
                 <el-dialog
                     class="task_dialog"
@@ -60,6 +64,8 @@ import { mapGetters } from 'vuex'
                 dialogImageUrl:'',
                 applyPic:'',
                 imageUrlArr:[],
+                oInput:'',
+                copyBtn: null //存储初始化复制按钮事件
             }
         },
         components: {
@@ -76,16 +82,61 @@ import { mapGetters } from 'vuex'
             console.log(this.detailData)
         },
         mounted () {
-            
+            this.copyBtn = new this.clipboard(this.$refs.copy);
         },
         computed: {
         },
         methods: {
+            clickTip() {
+                this.$message({
+                    message: '长按图片保存本地!',
+                    type: 'info',
+                    duration:1500
+                });
+            },
+            copyLink(){
+                // if(this.oInput) {
+                //     document.body.removeChild(this.oInput)
+                // }
+                // let url = document.querySelector('#copyObj').innerText;
+                // this.oInput = document.createElement('input');
+                // this.oInput.value = url;
+                // document.body.appendChild(this.oInput);
+                // this.oInput.select();
+                // document.execCommand("Copy"); 
+                // this.$message({
+                //     message: '一键复制成功!',
+                //     type: 'success',
+                //     duration:1500
+                // });
+                // this.oInput.className = 'oInput';
+                // this.oInput.style.display = 'none';
+                let _this = this;
+                let clipboard = _this.copyBtn;
+                clipboard.on('success', function() {
+                    _this.$message({ /*这是使用了element-UI的信息弹框*/
+                        message: '复制成功！',
+                        type: 'success',
+                        duration:1500
+                    });
+                });
+                clipboard.on('error', function() {
+                    _this.$message({
+                        message: '复制失败，请手动选择复制！',
+                        type: 'error',
+                        duration:1500
+                    });
+                });
+            },
             beforeAvatarUpload(file) {
                 const isLt2M = file.size / 1024 / 1024 < 2;
 
                 if (!isLt2M) {
-                this.$message.error('上传图片大小不能超过 2MB!');
+                    this.$message({
+                        message: '上传图片大小不能超过 2MB!',
+                        type: 'error',
+                        duration:1500
+                    });
                 }
                 return isLt2M;
             },
@@ -139,7 +190,8 @@ import { mapGetters } from 'vuex'
                 await this.$store.dispatch('submitTask',obj)
                 this.$message({
                     message: '提交成功',
-                    type: 'success'
+                    type: 'success',
+                    duration:1500
                 });
                 this.$router.back(-1)
             }
@@ -192,10 +244,24 @@ import { mapGetters } from 'vuex'
 }
 .task_detail_derc h3{
     color:#FE4B1C;
-    border-bottom: 1px solid #e9e9e9;
 }
 .task_detail_derc p {
     margin:10px 0
+}
+
+.task_derc_name {
+    border-bottom: 1px solid rgb(233, 233, 233);
+    padding: 5px 0;
+}
+.task_derc_name h3{
+    float:left
+}
+.task_derc_name p{
+    float:right;
+    height:20px;
+    padding: 5px 10px;
+    background:#FE4B1C;
+    border-radius:5px;
 }
 .task_detail_but button{
     background: #FE4B1C;

@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="password_but">
-                <button @click="updataForm()" :loading="loading" class="commom_button">新增</button>
+                <button @click="updataForm()" class="commom_button">新增</button>
             </div>
         </div>
     </div>
@@ -57,7 +57,6 @@
                     detailAddress:'',
                     mergeAddress:''
                 },
-                loading:false,
                 provinceLists:[],
                 cityLists:[]
             }
@@ -102,28 +101,32 @@
                 if(!this.info.receiver) {
                     this.$message({
                         message: '请填写收货人',
-                        type: 'error'
+                        type: 'error',
+                        duration:1500
                     });
                     return
                 }
                 if(!this.info.telphone) {
                     this.$message({
                         message: '请填写电话号码',
-                        type: 'error'
+                        type: 'error',
+                        duration:1500
                     });
                     return
                 }
                 if(!this.info.pCode) {
                     this.$message({
                         message: '请选择所在省份',
-                        type: 'error'
+                        type: 'error',
+                        duration:1500
                     });
                     return
                 }
                 if(!this.info.cCode) {
                     this.$message({
                         message: '请填选择所在市',
-                        type: 'error'
+                        type: 'error',
+                        duration:1500
                     });
                     return
                 }
@@ -137,7 +140,8 @@
                 if(!this.info.detailAddress) {
                     this.$message({
                         message: '请填写详细地址',
-                        type: 'error'
+                        type: 'error',
+                        duration:1500
                     });
                     return
                 }
@@ -171,11 +175,11 @@
                     center: true,
                     customClass:'message_width'
                 }).then(async () => {
-                    this.loading = true;
                     await this.$store.dispatch('addAddress', this.info);
                     this.$message({
                         message: '新增成功',
-                        type: 'success'
+                        type: 'success',
+                        duration:1500
                     });
                     this.info = {
                         receiver: '',
@@ -186,7 +190,6 @@
                         detailAddress:'',
                         mergeAddress:''
                     }
-                    this.loading = false
                     this.$router.back(-1)
                 })
             }

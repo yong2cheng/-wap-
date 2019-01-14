@@ -42,6 +42,7 @@
 				// 获取登陆验证码
 				getValidateCodeLogin() {
 					this.codeImg= "http://www.sai32m.cn:8080/api/validateCode?"+Math.random()
+					// this.codeImg= "http://2x3r233961.iask.in/api/validateCode?"+Math.random()
 				},
 				async login() {
 					console.log(this.$store)
@@ -57,7 +58,8 @@
 					if (this.msg) {
 						this.$message({
 							message: this.msg,
-							type: "warning"
+							type: "warning",
+							duration:1500
 						});
 						this.msg = "";
 						this.loading = false;

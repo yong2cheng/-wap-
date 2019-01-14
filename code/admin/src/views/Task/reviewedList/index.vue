@@ -18,11 +18,17 @@
             value-format="yyyy-MM-dd"
             >
         </el-date-picker>
-        <el-button type="primary" icon="el-icon-search" :loading="loading" @click="getReviewedList">搜索</el-button>
-        <!-- <el-button type="primary" style="float: right;"><router-link :to="{path:'/task/add'}">添加</router-link></el-button> -->
+        <el-button type="primary" icon="el-icon-search"  @click="getReviewedList">搜索</el-button>
+        <el-button type="primary" style="float: right;"  @click="batchAudit">批量审核</el-button>
     </div>
     <div style="height:calc(100vh - 220px);">
-        <el-table ref="multipleTable" :data="taskList" tooltip-effect="dark" stripe border height="100%">
+        <el-table ref="multipleTable" :data="taskList" tooltip-effect="dark" stripe border height="100%" @selection-change="handleSelectionChange">
+            <el-table-column
+                type="selection"
+                align="center"
+                :selectable="selectable"
+                width="55">
+            </el-table-column>
             <el-table-column type="index" width="55" align="center" header-align="center" :index="increment" label="序号"></el-table-column>
     
             <el-table-column show-overflow-tooltip v-if="!item.hidden" v-for="(item, index) in headerOptions" :key="index" :label="item.label" :prop="item.prop" :header-align="item.headerAlign" :align="item.align" :sortable="item.sort"  :min-width="item.minWidth || 150">
@@ -102,6 +108,7 @@
                         hidden: false,
                         headerAlign: 'center',
                         align: 'center',
+                        minWidth: 120,
                     },
                     {
                         label: '任务类型名称',
@@ -177,6 +184,16 @@
         },
 
         methods: {
+            selectable(row,index) {
+                if(row.userTaskRelationStatus==2) {
+                    return true
+                } else {
+                    return false
+                }
+            },
+            handleSelectionChange(val) {
+                this.multipleSelection = val;
+            },
             increment (index) {
                 return index+1+((this.pageindex-1)*this.pagesize)
             },
@@ -222,6 +239,58 @@
                 }catch(e) {
                     this.loading = false;
                 }
+            },
+            batchAudit() {
+                if(this.multipleSelection&&this.multipleSelection.length>0) {
+                    this.loading = true
+                    let idArr = []
+                    this.multipleSelection.forEach(element => {
+                        idArr.push(element.id)
+                    });
+                    this.$confirm('是否审核通过', '提示', {
+                        distinguishCancelAndClose: true,
+                        confirmButtonText: '审核通过',
+                        cancelButtonText: '审核不通过',
+                        type: 'warning',
+                        center: true,
+                        customClass:'message_color'
+                    }).then(async () => {
+                        let obj={
+                            ids:idArr.join(),
+                            userTaskRelationStatus:3
+                        }
+                        await this.$store.dispatch('toExamineBatchUpdate', obj);
+                        this.loading = false;
+                        this.$message({
+                            message: '审核通过成功',
+                            type: 'success',
+                            duration:1500
+                        });
+                        this.getReviewedList()
+                    }).catch(async (action) => {
+                        if(action === 'cancel') {
+                            let obj={
+                                ids:idArr.join(),
+                                userTaskRelationStatus:4
+                            }
+                            await this.$store.dispatch('toExamineBatchUpdate', obj);
+                            this.loading = false;
+                            this.$message({
+                                message: '审核不通过成功',
+                                type: 'success',
+                                duration:1500
+                            });
+                            this.getReviewedList()
+                        } 
+                    });
+                } else {
+                    this.$message({
+                        message: '请勾选要审核的数据',
+                        type: 'info',
+                        duration:1500
+                    });
+                }
+                
             },
             getDetail (scope) {
                 this.detailShow = true;

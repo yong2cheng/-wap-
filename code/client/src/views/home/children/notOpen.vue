@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="notOpen_count wrapper_count" >
-                <img src="../../../images/notOpen.jpg"/>
+                <img src="../../../images/notOpen.png"/>
             </div>
             <div class="content_title">
                 <p>即将上线&nbsp;&nbsp;&nbsp;敬请期待</p>

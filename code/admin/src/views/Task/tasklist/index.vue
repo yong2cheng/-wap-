@@ -5,6 +5,9 @@
         <el-select v-model="taskType" placeholder="请选择任务类型" class="block" style="width:120px">
             <el-option v-for="(item,index) in taskTypeArr" :key="index" :label="item.name" :value="item.taskType"></el-option>
         </el-select>
+        <el-select v-model="taskStaus" placeholder="请选择任务状态" class="block" style="width:120px">
+            <el-option v-for="(item,index) in taskStausArr" :key="index" :label="item.name" :value="item.userTaskRelationStatus"></el-option>
+        </el-select>
         <el-date-picker
             v-model="dateValue"
             type="daterange"
@@ -35,6 +38,7 @@
                 <el-button size="mini" @click="edit(scope)" v-if="scope.row.status==1">编辑</el-button>
                 <el-button size="mini" @click="releaseTask(scope,2)" v-if="scope.row.status==1">发布</el-button>
                 <el-button size="mini" @click="releaseTask(scope,3)" v-if="scope.row.status==2">停止发布</el-button>
+                <el-button size="mini" @click="del(scope)" v-if="scope.row.status==3">删除</el-button>
                 <!-- <el-button size="mini" type="danger" @click="del(scope)">删除</el-button> -->
                 </template>
             </el-table-column>
@@ -136,6 +140,22 @@
                     taskType:2
                 }],
                 taskType:'',
+                taskStausArr:[
+                {
+                    name:'所有状态',
+                    userTaskRelationStatus:''
+                },
+                {
+                    name:'新建',
+                    userTaskRelationStatus:1
+                },{
+                    name:'已发布',
+                    userTaskRelationStatus:2
+                },{
+                    name:'停止发布',
+                    userTaskRelationStatus:3
+                }],
+                taskStaus:'',
                 taskInfo:''
             }
         },
@@ -193,6 +213,9 @@
                     obj.beginDate = this.dateValue[0]
 				    obj.endDate = this.dateValue[1]
                 }
+                if(this.taskStaus) {
+                    obj.status = this.taskStaus
+                }
                 try {
                     await this.$store.dispatch('getTaskList', obj)
                     this.loading = false;
@@ -220,6 +243,27 @@
                     }
                 }
             },
+            del (scope) {
+                this.$confirm('是否删除？', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning',
+                    center: true
+                }).then(async () => {
+                    let obj={
+                        id:scope.row.id,
+                    }
+                    await this.$store.dispatch('deleteTask', obj);
+                    if(this.opertionStatus = 10000) {
+                        this.$message({
+                            message: '删除成功',
+                            type: 'success',
+                            duration:1500
+                        });
+                    }
+                    this.getTaskList()
+                })
+            },
             releaseTask (scope,type) {
                 let str ='',successMes=''
                 if(type == 2) {
@@ -243,7 +287,8 @@
                     if(this.opertionStatus = 10000) {
                         this.$message({
                             message: successMes,
-                            type: 'success'
+                            type: 'success',
+                            duration:1500
                         });
                     }
                     this.close()

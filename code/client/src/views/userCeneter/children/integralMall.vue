@@ -82,31 +82,45 @@
                 } else {
                     this.$message({
                         message: '请先收获新增地址！！！',
-                        type: 'info'
+                        type: 'info',
+                        duration:1500
                     });
                 }
             },
 
             // 兑换商品
             exchangeShoopping (item) {
-                this.$confirm('是否兑换该商品', '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                this.$confirm('*退货按照商品等价金额打款至收款账户', '提示', {
+                    distinguishCancelAndClose: true,
+                    confirmButtonText: '提货',
+                    cancelButtonText: '退货',
                     type: 'warning',
                     center: true,
-                    customClass:'message_width'
+                    customClass:'message_width message_color'
                 }).then(async () => {
-                    this.loading = true;
                     await this.$store.dispatch('exchangeShoopping',{
-                        goodsId:item.id
+                        goodsId:item.id,
+                        status:1
                     })
                     this.$message({
-                        message: '兑换成功',
-                        type: 'success'
+                        message: '提货成功',
+                        type: 'success',
+                        duration:1500
                     });
-                    this.loading = false
                     this.getGoodsList()
-                })
+                }).catch(async (action) => {
+                    if(action === 'cancel') {
+                        await this.$store.dispatch('exchangeShoopping',{
+                            goodsId:item.id,
+                            status:3
+                        })
+                        this.$message({
+                            message: '退货成功',
+                            type: 'success',
+                            duration:1500
+                        });
+                    } 
+                });
             },
         }
     }

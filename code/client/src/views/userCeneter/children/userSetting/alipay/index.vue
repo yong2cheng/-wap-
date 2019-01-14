@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div class="password_but">
-                    <button @click="updataForm()" :loading="loading" class="commom_button">确认绑定</button>
+                    <button @click="updataForm()" class="commom_button">确认绑定</button>
                 </div>
             </div>
             <div class="wrapper_count" v-else>
@@ -61,14 +61,16 @@
                 if(!this.info.alipayCard) {
                     this.$message({
                         message: '请输入支付宝账号',
-                        type: 'error'
+                        type: 'error',
+                        duration:1500
                     });
                     return
                 }
                 if(!this.info.realName) {
                     this.$message({
                         message: '请输入真实姓名',
-                        type: 'error'
+                        type: 'error',
+                        duration:1500
                     });
                     return
                 }
@@ -79,17 +81,16 @@
                     center: true,
                     customClass:'message_width'
                 }).then(async () => {
-                    this.loading = true;
                     await this.$store.dispatch('addAlialiCard', this.info);
                     this.$message({
                         message: '绑定成功',
-                        type: 'success'
+                        type: 'success',
+                        duration:1500
                     });
                     this.info = {
                         alipyCard: '',
                         realName: ''
                     }
-                    this.loading = false
                     await this.$store.dispatch('getUserInfo');
                 })
             }

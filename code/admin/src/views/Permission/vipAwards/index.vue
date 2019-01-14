@@ -174,10 +174,10 @@
                     vipType:''
                 },
                 {
-                    name:'普通任务',
+                    name:'普通会员',
                     vipType:1
                 },{
-                    name:'高级任务',
+                    name:'高级会员',
                     vipType:2
                 }],
                 vipType:'',
@@ -272,7 +272,8 @@
                 await this.$store.dispatch('updateVipAwards', this.deliverInfo)
                 this.$message({
                     message: '发货成功',
-                    type: 'success'
+                    type: 'success',
+                    duration:1500
                 });
                 this.dialogFormVisible=false
                 this.getBecomeVIPAwardsList()

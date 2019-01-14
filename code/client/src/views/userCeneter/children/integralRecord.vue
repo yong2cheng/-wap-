@@ -22,7 +22,7 @@
                             <div>
                                 <p class="integral_changeTypeName cf">
                                     <span class="change_Name">{{item.changeTypeName}}</span>
-                                    <span>{{item.createDate}}</span>
+                                    <span style="font-size:12px">{{item.createDate}}</span>
                                     <em>剩{{item.currentIntegral}}积分</em>
                                 </p>
                             </div>
@@ -94,7 +94,7 @@
     float: left;
     font-size: 0.35rem;
     font-weight: bold;
-    width:135px;
+    width:90px;
     /* 让超出的用...实现 */
     text-overflow:ellipsis;
     /* 禁止换行 */

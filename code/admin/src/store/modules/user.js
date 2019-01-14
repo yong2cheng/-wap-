@@ -92,6 +92,16 @@ const user = {
 				})
 			})
 		},
+		updateStatus ({commit}, info) {
+			return new Promise( (resolve, reject) => {
+				axios.post('user/update', info)
+					.then( res => {
+						resolve(res)
+					}).catch( err => {
+						reject(err)
+					})
+			})
+		},
 		addUser ({commit}, info) {
 			info.pwd = md5(info.pwd)
 			return new Promise( (resolve, reject) => {

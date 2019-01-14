@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="password_but">
-                <button @click="updataForm()" :loading="loading" class="commom_button">确认修改</button>
+                <button @click="updataForm()" class="commom_button">确认修改</button>
             </div>
         </div>
     </div>
@@ -51,18 +51,17 @@
         },
         methods: {
             async updataForm() {
-                this.loading = true;
                 await this.$store.dispatch('updataPassword', this.info);
                 this.$message({
                     message: '修改成功',
-                    type: 'success'
+                    type: 'success',
+                    duration:1500
                 });
                 this.info = {
                     oldPassword: '',
                     newPassword: '',
                     confirmPassword: '',
                 }
-                this.loading = false
                 this.$router.back(-1)
             }
             

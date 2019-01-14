@@ -42,13 +42,14 @@ function checkCode(res) {
         Message({
             message: res.message,
             type: 'error',
-            duration: 2 * 1000
+            duration:1500
         })
         throw new Error(res.msg)
     }
 }
 
 const prefix = 'http://www.sai32m.cn:8080/api/'
+// var prefix = 'http://2x3r233961.iask.in/api/'
 export default {
     get(url, params) {
         if (!url) return

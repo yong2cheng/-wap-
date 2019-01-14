@@ -3,17 +3,18 @@
         <div class="user_center_wrapper">
             <div class="site-header">
                 <div>
-                    <router-link :to="{path:'/'}"><img src="../../../images/user.png" class="user_img"/></router-link>
+                    <router-link :to="{path:'/'}"><img src="../../../images/user.jpg" class="user_img"/></router-link>
                 </div>
                 <div class="user_info">
                     <p>{{userInfo.username}}【{{userInfo.vipTypeName}}】</p>
+                    <p>一级：{{firstNumber}}人&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;二级：{{secondNumber}}人</p>
                     <!-- <p>编号：176</p> -->
                 </div>
                 <!-- <div class="member-intro">
                     <i class="level">V1</i>
                     <span>签到</span>
                 </div> -->
-                <router-link :to="{path:'/userCeneter/userSetting'}"><img src="../../../images/setting.png" class="setting_img"/></router-link>
+                <!-- <router-link :to="{path:'/userCeneter/userSetting'}"><img src="../../../images/setting.png" class="setting_img"/></router-link> -->
             </div>
             <div class="middle_count">
                 <ul>
@@ -36,12 +37,12 @@
                     <li @click="getPath('/userCeneter/integralMall')"><img src="../../../images/userCeneterMenu/users_07.png"/><span>积分商城</span></li>
                     <li @click="getPath('/userCeneter/integraExchangeHistory')"><img src="../../../images/userCeneterMenu/help.png"/><span>积分兑换记录</span></li>
                     <li @click="getPath('/userCeneter/vipAwards')"><img src="../../../images/userCeneterMenu/users_08.png"/><span>会员奖品</span></li>
-                    <!-- <li><img src="../../images/userCeneterMenu/users_08.png"/><span>开通VIP</span></li> -->
-                    <!-- <li><img src="../../images/userCeneterMenu/users_07.png"/><span>投诉与建议</span></li> -->
-                    <!-- <li><img src="../../images/userCeneterMenu/customer.png"/><span>微信客服</span></li>
-                    <li><img src="../../images/userCeneterMenu/notice.png"/><span>公告</span></li>
-                    <li><img src="../../images/userCeneterMenu/help.png"/><span>新手引导</span></li>
-                    <li><img src="../../images/userCeneterMenu/caiwu.png"/><span>财务管理</span></li> -->
+                    <li @click="getPath('/userSetting/harvestAddress/index')"><img src="../../../images/userCeneterMenu/sz3.png"/><span>我的收货地址</span></li>
+                    <li @click="getPath('/userSetting/myBankCard/index')"><img src="../../../images/userCeneterMenu/sz2.png"/><span>我的银行卡</span></li>
+                    <li @click="getPath('/userSetting/alipay/index')"><img src="../../../images/userCeneterMenu/sz1.jpg"/><span>绑定支付宝</span></li>
+                    <li @click="getPath('/userSetting/updataPassword/index')"><img src="../../../images/userCeneterMenu/sz4.png"/><span>修改密码</span></li>
+                    <!-- <li><img src="../../images/userCeneterMenu/help.png"/><span>新手引导</span></li> -->
+                    <!-- <li><img src="../../images/userCeneterMenu/caiwu.png"/><span>财务管理</span></li>  -->
                     <button class="tc_login" @click="removeCookie">退出登陆</button>
                     <div style="height: 73px;clear: both;background-color: #f8f8f8;"></div>
                 </ul>
@@ -56,13 +57,17 @@
     export default {
         data () {
             return {
+                firstNumber:'',
+                secondNumber:''
             }
         },
         components: {
             footerCommon,
         },
         mounted () {
-            // this.getUserInfo()
+            // if(this.userInfo.userLevel<=2) {
+                this.getStatistics()
+            // }
         },
         computed: {
             ...mapGetters([
@@ -70,6 +75,14 @@
             ])
         },
         methods: {
+            getStatistics() {
+                this.axios.get('user/statistics').then( res => {
+					this.firstNumber = res.data.first
+                    this.secondNumber = res.data.second
+				}).catch( err => {
+					// console.log(err)
+				})
+            },
             getPath(path) {
                 this.$router.push({ 
                     path: path, 

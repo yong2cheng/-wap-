@@ -118,7 +118,8 @@
                             this.loading = false
                             this.$message({
                                 message: '新增成功',
-                                type: 'success'
+                                type: 'success',
+                                duration:1500
                             });
                             this.$router.push('/task/list')
                         }catch(e) {

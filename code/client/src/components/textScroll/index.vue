@@ -50,8 +50,7 @@ export default {
 .text_scroll_wrap {
     overflow: hidden;
     float: left;
-    margin-top: 7px;
-    width:calc(100% - 30px)
+    width:calc(100% - 0.92rem)
 }
 .text_scroll_wrap #box {
     width: 500%;

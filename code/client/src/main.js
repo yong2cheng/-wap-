@@ -7,6 +7,7 @@ import './javascript/index'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from './utils/fetch'
+import clipboard from 'clipboard';
 
 import * as filters from './filters'
 Object.keys(filters).forEach(key => {
@@ -17,6 +18,7 @@ import customComponents from './custom-components'
 Vue.use(ElementUI)
 Vue.use(customComponents)
 Vue.prototype.axios = axios
+Vue.prototype.clipboard = clipboard;
 
 new Vue({
     el: '#app',
