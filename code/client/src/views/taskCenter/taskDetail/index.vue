@@ -26,7 +26,7 @@
                 </div>
                 <div style="margin-top:10px">
                     <!-- <h3>完成任务上传图片</h3> -->
-                    <img src='../../../images/regular.png' alt="" style="width:100%;height:175px;"/>
+                    <img src='../../../images/regular.jpg' alt="" style="width:100%;"/>
                 </div>
                 <el-dialog
                     class="task_dialog"
@@ -129,11 +129,11 @@ import { mapGetters } from 'vuex'
                 });
             },
             beforeAvatarUpload(file) {
-                const isLt2M = file.size / 1024 / 1024 < 2;
+                const isLt2M = file.size / 1024 / 1024 < 10;
 
                 if (!isLt2M) {
                     this.$message({
-                        message: '上传图片大小不能超过 2MB!',
+                        message: '上传图片大小不能超过 10MB!',
                         type: 'error',
                         duration:1500
                     });

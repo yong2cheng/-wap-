@@ -8,6 +8,8 @@ const promotionLinks = () =>
     import('../../views/home/children/promotionLinks/index')
 const earnCommission = () =>
     import('../../views/home/children/earnCommission/index')
+const onlineService = () =>
+    import('../../views/home/children/onlineService/index')
 const notOpen = () =>
     import('../../views/home/children/notOpen')
 
@@ -47,6 +49,14 @@ let indexArr = [
                 path: '/earnCommission',
                 name: 'earnCommission',
                 component: earnCommission,
+                meta: {
+                    requiresAuth: true
+                }
+            },
+            { // 
+                path: '/onlineService',
+                name: 'onlineService',
+                component: onlineService,
                 meta: {
                     requiresAuth: true
                 }

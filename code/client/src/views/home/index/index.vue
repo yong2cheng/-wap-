@@ -16,7 +16,7 @@
                         <li @click="getPath('earnCommission','如何赚佣')"><img src="../../../images/homeMenu/icon03.png"/><p>如何赚佣</p></li>
                         <li @click="getPath('notOpen','广告投放')"><img src="../../../images/homeMenu/icon04.png"/><p>广告投放</p></li>
                         <li @click="getPath('notOpen','签到赚分')"><img src="../../../images/homeMenu/icon05.png"/><p>签到赚分</p></li>
-                        <li @click="getPath('notOpen','在线客服')"><img src="../../../images/homeMenu/icon06.png"/><p>在线客服</p></li>
+                        <li @click="getPath('onlineService','人工客服')"><img src="../../../images/homeMenu/icon06.png"/><p>人工客服</p></li>
                         <li @click="getPath('notOpen','发布任务')" style="padding-bottom:0"><img src="../../../images/homeMenu/icon07.png"/><p>发布任务</p></li>
                         <li @click="getPath('notOpen','免费影视')" style="padding-bottom:0"><img src="../../../images/homeMenu/icon08.png"/><p>免费影视</p></li>
                         <li @click="getPath('notOpen','淘宝返利')" style="padding-bottom:0"><img src="../../../images/homeMenu/icon09.png"/><p>淘宝返利</p></li>
@@ -27,7 +27,7 @@
                     <!-- <textScroll :lists="textLists"></textScroll> -->
                     <div class="notice_tip">
                         <p class="notice_wrapper"><img class="notice_mark" src="../../../images/homeMenu/icon11.png" />公告</p>
-                        <p class="notice_content">欢迎来到巨象优购</p>
+                        <p class="notice_content">欢迎来到巨象传媒</p>
                     </div>
                 </div>
                 <div style="height:1.3rem"></div>

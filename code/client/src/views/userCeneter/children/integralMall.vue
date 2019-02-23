@@ -90,7 +90,7 @@
 
             // 兑换商品
             exchangeShoopping (item) {
-                this.$confirm('*退货按照商品等价金额打款至收款账户', '提示', {
+                this.$confirm('*退货按照商品等价金额打款至收款账户，需扣除5%服务费', '提示', {
                     distinguishCancelAndClose: true,
                     confirmButtonText: '提货',
                     cancelButtonText: '退货',

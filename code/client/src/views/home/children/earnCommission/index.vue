@@ -9,7 +9,7 @@
             </div>
             <div class="wrapper_count" >
                 <div class="inivteFriend" style="padding:10px">
-                    <img src="../../../../images/commission.jpeg" alt=""/>
+                    <img src="../../../../images/commission.jpg" alt=""/>
                 </div>
             </div>
         </div>

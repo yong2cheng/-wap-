@@ -1,12 +1,14 @@
 <template>
 <article>
     <div class="search">
-        <el-input placeholder="请输入用户名" prefix-icon="el-icon-search" v-model="keyword" @keydown.enter.native="getUserList" style="width:150px"></el-input>
-        <el-input placeholder="请输入真实姓名" prefix-icon="el-icon-search" v-model="keywordRealName" @keydown.enter.native="getUserList" style="width:150px"></el-input>
-        <el-select v-model="vipType" placeholder="请选择会员类型" class="block" style="width:150px">
+        <el-input placeholder="请输入用户名" prefix-icon="el-icon-search" v-model="keyword" @keydown.enter.native="getUserList" style="width:150px;margin-bottom:5px;"></el-input>
+        <el-input placeholder="请输入真实姓名" prefix-icon="el-icon-search" v-model="keywordRealName" @keydown.enter.native="getUserList" style="width:150px;margin-bottom:5px;"></el-input>
+        <el-input placeholder="请输入注册多少天内" prefix-icon="el-icon-search" v-model="keywordDays" @keydown.enter.native="getUserList" style="width:180px;margin-bottom:5px;"></el-input>
+        <el-input placeholder="请输入下线人数小于多少人" prefix-icon="el-icon-search" v-model="keywordChildCount" @keydown.enter.native="getUserList" style="width:215px;margin-bottom:5px;"></el-input>
+        <el-select v-model="vipType" placeholder="请选择会员类型" class="block" style="width:150px;margin-bottom:5px;">
             <el-option v-for="(item,index) in vipTypeArr" :key="index" :label="item.name" :value="item.vipType"></el-option>
         </el-select>
-        <el-select v-model="userStatus" placeholder="请选择用户状态" class="block" style="width:150px">
+        <el-select v-model="userStatus" placeholder="请选择用户状态" class="block" style="width:150px;margin-bottom:5px;">
             <el-option v-for="(item,index) in userStatusArr" :key="index" :label="item.name" :value="item.status"></el-option>
         </el-select>
         <el-date-picker
@@ -20,25 +22,19 @@
             </el-date-picker>
         <el-button type="primary" icon="el-icon-search" :loading="loading" @click="getUserList">搜索</el-button>
     </div>
-    <div style="height:calc(100vh - 220px);">
-        <el-table ref="multipleTable" :data="userList" tooltip-effect="dark" stripe border height="100%">
+    <div style="height:calc(100vh - 270px);">
+        <el-table ref="multipleTable" :data="userList" tooltip-effect="dark" stripe border height="100%"  @sort-change='tableChange'>
             <el-table-column type="index" width="55" align="center" header-align="center" :index="increment" label="序号"></el-table-column>
 
-            <el-table-column show-overflow-tooltip v-if="!item.hidden" v-for="(item, index) in headerOptions" :key="index" :label="item.label" :prop="item.prop" :header-align="item.headerAlign" :align="item.align"  :min-width="item.minWidth || 150">
+            <el-table-column show-overflow-tooltip v-if="!item.hidden" v-for="(item, index) in headerOptions" :key="index" :label="item.label" :prop="item.prop" :header-align="item.headerAlign" :align="item.align"  :sortable="item.sort?'custom':false" :min-width="item.minWidth">
                 <template slot-scope="scope">
-                    <div v-if="scope.column.property === 'roles'">
-                        <el-tag
-                            class="tag"
-                            type="primary"
-                            close-transition 
-                            v-for="(tag, index) in scope.row.roles" :key="index">{{tag}}</el-tag>
-                    </div>
-                    <div v-else-if="scope.column.property === 'avatar'"><img :src="scope.row[scope.column.property]" alt="" style="height: 40px;"></div>
+                    <div v-if="scope.column.property === 'avatar'"><img :src="scope.row[scope.column.property]" alt="" style="height: 40px;"></div>
                     <div v-else-if="scope.column.property === 'status'">{{scope.row.status ==1?'启用' : '禁用'}}</div>
+                    <div v-else-if="scope.column.property === 'childCount'">{{scope.row[scope.column.property]}}</div>
                     <div v-else>{{scope.row[scope.column.property] || '无'}}</div>
                 </template>
             </el-table-column>
-            <el-table-column label="操作" header-align="center" align="center" width="100">
+            <el-table-column label="操作" header-align="center" align="center" width="80">
                 <template slot-scope="scope">
                 <el-button size="mini" @click="changStatus(scope,0)" v-if="scope.row.status==1">禁用</el-button>
                 <el-button size="mini" @click="changStatus(scope,1)" v-else>启用</el-button>
@@ -73,11 +69,14 @@
                 dateValue:'',
                 keyword: '',
                 keywordRealName:'',
+                keywordDays:14,
+                keywordChildCount:'',
                 editShow: false,
                 userInfo: {},
                 loading: false,
                 pageindex: 1,
                 pagesize: 10,
+                childCountOrder:'',
                 size_scoped: [10, 20, 30, 40],
                 headerOptions: [
                     {
@@ -94,7 +93,7 @@
                         hidden: false,
                         headerAlign: 'center',
                         align: 'center',
-                        width: ''                 
+                        minWidth:'100px'                 
                     },
                     {
                         label: '真实姓名',
@@ -103,7 +102,7 @@
                         headerAlign: 'center',
                         align: 'center',
                         width: '',
-                        minWidth:'80px'                 
+                        minWidth:'75px'                 
                     },
                     {
                         label: '会员类型名称',
@@ -112,8 +111,8 @@
                         headerAlign: 'center',
                         align: 'center',
                         width: '',
-                        sort: true,
-                        minWidth:'120px'                  
+                        sort: false,
+                        minWidth:'100px'                  
                     },
                     {
                         label: '用户状态',
@@ -122,8 +121,8 @@
                         headerAlign: 'center',
                         align: 'center',
                         width: '',
-                        sort: true,
-                        minWidth:'80px'                  
+                        sort: false,
+                        minWidth:'75px'                  
                     },
                     {
                         label: '用户层级',
@@ -132,8 +131,8 @@
                         headerAlign: 'center',
                         align: 'center',
                         width: '',
-                        sort: true ,
-                        minWidth:'80px'                  
+                        sort: false ,
+                        // minWidth:'75px'                  
                     },
                     {
                         label: '上级姓名',
@@ -142,8 +141,8 @@
                         headerAlign: 'center',
                         align: 'center',
                         width: '',
-                        sort: true,
-                        minWidth:'80px'                   
+                        sort: false,
+                        minWidth:'75px'                   
                     },
                     {
                         label: '上级手机号',
@@ -152,7 +151,18 @@
                         headerAlign: 'center',
                         align: 'center',
                         width: '',
-                        sort: true                  
+                        sort: false,
+                        minWidth:'100px'                  
+                    },
+                    {
+                        label: '下线人数',
+                        prop: 'childCount',
+                        hidden: false,
+                        headerAlign: 'center',
+                        align: 'center',
+                        width: '',
+                        sort: true,
+                        minWidth:'110px'                  
                     },
                     {
                         label: '注册时间',
@@ -161,8 +171,8 @@
                         headerAlign: 'center',
                         align: 'center',
                         width: '',
-                        sort: true ,
-                        minWidth:'160px'               
+                        sort: false ,
+                        minWidth:'150px'               
                     }
                 ],
                 vipTypeArr:[
@@ -202,6 +212,18 @@
         },
 
         methods: {
+            tableChange({column,prop,order}) {
+                console.log(order)
+                this.orderColumn = prop
+                if(order == 'descending') {
+                    this.childCountOrder = 0
+                } else if(order == 'ascending'){
+                    this.childCountOrder = 1
+                } else {
+                    this.childCountOrder = ''
+                }
+                this.getUserList()
+            },
             increment (index) {
                 return index+1+((this.pageindex-1)*this.pagesize)
             },
@@ -224,6 +246,9 @@
                         pageindex: this.pageindex,
                         pagesize: this.pagesize,
                 }
+                if(this.childCountOrder || this.childCountOrder===0) {
+                    obj.childCountOrder = this.childCountOrder
+                }
                 if(this.dateValue) {
                     obj.beginDate = this.dateValue[0]
 				    obj.endDate = this.dateValue[1]
@@ -234,11 +259,17 @@
                 if(this.keywordRealName) {
                     obj.realName = this.keywordRealName
                 }
-                if(this.vipType || this.vipType==0) {
+                if(this.vipType || this.vipType===0) {
                     obj.vipType = this.vipType
                 }
-                if(this.userStatus || this.userStatus==0) {
+                if(this.userStatus || this.userStatus===0) {
                     obj.status = this.userStatus
+                }
+                if(this.keywordDays || this.keywordDays===0) {
+                    obj.days = this.keywordDays
+                }
+                if(this.keywordChildCount || this.keywordChildCount===0) {
+                    obj.childCount = this.keywordChildCount
                 }
                 this.loading = true;
                 try {

@@ -176,9 +176,10 @@ import payment from '../../../../components/payment/index'
     float: left;
 }
 .shopping_img img{
-    width:90%;
-    height: 80px;
-    margin: 10px 5%;
+    width: 100px;
+    height: 100px;
+    margin: 10px 0;
+    padding: 0 calc((100% - 100px) / 2);
 }
 .shopping_name {
     width:calc(50% - 78px)

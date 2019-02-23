@@ -90,11 +90,11 @@
         },
         methods: {
             beforeAvatarUpload(file) {
-                const isLt2M = file.size / 1024 / 1024 < 2;
+                const isLt2M = file.size / 1024 / 1024 < 10;
 
                 if (!isLt2M) {
                     this.$message({
-                        message: '上传图片大小不能超过 2MB!',
+                        message: '上传图片大小不能超过 10MB!',
                         type: 'error',
                         duration:1500
                     });
