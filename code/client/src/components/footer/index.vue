@@ -67,7 +67,7 @@
         width:100%;
         background:#f7f7fa;;
         border-top:1px solid #e6e6e6; 
-        height:1.3rem;
+        /* height:1.3rem; */
         z-index: 9999;
     }
     .footbar ul {
@@ -75,7 +75,7 @@
     }
     .footbar ul li {
         float: left;
-        font-size: 0.28rem;
+        /* font-size: 0.28rem; */
         text-align: center;
         width:33.333%
     }

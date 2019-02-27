@@ -12,7 +12,7 @@
                     <li v-for="(item, index) in dataList" :key="index">
                         <div class="cf">
                             <p class="shopping_img"><img :src="'http://www.sai32m.cn:8080/api/'+item.goodsPic" alt=""></p>
-                            <p class="shopping_img shopping_name cf"><span>{{item.goodsName}}</span><em>{{item.goodsIntegral}}积分</em></p>
+                            <div class="shopping_img shopping_name cf"><h4>{{item.goodsName}}</h4><em>{{item.goodsIntegral}}积分</em></div>
                             <p class="shopping_oper"><span>{{item.vipTypeName}}</span></p>
                         </div>
                         <p class="opertion_but" v-if="item.vipType == 1"><el-button class="commom_button" :loading="loading1" @click="loading1=true;openMembership(item)">成为普通会员</el-button></p>
@@ -151,9 +151,9 @@ import payment from '../../../../components/payment/index'
     width: 100%;
     margin-top: 70px;
 }
-.shopping_count .shopping_img span{
+.shopping_count .shopping_img h4{
     display: block;
-    font-size: 0.35rem;
+    /* font-size: 0.35rem; */
     font-weight: bold;
     /* 让超出的用...实现 */
     text-overflow:ellipsis;
@@ -169,14 +169,14 @@ import payment from '../../../../components/payment/index'
 }
 .shopping_count .shopping_img em {
     color: #FE4B1C;
-    font-size: 0.3rem;
+    /* font-size: 0.3rem; */
 }
 .shopping_img  {
     width:50%;
     float: left;
 }
 .shopping_img img{
-    width: 100px;
+    width: 100%;
     height: 100px;
     margin: 10px 0;
     padding: 0 calc((100% - 100px) / 2);

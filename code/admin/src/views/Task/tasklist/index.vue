@@ -17,7 +17,7 @@
             value-format="yyyy-MM-dd"
             >
         </el-date-picker>
-        <el-button type="primary" icon="el-icon-search" :loading="loading" @click="getTaskList">搜索</el-button>
+        <el-button type="primary" icon="el-icon-search" :loading="loading" @click="pageindex=1;getTaskList()">搜索</el-button>
         <el-button type="primary" style="float: right;" @click="getPath('/task/add')">添加</el-button>
     </div>
     <div style="height:calc(100vh - 220px);">

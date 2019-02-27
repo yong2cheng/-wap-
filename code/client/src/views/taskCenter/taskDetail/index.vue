@@ -9,16 +9,16 @@
             </div>
             <div class="task_detail_count" >
                 <div class="task_detail_name">
-                    <p>{{this.detailData.taskName}}</p>
+                    <h3>{{this.detailData.taskName}}</h3>
                     <span>{{this.detailData.taskReward}}积分</span>
                 </div>
                 <div class="task_detail_derc">
-                    <div class="cf task_derc_name" style="border-bottom: 1px solid #e9e9e9;padding: 5px 0;"><h3 style="float:left">任务描述</h3><p style="margin:0;color:#fff" ref="copy" data-clipboard-action="copy" data-clipboard-target="#success_form_input" @click="copyLink">一键复制描述</p></div>
+                    <div class="cf task_derc_name" style="border-bottom: 1px solid #e9e9e9;padding: 5px 0;"><h4 style="float:left">任务描述</h4><p style="margin:0;color:#fff" ref="copy" data-clipboard-action="copy" data-clipboard-target="#success_form_input" @click="copyLink">一键复制描述</p></div>
                     <p id="success_form_input">{{this.detailData.taskDescribe}}</p>
                     <img :src="'http://www.sai32m.cn:8080/api/'+item" alt="" style="width:96%;height:175px" v-for="(item,index) in this.detailData.taskPicList" :key="index" @click="clickTip"/>
                 </div>
                 <div class="task_detail_derc" v-if="this.detailData.applyPicList&&this.detailData.applyPicList.length>0">
-                    <h3>完成任务上传图片</h3>
+                    <h4>完成任务上传图片</h4>
                     <img :src="'http://www.sai32m.cn:8080/api/'+item" alt="" style="width:96%;height:175px" v-for="(item,index) in this.detailData.applyPicList" :key="index" @click="clickTip"/>
                 </div>
                 <div class="task_detail_but">
@@ -226,7 +226,7 @@ import { mapGetters } from 'vuex'
     padding: 0;
 }
 .task_detail_count {
-    width: 96%;
+    width: 100%;
     margin-top: 60px;
     background: #fff;
     padding: 0 2% 30px;
@@ -236,13 +236,13 @@ import { mapGetters } from 'vuex'
     padding: 10px 0;
 }
 .task_detail_name p{
-    font-size: 0.35rem;
+    /* font-size: 0.35rem; */
     font-weight: bold;
 }
 .task_detail_name span{
     
 }
-.task_detail_derc h3{
+.task_detail_derc h4{
     color:#FE4B1C;
 }
 .task_detail_derc p {
@@ -253,12 +253,12 @@ import { mapGetters } from 'vuex'
     border-bottom: 1px solid rgb(233, 233, 233);
     padding: 5px 0;
 }
-.task_derc_name h3{
+.task_derc_name h4{
     float:left
 }
 .task_derc_name p{
     float:right;
-    height:20px;
+    /* height:20px; */
     padding: 5px 10px;
     background:#FE4B1C;
     border-radius:5px;

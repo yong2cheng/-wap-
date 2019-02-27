@@ -10,7 +10,7 @@ body {
     padding: 5px;
     margin-top: 15px;
     border: 1px double #a9a2a2;
-    font-size: 0.3rem;
+    /* font-size: 0.3rem; */
     border-radius: 5px;
     background: none;
     outline: none;

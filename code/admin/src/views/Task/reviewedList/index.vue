@@ -18,7 +18,7 @@
             value-format="yyyy-MM-dd"
             >
         </el-date-picker>
-        <el-button type="primary" icon="el-icon-search"  @click="getReviewedList">搜索</el-button>
+        <el-button type="primary" icon="el-icon-search"  @click="pageindex=1;getReviewedList()">搜索</el-button>
         <el-button type="primary" style="float: right;"  @click="batchAudit">批量审核</el-button>
     </div>
     <div style="height:calc(100vh - 220px);">

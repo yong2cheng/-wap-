@@ -21,7 +21,7 @@
                 <ul class="cf" v-if="taskList.length > 0">
                     <li v-for="(item, index) in taskList" :key="index" class="cf">
                         <p class="shopping_img1"><img :src="'http://www.sai32m.cn:8080/api/'+item.goodsPic" alt=""></p>
-                        <p class="shopping_img1 shopping_name1 cf"><span>{{item.goodsName}}</span><em>{{item.goodsIntegral}}积分</em></p>
+                        <div class="shopping_img1 shopping_name1 cf"><h4>{{item.goodsName}}</h4><em>{{item.goodsIntegral}}积分</em></div>
                         <p class="shopping_img1" @click="exchange(item)"><button class="commom_button inter_button">兑换</button></p>
                     </li>
                 </ul>
@@ -176,9 +176,9 @@
     width: 100%;
     margin-top: 60px;
 }
-.shopping_count1 .shopping_img1 span{
+.shopping_count1 .shopping_img1 h4{
     display: block;
-    font-size: 0.35rem;
+    /* font-size: 0.35rem; */
     font-weight: bold;
     /* 让超出的用...实现 */
     text-overflow:ellipsis;
@@ -194,7 +194,7 @@
 }
 .shopping_count1 .shopping_img1 em {
     color: #FE4B1C;
-    font-size: 0.3rem;
+    /* font-size: 0.3rem; */
 }
 .shopping_img1  {
     width:100%;

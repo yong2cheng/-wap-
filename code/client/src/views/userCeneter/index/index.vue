@@ -3,7 +3,8 @@
         <div class="user_center_wrapper">
             <div class="site-header">
                 <div>
-                    <router-link :to="{path:'/'}"><img src="../../../images/user.jpg" class="user_img"/></router-link>
+                    <!-- <router-link :to="{path:'/'}"><img src="../../../images/user.jpg" class="user_img"/></router-link> -->
+                    <img src="../../../images/user.jpg" class="user_img"/>
                 </div>
                 <div class="user_info">
                     <p>{{userInfo.username}}【{{userInfo.vipTypeName}}】</p>
@@ -44,7 +45,7 @@
                     <!-- <li><img src="../../images/userCeneterMenu/help.png"/><span>新手引导</span></li> -->
                     <!-- <li><img src="../../images/userCeneterMenu/caiwu.png"/><span>财务管理</span></li>  -->
                     <button class="tc_login" @click="removeCookie">退出登陆</button>
-                    <div style="height: 73px;clear: both;background-color: #f8f8f8;"></div>
+                    <div style="height:1.4rem"></div>
                 </ul>
             </div>
         </div>
@@ -120,7 +121,7 @@
         margin-top: 0.1rem
     }
     .user_info p {
-        font-size: 0.3rem;
+        /* font-size: 0.3rem; */
         color: #fff;
     }
     .setting_img {
@@ -198,7 +199,7 @@
         margin: 10px 5%;
         border-radius:5px;
         background: #fd571d; 
-        font-size:0.35rem;
+        /* font-size:0.35rem; */
         color:#fff
     }
 </style>

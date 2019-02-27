@@ -18,7 +18,7 @@
             value-format="yyyy-MM-dd"
             >
             </el-date-picker>
-        <el-button type="primary" icon="el-icon-search" :loading="loading" @click="getBecomeVIPAwardsList">搜索</el-button>
+        <el-button type="primary" icon="el-icon-search" :loading="loading" @click="pageindex=1;getBecomeVIPAwardsList()">搜索</el-button>
     </div>
     <div style="height:calc(100vh - 220px);">
         <el-table ref="multipleTable" :data="intergralList" tooltip-effect="dark" stripe border height="100%">

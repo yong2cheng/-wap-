@@ -92,7 +92,7 @@
 }
 .change_Name{
     float: left;
-    font-size: 0.35rem;
+    /* font-size: 0.35rem; */
     font-weight: bold;
     width:90px;
     /* 让超出的用...实现 */
@@ -106,7 +106,7 @@
 .integral_count .integral_changeTypeName em {
     float: right;
     color: #FE4B1C;
-    font-size: 0.3rem;
+    /* font-size: 0.3rem; */
 }
 
 .integral_describe {

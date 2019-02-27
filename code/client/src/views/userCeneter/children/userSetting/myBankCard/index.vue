@@ -13,7 +13,7 @@
             <div class="wrapper_count" >
                 <ul class="cf" v-if="dataList">
                     <li class="address_li">
-                        <p class="address_detail"><span>{{dataList.realName}}</span><em>{{dataList.subBranchName}}{{dataList.bankCard}}</em></p>
+                        <div class="address_detail"><h4>{{dataList.realName}}</h4><em>{{dataList.subBranchName}}<br/>{{dataList.bankCard}}</em></div>
                         <!-- <p class="address_name">{{dataList.mergeAddress}}</p> -->
                     </li>
                 </ul>
@@ -56,26 +56,26 @@
 <style lang="css" scoped>
     .add_address {
         float: right;
-        font-size: 0.28rem
+        /* font-size: 0.28rem */
     }
 
     .address_li {
         background: #fff;
         padding:10px 0;
     }
-    .address_detail {
+    /* .address_detail {
 
-    }
+    } */
 
-    .address_detail span{
-        font-size: 0.35rem;
+    .address_detail h4{
+        /* font-size: 0.35rem; */
         margin:0 15px 0 10px;
         float: left;
         line-height: 45px;
     }
 
     .address_detail em{
-        font-size: 0.28rem
+        /* font-size: 0.28rem */
     }
     .address_name{
         font-size: 0.32rem;

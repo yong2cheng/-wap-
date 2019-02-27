@@ -230,7 +230,7 @@
 }
 .task_generalt_count ul li p span{
     display: block;
-    font-size: 0.35rem;
+    /* font-size: 0.35rem; */
     font-weight: bold;
     /* 让超出的用...实现 */
     text-overflow:ellipsis;

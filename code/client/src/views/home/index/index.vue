@@ -141,6 +141,7 @@
 }
 .home-wrapper .notice .notice_tip .notice_wrapper {
     line-height: 0.4rem;
+    font-size: .28rem;
 }
 .home-wrapper .notice .notice_tip .notice_wrapper .notice_mark{
     margin: 0 0.05rem 0.05rem;

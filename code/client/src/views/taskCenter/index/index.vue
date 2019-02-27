@@ -98,8 +98,8 @@
     }
 .task_center_wrapper .middle_menu ul li img{
     display: inline-block;
-    width: 28px;
-    height: 28px;
+    width: 0.5rem;
+    height: 0.5rem;
 }
 /* .task_center_wrapper .middle_menu:after, .task_center_wrapper .middle_menu:before {
     content: " ";

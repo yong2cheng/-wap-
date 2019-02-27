@@ -20,7 +20,7 @@
             value-format="yyyy-MM-dd"
             >
             </el-date-picker>
-        <el-button type="primary" icon="el-icon-search" :loading="loading" @click="getUserList">搜索</el-button>
+        <el-button type="primary" icon="el-icon-search" :loading="loading" @click="pageindex=1;getUserList()">搜索</el-button>
     </div>
     <div style="height:calc(100vh - 270px);">
         <el-table ref="multipleTable" :data="userList" tooltip-effect="dark" stripe border height="100%"  @sort-change='tableChange'>
@@ -243,8 +243,8 @@
             },
             async getUserList () {
                 let obj = {
-                        pageindex: this.pageindex,
-                        pagesize: this.pagesize,
+                        current: this.pageindex,
+                        size: this.pagesize,
                 }
                 if(this.childCountOrder || this.childCountOrder===0) {
                     obj.childCountOrder = this.childCountOrder
