@@ -48,7 +48,7 @@ function checkCode(res) {
     }
 }
 
-const prefix = 'http://www.sai32m.cn:8080/api/'
+const prefix = 'http://vip.omx65.cn/api/'
 // var prefix = 'http://2x3r233961.iask.in/api/'
 export default {
     get(url, params) {

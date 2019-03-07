@@ -190,6 +190,9 @@
                 },{
                     name:'高级会员',
                     vipType:2
+                },{
+                    name:'体验会员',
+                    vipType:3
                 }],
                 vipType:'',
                 userStatusArr:[

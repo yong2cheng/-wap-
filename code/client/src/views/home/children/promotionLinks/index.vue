@@ -32,7 +32,7 @@
         components: {
         },
         created () {
-            this.codeImg= "http://www.sai32m.cn:8080/api/qrCode"
+            this.codeImg= "http://vip.omx65.cn:8080/api/qrCode"
         },
         mounted () {
             

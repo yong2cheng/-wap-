@@ -41,7 +41,7 @@
 			methods: {
 				// 获取登陆验证码
 				getValidateCodeLogin() {
-					this.codeImg= "http://www.sai32m.cn:8080/api/validateCode?"+Math.random()
+					this.codeImg= "http://vip.omx65.cn/api/validateCode?"+Math.random()
 					// this.codeImg= "http://2x3r233961.iask.in/api/validateCode?"+Math.random()
 				},
 				async login() {

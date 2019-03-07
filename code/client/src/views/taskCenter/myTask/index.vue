@@ -31,7 +31,7 @@
                 <span>
                     <el-upload
                         class="upload_img"
-                        action='http://www.sai32m.cn:8080/api/imgUpload/'
+                        action='http://vip.omx65.cn:8080/api/imgUpload/'
                         list-type="picture-card"
                         :on-success="handleAvatarSuccess"
                         :before-upload="beforeAvatarUpload"

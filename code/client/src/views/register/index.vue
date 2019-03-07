@@ -17,7 +17,7 @@
                     <el-input v-model="ruleForm2.graphValidateCode" placeholder="输入验证码" style="display:inline-block;width:calc(100% - 100px);margin-bottom:10px"></el-input>
                     <div class="number_code" style="margin-bottom:10px" @click.stop="getValidateCodeRegister"><img :src="codeImg2"/></div>
                     <el-input v-model="ruleForm2.mobileValidateCode" placeholder="请输入短信验证码" style="display:inline-block;width:calc(100% - 100px)"></el-input>
-                    <div class="number_code send_message" @click="getSendMessage">{{messageTip}}</div>
+                    <div class="number_code send_message" @click="getSendMessage" style="font-size: 13px;">{{messageTip}}</div>
                     <div v-if="$route.query.parentId" class="tjr_name">
                         推荐人手机号码:     {{$route.query.username}}
                     </div>
@@ -62,7 +62,7 @@
             },
             // 获取注册验证码
             getValidateCodeRegister() {
-                this.codeImg2= "http://www.sai32m.cn/api/validateCode?"+Math.random()
+                this.codeImg2= "http://vip.omx65.cn/api/validateCode?"+Math.random()
                 // this.codeImg2= "http://2x3r233961.iask.in/api/validateCode?"+Math.random()
             },
             // 发送短信

@@ -23,10 +23,10 @@
                 {{info.statusName?info.statusName:info.userTaskRelationStatusName}}
             </el-form-item>
             <el-form-item label="任务图片" prop="isVisible" class="left-item">
-                <img :src="'http://www.sai32m.cn:8080/api/'+item" alt="" style="width:100px;height:50px;margin-right:5px" @click="clickImg($event)" v-for="(item, index) in info.taskPicList" :key="index" v-if="info.taskPicList">
+                <img :src="'http://vip.omx65.cn:8080/api/'+item" alt="" style="width:100px;height:50px;margin-right:5px" @click="clickImg($event)" v-for="(item, index) in info.taskPicList" :key="index" v-if="info.taskPicList">
             </el-form-item>
             <el-form-item label="用户上传图片" prop="isVisible" class="left-item" v-if="info.linkType != 1">
-                <img :src="'http://www.sai32m.cn:8080/api/'+item" alt="" style="width:100px;height:50px;margin-right:5px" @click="clickImg($event)" v-for="(item, index) in info.applyPicList" :key="index" v-if="info.applyPicList">
+                <img :src="'http://vip.omx65.cn:8080/api/'+item" alt="" style="width:100px;height:50px;margin-right:5px" @click="clickImg($event)" v-for="(item, index) in info.applyPicList" :key="index" v-if="info.applyPicList">
             </el-form-item>
             <el-form-item v-if="info.userTaskRelationStatus == 2">
                 <el-button type="primary" @click="loading=true;submitForm(4)" :loading="loading">审核不通过</el-button>

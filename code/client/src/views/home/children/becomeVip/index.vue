@@ -11,7 +11,7 @@
                 <ul class="cf" v-if="dataList.length > 0">
                     <li v-for="(item, index) in dataList" :key="index">
                         <div class="cf">
-                            <p class="shopping_img"><img :src="'http://www.sai32m.cn:8080/api/'+item.goodsPic" alt=""></p>
+                            <p class="shopping_img"><img :src="'http://vip.omx65.cn:8080/api/'+item.goodsPic" alt=""></p>
                             <div class="shopping_img shopping_name cf"><h4>{{item.goodsName}}</h4><em>{{item.goodsIntegral}}积分</em></div>
                             <p class="shopping_oper"><span>{{item.vipTypeName}}</span></p>
                         </div>
@@ -97,7 +97,7 @@ import payment from '../../../../components/payment/index'
             //     this.axios.get('address').then( res => {
 			// 		if(res.code == 10000) {
             //             if(res.data) {
-            //                 this.codeImg= "http://www.sai32m.cn:8080/api/becomeVIP?vipType="+data.vipType+'&goodsIntegral='+data.goodsIntegral+'&goodsId='+data.goodsId
+            //                 this.codeImg= "http://vip.omx65.cn:8080/api/becomeVIP?vipType="+data.vipType+'&goodsIntegral='+data.goodsIntegral+'&goodsId='+data.goodsId
             //                 this.dialogVisible = true
             //                 this.intervalId = setInterval(() => {
             //                     this.timeIndex +=1

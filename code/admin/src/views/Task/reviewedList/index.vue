@@ -33,7 +33,7 @@
     
             <el-table-column show-overflow-tooltip v-if="!item.hidden" v-for="(item, index) in headerOptions" :key="index" :label="item.label" :prop="item.prop" :header-align="item.headerAlign" :align="item.align" :sortable="item.sort"  :min-width="item.minWidth || 150">
                 <template slot-scope="scope">
-                    <div v-if="scope.column.property == 'taskPic'"><img :src="'http://www.sai32m.cn:8080/api/'+scope.row[scope.column.property]" style="width:80px;height:40px"/></div>
+                    <div v-if="scope.column.property == 'taskPic'"><img :src="'http://vip.omx65.cn:8080/api/'+scope.row[scope.column.property]" style="width:80px;height:40px"/></div>
                     <div v-else-if="scope.column.property == 'taskReward'">{{scope.row[scope.column.property]}}积分</div>
                     <!-- <div v-else-if="scope.column.property == 'releaseTime'">{{scope.row[scope.column.property] | parseTime('{y}-{m}-{d}')}}</div> -->
                     <div v-else>{{scope.row[scope.column.property] || '无'}}</div>
