@@ -15,8 +15,10 @@
                             <div class="shopping_img shopping_name cf"><h4>{{item.goodsName}}</h4><em>{{item.goodsIntegral}}积分</em></div>
                             <p class="shopping_oper"><span>{{item.vipTypeName}}</span></p>
                         </div>
-                        <p class="opertion_but" v-if="item.vipType == 1"><el-button class="commom_button" :loading="loading1" @click="loading1=true;openMembership(item)">成为普通会员</el-button></p>
-                        <p class="opertion_but" v-if="item.vipType == 2"><el-button class="commom_button" :loading="loading2" @click="loading2=true;openMembership(item)">成为高级会员</el-button></p>
+                        <!-- <p class="opertion_but" v-if="item.vipType == 1"><el-button class="commom_button" :loading="loading1" @click="loading1=true;openMembership(item)">成为普通会员</el-button></p> -->
+                        <!-- <p class="opertion_but" v-if="item.vipType == 2"><el-button class="commom_button" :loading="loading2" @click="loading2=true;openMembership(item)">成为高级会员</el-button></p> -->
+                        <!-- <p class="opertion_but" v-if="item.vipType == 3"><el-button class="commom_button" :loading="loading3" @click="loading3=true;openMembership(item)">成为高级会员</el-button></p> -->
+                        <p class="opertion_but"><el-button class="commom_button"  @click="openMembership(item)">成为{{item.vipTypeName}}</el-button></p>
                     </li>
                 </ul>
                 <NoneData v-else></NoneData>
@@ -59,6 +61,7 @@ import payment from '../../../../components/payment/index'
                 paymentInfo:{},
                 loading1: false,
                 loading2: false,
+                loading3: false,
             }
         },
         components: {
@@ -80,6 +83,7 @@ import payment from '../../../../components/payment/index'
             close (data) {
                 this.loading1 = false
                 this.loading2 = false
+                this.loading3 = false
                 this.paymentShow = false
                 this.getUserInfo()
             },
