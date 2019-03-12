@@ -3,6 +3,8 @@ import axios from 'src/utils/fetch'
 const sysSetting = {
 	state: {
 		list:[],
+		noticelist:[],
+		noticetotal:[],
         total: 0,
         goodsList:[],
         taskRewardlist:[],
@@ -18,6 +20,11 @@ const sysSetting = {
         TASKREWARD (state, data) {
 			state.taskRewardlist = data
             state.taskRewardtotal = data.length;
+            console.log(state)
+		},
+		NOTICE (state, data) {
+			state.noticelist = data
+            state.noticetotal = data.length;
             console.log(state)
         },
         GOODSLISTS (state, data) {
@@ -54,6 +61,19 @@ const sysSetting = {
 				})
 			})
 		},
+
+		getNotice ({commit}, params) {
+			return new Promise( (resolve, reject) => {
+				axios.get('notice/query').then( res => {
+					console.log(res)
+					commit('NOTICE', res.data)
+					resolve(res)
+				}).catch( err => {
+					// console.log(err)
+					reject(err)
+				})
+			})
+		},
         
         updatevVipCondition ({commit}, info) {
 			return new Promise( (resolve, reject) => {
@@ -78,6 +98,19 @@ const sysSetting = {
 					})
 			})
 		},
+
+		updatevNotice ({commit}, info) {
+			return new Promise( (resolve, reject) => {
+				axios.post('notice/update', info)
+					.then( res => {
+						commit('OPERTIONSTATUS', res.code)
+						resolve(res)
+					}).catch( err => {
+						reject(err)
+					})
+			})
+		},
+
         getGoodsLists ({commit}, params) {
 			return new Promise( (resolve, reject) => {
 				axios.get('goods/list').then( res => {

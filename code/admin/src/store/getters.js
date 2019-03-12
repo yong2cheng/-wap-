@@ -12,6 +12,8 @@ const getters = {
     taskRewardlist: state => state.sysSetting.taskRewardlist,
     taskRewardtotal: state => state.sysSetting.taskRewardtotal,
     sysStatus: state => state.sysSetting.status,
+    noticelist: state => state.sysSetting.noticelist,
+    noticetotal: state => state.sysSetting.noticetotal,
 
     sources: state => state.task.sources,
     taskList: state => state.task.list,

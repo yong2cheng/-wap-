@@ -24,11 +24,11 @@
                 </div>
                 <div class="notice">
                     <em></em>
-                    <!-- <textScroll :lists="textLists"></textScroll> -->
-                    <div class="notice_tip">
+                    <textScroll :lists="textLists"></textScroll>
+                    <!-- <div class="notice_tip">
                         <p class="notice_wrapper"><img class="notice_mark" src="../../../images/homeMenu/icon11.png" />公告</p>
                         <p class="notice_content">欢迎来到巨象传媒</p>
-                    </div>
+                    </div> -->
                 </div>
                 <div style="height:1.3rem"></div>
             </div>
@@ -39,6 +39,7 @@
 <script>
     import footerCommon from '../../../components/footer/index'
     import textScroll from '../../../components/textScroll/index'
+    import { mapGetters } from 'vuex'
     export default {
         data () {
             return {
@@ -47,18 +48,24 @@
                     // {url:require('../../../images/banner2.jpg')},
                     // {url:require('../../../images/banner4.jpg')}
                 ],
-                textLists:['新版霸屏天下2.0.3前台UI界面上线了']
+                textLists:''
             }
         },
         components: {
             footerCommon,
             textScroll
         },
+        created () {
+            this.getNotice()
+        },
         mounted () {
             
         },
         computed: {
-
+            ...mapGetters([
+                'noticelist',
+                'noticetotal'
+            ])
         },
         methods: {
             getPath(path,typeName) {
@@ -68,7 +75,15 @@
                         name:typeName
                     } 
                 })
-            }
+            },
+            async getNotice () {
+                await this.$store.dispatch('getNotice')
+                this.textLists = this.noticelist[0].content
+                this.$nextTick(() => {
+                    this.textLists = this.noticelist[0].content
+                })
+                console.log(this.textLists)
+            },
         },
     }
 </script>
@@ -132,26 +147,6 @@
     text-align: center;
     font-size: 0.27rem;
     color: #434343;
-}
-.home-wrapper .notice .notice_tip{
-    float: left;
-    width:calc(100% - 1.22rem);
-    padding-top: 0.2rem;
-    padding-left: 0.3rem;
-}
-.home-wrapper .notice .notice_tip .notice_wrapper {
-    line-height: 0.4rem;
-    font-size: .28rem;
-}
-.home-wrapper .notice .notice_tip .notice_wrapper .notice_mark{
-    margin: 0 0.05rem 0.05rem;
-    width: 0.15rem;
-    height: 0.15rem;
-}
-.home-wrapper .notice .notice_tip .notice_content {
-    line-height: 0.4rem;
-    font-size: .28rem;
-    color: #93969d;
 }
 /* .home-wrapper .middle_menu:after, .home-wrapper .middle_menu:before {
     content: " ";

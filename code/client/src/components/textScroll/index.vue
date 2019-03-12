@@ -1,7 +1,10 @@
 <template>
     <div class="text_scroll_wrap" id="text_scroll">
+        <div class="notice_tip">
+            <p class="notice_wrapper" style="margin:0;"><img class="notice_mark" src="../../images/homeMenu/icon11.png" />公告</p>
+        </div>
         <div id="box">
-            <div id="marquee">{{text}}</div>
+            <div id="marquee" style="height:100%">{{text}}</div>
         </div>
         <div id="node">{{text}}</div>
     </div>
@@ -30,13 +33,23 @@ export default {
                 distance =width1
                 }
                 box.style.transform = 'translateX(' + distance + 'px)'
-            }, 50)
+            }, 30)
         }
     },
     // 把父组件传入的arr转化成字符串
     mounted: function () {
-        for (let i = 0; i < this.lists.length; i++) {
-            this.text += ' ' + this.lists[i]
+        // for (let i = 0; i < this.lists.length; i++) {
+            // this.text += ' ' + this.lists[i]
+            // this.text += ' ' + this.lists
+        // }
+        console.log(this.text)
+    },
+    watch: {
+        lists:{
+            handler(news) {
+                this.text += ' ' + this.lists
+            },
+            deep:true
         }
     },
     // 更新的时候运动
@@ -50,14 +63,37 @@ export default {
 .text_scroll_wrap {
     overflow: hidden;
     float: left;
-    width:calc(100% - 0.92rem)
+    width:calc(100% - 1.22rem);
+    margin-left: 0.3rem;
 }
 .text_scroll_wrap #box {
-    width: 500%;
+    width: 1000000%;
+    height:0.6rem;
+    line-height: 0.6rem;
 }
 .text_scroll_wrap #node {
     position: absolute;
     z-index: -99;
     top: -99px;
+}
+.text_scroll_wrap .notice_tip{
+    /* float: left; */
+    width:calc(100% - 1.22rem);
+    padding-top: 0.2rem;
+    /* padding-left: 0.3rem; */
+}
+.text_scroll_wrap  .notice_tip .notice_wrapper {
+    line-height: 0.4rem;
+    font-size: .28rem;
+}
+.text_scroll_wrap .notice_tip .notice_wrapper .notice_mark{
+    margin: 0 0.05rem 0.05rem;
+    width: 0.15rem;
+    height: 0.15rem;
+}
+.text_scroll_wrap .notice_tip .notice_content {
+    line-height: 0.4rem;
+    font-size: .28rem;
+    color: #93969d;
 }
 </style>

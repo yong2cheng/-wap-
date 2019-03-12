@@ -6,6 +6,7 @@ import md5 from 'js-md5'
 const user = {
 	state: {
 		list: [],
+		noticelist:[],
 		provinceList: [],
 		cityList: [],
 		areaList: [],
@@ -53,6 +54,11 @@ const user = {
 			state.username = '';
 			state.roles = null;
 		},
+		NOTICE (state, data) {
+			state.noticelist = data
+            state.noticetotal = data.length;
+            console.log(state)
+        },
 	},
 	actions: {
 		clearInfo ({commit}) {
@@ -241,6 +247,18 @@ const user = {
 		getVIPpolling ({commit}, params) {
 			return new Promise( (resolve, reject) => {
 				axios.get('becomeVIP/polling',params).then( res => {
+					resolve(res)
+				}).catch( err => {
+					// console.log(err)
+					reject(err)
+				})
+			})
+		},
+		getNotice ({commit}, params) {
+			return new Promise( (resolve, reject) => {
+				axios.get('notice/query').then( res => {
+					console.log(res)
+					commit('NOTICE', res.data)
 					resolve(res)
 				}).catch( err => {
 					// console.log(err)

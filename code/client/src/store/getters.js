@@ -11,6 +11,8 @@ const getters = {
     areaList: state => state.user.areaList,
     bankList: state => state.user.bankList,
     subBankList: state => state.user.subBankList,
+    noticelist: state => state.user.noticelist,
+    noticetotal: state => state.user.noticetotal,
     // task
     blogTypes: state => state.task.types,
     taskStatus: state => state.task.operStatus,

@@ -69,6 +69,7 @@ export const asyncRouterMap = [
         icon: 'zuowen',
         children: [
             { path: 'list', component: _import_('Integral/integrallist/index'), name: '积分列表' },
+            { path: 'statistics', component: _import_('Integral/integralStatistics/index'), name: '积分统计' },
             { path: 'exchange', component: _import_('Integral/integrallExchange/index'), name: '积分兑换列表' },
         ]
     },
@@ -94,6 +95,7 @@ export const asyncRouterMap = [
         children: [
             { path: 'index', component: _import_('sysSetting/index/index'), name: '会员条件查看' },
             { path: 'reward', component: _import_('sysSetting/reward/index'), name: '任务奖励列表' },
+            { path: 'announcement', component: _import_('sysSetting/announcement/index'), name: '公告配置' },
         ]
     }
 ]
