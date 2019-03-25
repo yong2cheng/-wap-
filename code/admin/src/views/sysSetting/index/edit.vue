@@ -10,7 +10,7 @@
                 </el-select>
             </el-form-item>
             <el-form-item label="商品图片">
-                <img :src="'http://vip.omx65.cn:8080/api/'+info.goodsPic" alt="" style="width:100px;height:50px" @click="clickImg($event)">
+                <img :src="'http://vip.31d461.cn:8080/api/'+info.goodsPic" alt="" style="width:100px;height:50px" @click="clickImg($event)">
             </el-form-item>
             <el-form-item label="商品积分">
                 {{info.goodsIntegral}}

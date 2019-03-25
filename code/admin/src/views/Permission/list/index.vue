@@ -31,13 +31,16 @@
                     <div v-if="scope.column.property === 'avatar'"><img :src="scope.row[scope.column.property]" alt="" style="height: 40px;"></div>
                     <div v-else-if="scope.column.property === 'status'">{{scope.row.status ==1?'启用' : '禁用'}}</div>
                     <div v-else-if="scope.column.property === 'childCount'">{{scope.row[scope.column.property]}}</div>
+                    <div v-else-if="scope.column.property === 'integral'">{{scope.row[scope.column.property]}}</div>
                     <div v-else>{{scope.row[scope.column.property] || '无'}}</div>
                 </template>
             </el-table-column>
-            <el-table-column label="操作" header-align="center" align="center" width="80">
+            <el-table-column label="操作" header-align="center" align="center" width="200" v-if="proxyFlag!=1">
                 <template slot-scope="scope">
                 <el-button size="mini" @click="changStatus(scope,0)" v-if="scope.row.status==1">禁用</el-button>
                 <el-button size="mini" @click="changStatus(scope,1)" v-else>启用</el-button>
+                <el-button size="mini" @click="changStatus(scope,'',1)" v-if="scope.row.userType==2">取消代理</el-button>
+                <el-button size="mini" @click="changStatus(scope,'',2)" v-else>设为代理</el-button>
                 <!-- <el-button size="mini" type="danger" @click="del(scope)">删除</el-button> -->
                 </template>
             </el-table-column>
@@ -66,6 +69,7 @@
         },
         data() {
             return {
+                proxyFlag:sessionStorage.getItem('proxyFlag'),
                 dateValue:'',
                 keyword: '',
                 keywordRealName:'',
@@ -112,7 +116,7 @@
                         align: 'center',
                         width: '',
                         sort: false,
-                        minWidth:'100px'                  
+                        minWidth:'110px'                  
                     },
                     {
                         label: '用户状态',
@@ -123,6 +127,16 @@
                         width: '',
                         sort: false,
                         minWidth:'75px'                  
+                    },
+                    {
+                        label: '用户积分',
+                        prop: 'integral',
+                        hidden: false,
+                        headerAlign: 'center',
+                        align: 'center',
+                        width: '',
+                        sort: false ,
+                        // minWidth:'75px'                  
                     },
                     {
                         label: '用户层级',
@@ -282,7 +296,7 @@
                     this.loading = false;
                 }
             },
-            async changStatus(scope,type) {
+            async changStatus(scope,type,flag) {
                 let str ='',successMes=''
                 if(type == 1) {
                     str = '是否启用该用户？'
@@ -290,6 +304,13 @@
                 } else {
                     str = '是否禁用该用户'
                     successMes = '禁用成功'
+                }
+                if(flag == 1) {
+                    str = '是否把该用户取消代理？'
+                    successMes = '取消代理成功'
+                } else if(flag == 2){
+                    str = '是否把该用户设为代理'
+                    successMes = '设为代理成功'
                 }
                 this.$confirm(str, '提示', {
                     confirmButtonText: '确定',
@@ -299,7 +320,12 @@
                 }).then(async () => {
                     let obj={
                         id: scope.row.id,
-                        status: type,
+                    }
+                    if(type || type === 0) {
+                        obj.status  = type
+                    }
+                    if(flag) {
+                        obj.userType  = flag
                     }
                     await this.$store.dispatch('updateStatus', obj)
                     this.$message({

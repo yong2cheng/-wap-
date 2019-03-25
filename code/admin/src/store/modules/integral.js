@@ -4,11 +4,23 @@ const integral = {
 	state: {
 		list:[],
 		total: 0,
+		totalIncrease:0,
+		totalReduce:0,
+		totalJia:0,
 	},
 	mutations: {
 		INTERGRALLIST (state, data) {
 			state.list = data.list
-            state.total = data.total;
+			state.total = data.total;
+			if(data.totalIncrease) {
+				state.totalIncrease = data.totalIncrease;
+			}
+			if(data.totalJia) {
+				state.totalJia = data.totalJia;
+			}
+			if(data.totalReduce) {
+				state.totalReduce = data.totalReduce;
+			}
             console.log(state)
 		},
 	},
@@ -27,8 +39,22 @@ const integral = {
 		},
 
 		exchangeShooppingList ({commit}, params) {
+			commit('INTERGRALLIST', {'list':[]})
 			return new Promise( (resolve, reject) => {
 				axios.get('integralConvert/query', params).then( res => {
+					console.log(res)
+					commit('INTERGRALLIST', res.data)
+					resolve(res)
+				}).catch( err => {
+					// console.log(err)
+					reject(err)
+				})
+			})
+		},
+
+		getIntegralStatisticsList ({commit}, params) {
+			return new Promise( (resolve, reject) => {
+				axios.get('userIntegralLog/statistics', params).then( res => {
 					console.log(res)
 					commit('INTERGRALLIST', res.data)
 					resolve(res)

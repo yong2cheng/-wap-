@@ -34,8 +34,8 @@
             <el-table-column label="操作" header-align="center" align="center" width="235">
                 <template slot-scope="scope">
                 <el-button size="mini" @click="getDetail(scope)">详情</el-button>
-                <el-button size="mini" @click="deliverGoods(scope)" v-if="scope.row.status==1">发货</el-button>
-                <el-button size="mini" @click="refund(scope)" v-if="scope.row.status==3">退款</el-button>
+                <el-button size="mini" @click="deliverGoods(scope)" v-if="scope.row.status==1 && proxyFlag!=1">发货</el-button>
+                <el-button size="mini" @click="refund(scope)" v-if="scope.row.status==3 && proxyFlag !=1">退款</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -72,6 +72,7 @@
         },
         data() {
             return {
+                proxyFlag:sessionStorage.getItem('proxyFlag'),
                 logisticsNo:'',
                 deliverInfo:{
                     status:'',

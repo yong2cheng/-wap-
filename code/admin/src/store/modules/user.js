@@ -59,6 +59,7 @@ const user = {
 					console.log(document.cookie)
 					// console.log(res)
 					state.token = getToken();
+					
 					resolve(res)
 				}).catch( err => {
 					// console.log(err)

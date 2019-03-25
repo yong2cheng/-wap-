@@ -5,6 +5,9 @@ const getters = {
 
     intergralList: state => state.integral.list,
     intergralTotal: state => state.integral.total,
+    totalIncrease: state => state.integral.totalIncrease,
+    totalReduce: state => state.integral.totalReduce,
+    totalJia: state => state.integral.totalJia,
 
     sysSettingList: state => state.sysSetting.list,
     sysSettingTotal: state => state.sysSetting.total,

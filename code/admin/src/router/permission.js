@@ -15,6 +15,7 @@ router.beforeEach((to, from, next) => {
             if (!store.state.user.roles) { // 不存在用户信息， 需要重新拉取
                 store.dispatch('getUserInfo').then( res => { //拉取用户信息
                     let roles = [res.data.username]
+                    sessionStorage.setItem("proxyFlag", res.data.proxyFlag);
                     store.dispatch('setRoutes', {roles}).then( () => { //根据权限动态添加路由
                         router.addRoutes(store.state.permission.addRouters)
                         next({ ...to }) //hash模式  确保路由加载完成

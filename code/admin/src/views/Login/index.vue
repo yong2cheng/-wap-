@@ -1,7 +1,7 @@
 <template>
 	<div class="login-wrapper">
 		<el-form class="login-form">
-			<h3>管理员登录</h3>
+			<!-- <h3>管理员登录</h3> -->
 			<el-form-item prop="username">
 				<Icon name="iconzh1" class="icon-user"></Icon>
 				<el-input type="text" placeholder="请输入用户名" class="username" v-model="loginInfo.username" @keydown.enter.native="login"/>
@@ -41,7 +41,7 @@
 			methods: {
 				// 获取登陆验证码
 				getValidateCodeLogin() {
-					this.codeImg= "http://vip.omx65.cn/api/validateCode?"+Math.random()
+					this.codeImg= "http://vip.31d461.cn/api/validateCode?"+Math.random()
 					// this.codeImg= "http://2x3r233961.iask.in/api/validateCode?"+Math.random()
 				},
 				async login() {

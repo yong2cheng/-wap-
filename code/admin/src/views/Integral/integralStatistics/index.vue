@@ -1,8 +1,8 @@
 <template>
 <article>
     <div class="search">
-        <el-input placeholder="请输入用户名" prefix-icon="el-icon-search" v-model="keyword" @keydown.enter.native="getIntegralLogList" style="width:150px"></el-input>
-        <el-input placeholder="请输入真实姓名" prefix-icon="el-icon-search" v-model="keywordRealName" @keydown.enter.native="getIntegralLogList" style="width:150px"></el-input>
+        <el-input placeholder="请输入用户名" prefix-icon="el-icon-search" v-model="keyword" @keydown.enter.native="getIntegralStatisticsList" style="width:150px"></el-input>
+        <el-input placeholder="请输入真实姓名" prefix-icon="el-icon-search" v-model="keywordRealName" @keydown.enter.native="getIntegralStatisticsList" style="width:150px"></el-input>
         <el-date-picker
             v-model="dateValue"
             type="daterange"
@@ -12,9 +12,9 @@
             value-format="yyyy-MM-dd"
             >
             </el-date-picker>
-        <el-button type="primary" icon="el-icon-search" :loading="loading" @click="pageindex=1;getIntegralLogList()">搜索</el-button>
+        <el-button type="primary" icon="el-icon-search" :loading="loading" @click="pageindex=1;getIntegralStatisticsList()">搜索</el-button>
     </div>
-    <div style="height:calc(100vh - 220px);">
+    <div style="height:calc(100vh - 256px);">
         <el-table ref="multipleTable" :data="intergralList" tooltip-effect="dark" stripe border height="100%">
             <el-table-column type="index" width="55" align="center" header-align="center" :index="increment" label="序号"></el-table-column>
 
@@ -28,7 +28,8 @@
                             v-for="(tag, index) in scope.row.roles" :key="index">{{tag}}</el-tag>
                     </div>
                     <div v-else-if="scope.column.property === 'avatar'"><img :src="scope.row[scope.column.property]" alt="" style="height: 40px;"></div>
-                    <div v-else>{{scope.row[scope.column.property] || '无'}}</div>
+                    
+                    <div v-else>{{scope.row[scope.column.property]}}</div>
                 </template>
             </el-table-column>
             <!-- <el-table-column label="操作" header-align="center" align="center" width="250">
@@ -39,6 +40,7 @@
             </el-table-column> -->
         </el-table>
     </div>
+    <div class="collect_data">汇总：增加{{totalIncrease}}分,减少{{-totalReduce}}分，合计{{totalJia}}分</div>
     <el-pagination
         class="pagination"
         @size-change="handleSizeChange"
@@ -94,8 +96,8 @@
                         minWidth:80                 
                     },
                     {
-                        label: '变动类型',
-                        prop: 'changeTypeName',
+                        label: '积分增加',
+                        prop: 'statisticsIncreaseIntegral',
                         hidden: false,
                         headerAlign: 'center',
                         align: 'center',
@@ -104,8 +106,8 @@
                         minWidth:100                  
                     },
                     {
-                        label: '变动积分',
-                        prop: 'changeIntegral',
+                        label: '积分减少',
+                        prop: 'statisticsReduceIntegral',
                         hidden: false,
                         headerAlign: 'center',
                         align: 'center',
@@ -114,27 +116,8 @@
                         minWidth:80                  
                     },
                     {
-                        label: '变动描述',
-                        prop: 'changeDescribe',
-                        hidden: false,
-                        headerAlign: 'center',
-                        align: 'center',
-                        width: '',
-                        sort: true                  
-                    },
-                    {
-                        label: '当前积分',
-                        prop: 'currentIntegral',
-                        hidden: false,
-                        headerAlign: 'center',
-                        align: 'center',
-                        width: '',
-                        sort: true ,
-                        minWidth:80                 
-                    },
-                    {
-                        label: '创建时间',
-                        prop: 'createDate',
+                        label: '积分合计',
+                        prop: 'statisticsIntegral',
                         hidden: false,
                         headerAlign: 'center',
                         align: 'center',
@@ -146,7 +129,7 @@
             }
         },
         mounted () {
-            this.getIntegralLogList()
+            this.getIntegralStatisticsList()
         },
 
         methods: {
@@ -156,14 +139,14 @@
             handleSizeChange(val) {
                 // console.log(`每页 ${val} 条`);
                 this.pagesize = val;
-                this.getIntegralLogList()
+                this.getIntegralStatisticsList()
             },
             handleCurrentChange(val) {
                 // console.log(`当前页: ${val}`);
                 this.pageindex = val;
-                this.getIntegralLogList()
+                this.getIntegralStatisticsList()
             },
-            async getIntegralLogList () {
+            async getIntegralStatisticsList () {
                 let obj = {
                         current: this.pageindex,
                         size: this.pagesize,
@@ -180,7 +163,7 @@
                 }
                 this.loading = true;
                 try {
-                    await this.$store.dispatch('getIntegralLog', obj)
+                    await this.$store.dispatch('getIntegralStatisticsList', obj)
                     this.loading = false;
                 }catch(e) {
                     this.loading = false;
@@ -190,7 +173,10 @@
         computed: {
             ...mapGetters([
                 'intergralTotal',
-                'intergralList'
+                'intergralList',
+                'totalIncrease',
+                'totalReduce',
+                'totalJia'
             ])
         }
     }
@@ -211,6 +197,12 @@
         }
         .tag {
             margin: 0 10px;
+        }
+        .collect_data {
+            height: 36px;
+            line-height: 36px;
+            color: #e22525;
+            text-align: right;
         }
     }
 </style>

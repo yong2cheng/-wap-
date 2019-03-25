@@ -2,7 +2,7 @@
 <div class="silde-bar-wrapper">
     <el-menu class="el-menu-vertical" :default-active="$route.path" unique-opened router :collapse="$store.state.app.slideBar.opened">
 
-        <template v-for="item in $store.state.permission.routes">
+        <template v-for="item in routesArr">
             <el-menu-item v-if="!item.hidden&&!item.dropdown" :index="(item.path === '/'?item.path:item.path+'/') + item.children[0].path">
                 <Icon :name="item.icon" class="slide-icon"></Icon>
                 <span slot="title">{{item.name}}</span>
@@ -26,11 +26,37 @@
     export default {
         data() {
             return {
-                isCollapse: true
+                isCollapse: true,
+                routesArr :[]
             }
         },
         created() {
-console.log(this.$store.state.app.slideBar.opened)
+            let dataArr = this.$store.state.permission.routes
+            if(sessionStorage.getItem("proxyFlag") == 1) {
+                if(dataArr&&dataArr.length>0) {
+                    dataArr.forEach(item => {
+                        let flag = true
+                        if(item.name=='系统设置'|| item.name=='任务管理' || item.name=='商品管理') {
+                            flag = false
+                        }
+                        if(item.name=='用户管理') {
+                            let itemArr = []
+                            item.children.forEach(element => {
+                                if(element.name != 'vip奖品管理') {
+                                    itemArr.push(element)
+                                }
+                            });
+                            item.children = itemArr
+                        }
+                        if(flag) {
+                            this.routesArr.push(item)
+                        }
+                    });
+                }
+            } else {
+                this.routesArr = dataArr
+            }
+console.log(this.$store.state.permission.routes)
         },
         methods: {
             demo (path, child) {
