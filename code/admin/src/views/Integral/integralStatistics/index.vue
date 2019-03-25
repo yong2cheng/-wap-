@@ -40,7 +40,7 @@
             </el-table-column> -->
         </el-table>
     </div>
-    <div class="collect_data">汇总：增加{{totalIncrease}}分,减少{{-totalReduce}}分，合计{{totalJia}}分</div>
+    <div class="collect_data">汇总：增加{{totalIncrease}}分，减少{{-totalReduce}}分，合计{{totalJia}}分</div>
     <el-pagination
         class="pagination"
         @size-change="handleSizeChange"
@@ -201,7 +201,6 @@
         .collect_data {
             height: 36px;
             line-height: 36px;
-            color: #e22525;
             text-align: right;
         }
     }
