@@ -40,7 +40,7 @@
             </el-table-column> -->
         </el-table>
     </div>
-    <div class="collect_data">汇总：增加{{totalIncrease}}分，减少{{-totalReduce}}分，合计{{totalJia}}分</div>
+    <div class="collect_data">汇总：充值{{totalRecharge}}分，增加{{totalIncrease}}分，减少{{-totalReduce}}分，合计{{totalJia}}分</div>
     <el-pagination
         class="pagination"
         @size-change="handleSizeChange"
@@ -176,7 +176,8 @@
                 'intergralList',
                 'totalIncrease',
                 'totalReduce',
-                'totalJia'
+                'totalJia',
+                'totalRecharge'
             ])
         }
     }

@@ -7,6 +7,7 @@ const integral = {
 		totalIncrease:0,
 		totalReduce:0,
 		totalJia:0,
+		totalRecharge:0
 	},
 	mutations: {
 		INTERGRALLIST (state, data) {
@@ -20,6 +21,9 @@ const integral = {
 			}
 			if(data.totalReduce) {
 				state.totalReduce = data.totalReduce;
+			}
+			if(data.totalRecharge) {
+				state.totalRecharge = data.totalRecharge;
 			}
             console.log(state)
 		},

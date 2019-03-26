@@ -8,6 +8,7 @@ const getters = {
     totalIncrease: state => state.integral.totalIncrease,
     totalReduce: state => state.integral.totalReduce,
     totalJia: state => state.integral.totalJia,
+    totalRecharge: state => state.integral.totalRecharge,
 
     sysSettingList: state => state.sysSetting.list,
     sysSettingTotal: state => state.sysSetting.total,
