@@ -76,7 +76,7 @@
             getOpenId() {
                 let ua = navigator.userAgent.toLowerCase();//获取判断用的对象
                 if (ua.match(/MicroMessenger/i) == "micromessenger") { //在微信中打开
-                    let url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxed39f9ff11a48cf0&redirect_uri=http://vip.31d461.cn/api/wechat/get/callback&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect";
+                    let url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx994e1cae4e78ab50&redirect_uri=http://vip.xyxzw.cn/api/wechat/get/callback&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect";
                     window.location.replace(url);
                 } else {
                     this.$router.push('/')
