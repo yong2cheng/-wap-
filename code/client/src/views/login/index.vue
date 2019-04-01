@@ -3,7 +3,7 @@
         <div class="login_wrapper">
             <div class="site-header">
                 <router-link :to="{path:'/'}"><img src="../../images/close.png" class="login_img"/></router-link>
-                <img  src="../../images/banner.jpeg" class="bannerImg"/>
+                <img  src="../../images/banner.jpg" class="bannerImg"/>
             </div>
             <div class="middle_count">
                 <ul class="cf">
