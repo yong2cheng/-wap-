@@ -32,7 +32,7 @@
         components: {
         },
         created () {
-            this.codeImg= "http://vip.xyxzw.cn/api/qrCode"
+            this.codeImg= "http://vip.31d461.cn/api/qrCode"
         },
         mounted () {
             

@@ -44,7 +44,7 @@
         data () {
             return {
                 bannerImgLst:[
-                    {url:require('../../../images/banner.jpg')},
+                    {url:require('../../../images/banner.jpeg')},
                     // {url:require('../../../images/banner2.jpg')},
                     // {url:require('../../../images/banner4.jpg')}
                 ],

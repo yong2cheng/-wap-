@@ -11,7 +11,7 @@
                 <ul class="cf" v-if="taskList.length > 0">
                     <li v-for="(item, index) in taskList" :key="index">
                         <div class="cf">
-                            <p class="shopping_img"><img :src="'http://vip.xyxzw.cn/api/'+item.goodsPic" alt=""></p>
+                            <p class="shopping_img"><img :src="'http://vip.31d461.cn/api/'+item.goodsPic" alt=""></p>
                             <p class="shopping_img shopping_name cf"><span>{{item.goodsName}}</span><em>{{item.goodsIntegral}}积分</em></p>
                             <p class="shopping_oper"><span>{{item.statusName}}</span></p>
                         </div>

@@ -15,11 +15,11 @@
                 <div class="task_detail_derc">
                     <div class="cf task_derc_name" style="border-bottom: 1px solid #e9e9e9;padding: 5px 0;"><h4 style="float:left">任务描述</h4><p style="margin:0;color:#fff" ref="copy" data-clipboard-action="copy" data-clipboard-target="#success_form_input" @click="copyLink">一键复制描述</p></div>
                     <p id="success_form_input">{{this.detailData.taskDescribe}}</p>
-                    <img :src="'http://vip.xyxzw.cn/api/'+item" alt="" style="width:96%;height:175px" v-for="(item,index) in this.detailData.taskPicList" :key="index" @click="clickTip"/>
+                    <img :src="'http://vip.31d461.cn/api/'+item" alt="" style="width:96%;height:175px" v-for="(item,index) in this.detailData.taskPicList" :key="index" @click="clickTip"/>
                 </div>
                 <div class="task_detail_derc" v-if="this.detailData.applyPicList&&this.detailData.applyPicList.length>0">
                     <h4>完成任务上传图片</h4>
-                    <img :src="'http://vip.xyxzw.cn/api/'+item" alt="" style="width:96%;height:175px" v-for="(item,index) in this.detailData.applyPicList" :key="index" @click="clickTip"/>
+                    <img :src="'http://vip.31d461.cn/api/'+item" alt="" style="width:96%;height:175px" v-for="(item,index) in this.detailData.applyPicList" :key="index" @click="clickTip"/>
                 </div>
                 <div class="task_detail_but">
                     <button @click="applyTask()" :class="{color_red:(this.detailData.sourePath != 1&&(this.detailData.userTaskRelationStatus != 0 && this.detailData.userTaskRelationStatus != -2)) || (this.detailData.sourePath == 1 && this.detailData.userTaskRelationStatus!=1)}" class="commom_button">{{this.detailData.sourePath == 1?this.detailData.userTaskRelationStatus==1?'提交审核':this.detailData.userTaskRelationStatusName:this.detailData.userTaskRelationStatusName}}</button>
@@ -37,7 +37,7 @@
                     <span>
                         <el-upload
                             class="upload_img"
-                            action='http://vip.xyxzw.cn/api/imgUpload/'
+                            action='http://vip.31d461.cn/api/imgUpload/'
                             list-type="picture-card"
                             :on-success="handleAvatarSuccess"
                             :before-upload="beforeAvatarUpload"
