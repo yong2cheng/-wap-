@@ -22,6 +22,7 @@
             pay(){
                 var url = "becomeVIP/jsapi?vipType="+this.info.vipType+"&goodsIntegral="+this.info.goodsIntegral+"&goodsId="+this.info.goodsId;
                 this.axios.get(url).then( res => {
+                    console.log(res)
                     this.messageInfo = res.data
                     var vm = this;
                     if (typeof WeixinJSBridge == "undefined"){//微信浏览器内置对象。参考微信官方文档
@@ -37,9 +38,13 @@
                         //  alert("直接回调");
                         vm.onBridgeReady();
                     }
-                });
+                }).catch(err =>{
+                    console.log(err)
+                    this.$emit('close',5)
+                })
             },
             onBridgeReady(){
+                this.$emit('close',5)
                 var that = this;
                 console.log("sucheng")
                 WeixinJSBridge.invoke( 'getBrandWCPayRequest', {

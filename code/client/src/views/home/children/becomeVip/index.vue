@@ -7,7 +7,11 @@
                     <div class="container_detail">成为VIP</div>
                 </div>
             </div>
-            <div class="shopping_count" v-if="!userInfo.vipType" >
+            <div class="shopping_count" v-if="!userInfo.vipType" 
+            v-loading="fullscreenLoading"
+            element-loading-text="拼命加载中"
+            element-loading-spinner="el-icon-loading"
+            element-loading-background="rgba(0, 0, 0, 0.8)">
                 <ul class="cf" v-if="dataList.length > 0">
                     <li v-for="(item, index) in dataList" :key="index">
                         <div class="cf">
@@ -62,6 +66,7 @@ import payment from '../../../../components/payment/index'
                 loading1: false,
                 loading2: false,
                 loading3: false,
+                fullscreenLoading:false
             }
         },
         components: {
@@ -81,11 +86,16 @@ import payment from '../../../../components/payment/index'
         },
         methods: {
             close (data) {
-                this.loading1 = false
-                this.loading2 = false
-                this.loading3 = false
-                this.paymentShow = false
-                this.getUserInfo()
+                if(data == 5) {
+                    this.fullscreenLoading =false
+                } else {
+                    this.fullscreenLoading =false
+                    this.loading1 = false
+                    this.loading2 = false
+                    this.loading3 = false
+                    this.paymentShow = false
+                    this.getUserInfo()
+                }
             },
             // closeDialog() {
             //     clearInterval(this.intervalId)
@@ -120,6 +130,7 @@ import payment from '../../../../components/payment/index'
             // },
             
             async openMembership(data) {
+                this.fullscreenLoading =true
                 this.paymentShow = true
                 this.paymentInfo = data
                 // this.intervalId = setInterval(() => {
