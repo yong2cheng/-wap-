@@ -19,7 +19,7 @@
                     <el-input v-model="ruleForm2.mobileValidateCode" placeholder="请输入短信验证码" style="display:inline-block;width:calc(100% - 100px)"></el-input>
                     <div class="number_code send_message" @click="getSendMessage" style="font-size: 13px;">{{messageTip}}</div>
                     <div v-if="$route.query.parentId" class="tjr_name">
-                        推荐人手机号码:     {{$route.query.username.substring(0,3)}}****{{$route.query.username.substring(8,11)}}
+                        推荐人手机号码:     {{$route.query.username.substring(0,3)}}****{{$route.query.username.substring(7,11)}}
                     </div>
                     <el-button type="primary" @click.stop="registeredAccountNumber()" style="margin:10px 0;">确认注册</el-button>
                 </el-form>
