@@ -40,7 +40,7 @@
                     <li @click="getPath('/userCeneter/vipAwards')"><img src="../../../images/userCeneterMenu/users_08.png"/><span>会员奖品</span></li>
                     <li @click="getPath('/userSetting/harvestAddress/index')"><img src="../../../images/userCeneterMenu/sz3.png"/><span>我的收货地址</span></li>
                     <li @click="getPath('/userSetting/myBankCard/index')"><img src="../../../images/userCeneterMenu/sz2.png"/><span>我的银行卡</span></li>
-                    <li @click="getPath('/userSetting/alipay/index')"><img src="../../../images/userCeneterMenu/sz1.jpg"/><span>绑定支付宝</span></li>
+                    <!-- <li @click="getPath('/userSetting/alipay/index')"><img src="../../../images/userCeneterMenu/sz1.jpg"/><span>绑定支付宝</span></li> -->
                     <li @click="getPath('/userSetting/updataPassword/index')"><img src="../../../images/userCeneterMenu/sz4.png"/><span>修改密码</span></li>
                     <!-- <li><img src="../../images/userCeneterMenu/help.png"/><span>新手引导</span></li> -->
                     <!-- <li><img src="../../images/userCeneterMenu/caiwu.png"/><span>财务管理</span></li>  -->

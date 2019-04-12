@@ -15,7 +15,8 @@
                         <li @click="getPath('promotionLinks','推广二维码')"><img src="../../../images/homeMenu/icon02.png"/><p>推广二维码</p></li>
                         <li @click="getPath('earnCommission','如何赚佣')"><img src="../../../images/homeMenu/icon03.png"/><p>如何赚佣</p></li>
                         <li @click="getPath('notOpen','广告投放')"><img src="../../../images/homeMenu/icon04.png"/><p>广告投放</p></li>
-                        <li @click="getPath('notOpen','签到赚分')"><img src="../../../images/homeMenu/icon05.png"/><p>签到赚分</p></li>
+                        <!-- <li @click="getPath('notOpen','签到赚分')"><img src="../../../images/homeMenu/icon05.png"/><p>签到赚分</p></li> -->
+                        <li @click="getPath('join','城主加盟')"><img src="../../../images/homeMenu/icon12.png"/><p>城主加盟</p></li>
                         <li @click="getPath('onlineService','人工客服')"><img src="../../../images/homeMenu/icon06.png"/><p>人工客服</p></li>
                         <li @click="getPath('notOpen','发布任务')" style="padding-bottom:0"><img src="../../../images/homeMenu/icon07.png"/><p>发布任务</p></li>
                         <li @click="getPath('notOpen','免费影视')" style="padding-bottom:0"><img src="../../../images/homeMenu/icon08.png"/><p>免费影视</p></li>

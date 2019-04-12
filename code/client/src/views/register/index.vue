@@ -19,7 +19,7 @@
                     <el-input v-model="ruleForm2.mobileValidateCode" placeholder="请输入短信验证码" style="display:inline-block;width:calc(100% - 100px)"></el-input>
                     <div class="number_code send_message" @click="getSendMessage" style="font-size: 13px;">{{messageTip}}</div>
                     <div v-if="$route.query.parentId" class="tjr_name">
-                        推荐人手机号码:     {{$route.query.username}}
+                        推荐人手机号码:     {{$route.query.username | toTel}}
                     </div>
                     <el-button type="primary" @click.stop="registeredAccountNumber()" style="margin:10px 0;">确认注册</el-button>
                 </el-form>
@@ -27,7 +27,15 @@
         </div>
     </div>
 </template>
+
 <script>
+    import Vue from 'vue'
+    Vue.filter('toTel', function (value) {
+    let start = value.slice(0, 3)
+    let end = value.slice(-4)
+    return `${start}****${end}`
+    });
+    
     import footerCommon from '../../components/footer/index'
     export default {
         data () {

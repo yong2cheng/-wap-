@@ -10,6 +10,8 @@ const earnCommission = () =>
     import('../../views/home/children/earnCommission/index')
 const onlineService = () =>
     import('../../views/home/children/onlineService/index')
+const join = () =>
+    import('../../views/home/children/join/index')
 const notOpen = () =>
     import('../../views/home/children/notOpen')
 
@@ -57,6 +59,14 @@ let indexArr = [
                 path: '/onlineService',
                 name: 'onlineService',
                 component: onlineService,
+                meta: {
+                    requiresAuth: true
+                }
+            },
+            { // 
+                path: '/join',
+                name: 'join',
+                component: join,
                 meta: {
                     requiresAuth: true
                 }
