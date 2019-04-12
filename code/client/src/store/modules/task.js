@@ -162,6 +162,7 @@ const task = {
                     then( res => {
                         state.loadingMore = false;
                         resolve(res)
+                        return
                         if (res.data.list.length <= 0 && params.current > 1) return
                         if (params.current > 1) {
                             commit('TASKLIST', state.list.concat(res.data.list))
