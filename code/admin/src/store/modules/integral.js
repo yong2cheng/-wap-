@@ -13,16 +13,16 @@ const integral = {
 		INTERGRALLIST (state, data) {
 			state.list = data.list
 			state.total = data.total;
-			if(data.totalIncrease) {
+			if(data.totalIncrease || data.totalIncrease===0) {
 				state.totalIncrease = data.totalIncrease;
 			}
-			if(data.totalJia) {
+			if(data.totalJia || data.totalJia===0) {
 				state.totalJia = data.totalJia;
 			}
-			if(data.totalReduce) {
+			if(data.totalReduce || data.totalReduce===0) {
 				state.totalReduce = data.totalReduce;
 			}
-			if(data.totalRecharge) {
+			if(data.totalRecharge || data.totalRecharge===0) {
 				state.totalRecharge = data.totalRecharge;
 			}
             console.log(state)
