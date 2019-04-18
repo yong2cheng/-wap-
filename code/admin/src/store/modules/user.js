@@ -11,7 +11,14 @@ const user = {
 		username: '',
 		roles: null,
 		token: getToken(),
-		otherList: []
+		otherList: [],
+		provinceList: [],
+		cityList: [],
+		areaList: [],
+		bankList:[],
+		subBankList:[],
+		userBankList:[],
+		userAddressList:[]
 	},
 	mutations: {
 		SET_TOKEN (state, token) {
@@ -34,7 +41,28 @@ const user = {
 			state.name = '';
 			state.username = '';
 			state.roles = null;
-		}
+		},
+		PROVINCELIST (state, data) {
+			state.provinceList = data
+		},
+		CITYLIST (state, data) {
+			state.cityList = data
+		},
+		AREALIST (state, data) {
+			state.areaList = data
+		},
+		BANKLIST (state, data) {
+			state.bankList = data
+		},
+		SUBBANKLIST (state, data) {
+			state.subBankList = data
+		},
+		USERBANKLIST (state, data) {
+			state.userBankList = data
+		},
+		USERADDRESSLIST (state, data) {
+			state.userAddressList = data
+		},
 	},
 	actions: {
 		clearInfo ({commit}) {
@@ -103,6 +131,16 @@ const user = {
 					})
 			})
 		},
+		resetPassword ({commit}, info) {
+			return new Promise( (resolve, reject) => {
+				axios.post('user/resetPassword', info)
+					.then( res => {
+						resolve(res)
+					}).catch( err => {
+						reject(err)
+					})
+			})
+		},
 		addUser ({commit}, info) {
 			info.pwd = md5(info.pwd)
 			return new Promise( (resolve, reject) => {
@@ -135,7 +173,114 @@ const user = {
 						reject(err)
 					})
 			})
-		}
+		},
+		getProvinceCity ({state, commit}, info) {
+			return new Promise( (resolve, reject) => {
+				axios.get('pca/list',info).then( res => {
+					console.log(res)
+					if(info.level == 1) {
+						commit('PROVINCELIST', res.data)
+					}
+					if(info.level == 2) {
+						commit('CITYLIST', res.data)
+					}
+					if(info.level == 3) {
+						commit('AREALIST', res.data)
+					}
+					resolve(res)
+				}).catch( err => {
+					// console.log(err)
+					reject(err)
+				})
+			})
+		},
+		getBankList ({state, commit}, info) {
+			return new Promise( (resolve, reject) => {
+				axios.get('bank/list').then( res => {
+					console.log(res)
+					commit('BANKLIST', res.data)
+					resolve(res)
+				}).catch( err => {
+					// console.log(err)
+					reject(err)
+				})
+			})
+		},
+		getBankSubList ({state, commit}, info) {
+			return new Promise( (resolve, reject) => {
+				axios.get('bank/subList',info).then( res => {
+					commit('SUBBANKLIST', res.data)
+					resolve(res)
+				}).catch( err => {
+					// console.log(err)
+					reject(err)
+				})
+			})
+		},
+		getAddress ({state, commit}, info) {
+			return new Promise( (resolve, reject) => {
+				axios.get('address',info).then( res => {
+					console.log(res)
+					commit('USERADDRESSLIST', res.data)
+					resolve(res)
+				}).catch( err => {
+					// console.log(err)
+					reject(err)
+				})
+			})
+		},
+		addAddress ({state, commit}, info) {
+			return new Promise( (resolve, reject) => {
+				axios.post('address/insert',info).then( res => {
+					resolve(res)
+				}).catch( err => {
+					reject(err)
+				})
+			})
+		},
+		updateUserAddress ({state, commit}, info) {
+			return new Promise( (resolve, reject) => {
+				axios.post('address/update',info).then( res => {
+					console.log(res)
+					resolve(res)
+				}).catch( err => {
+					// console.log(err)
+					reject(err)
+				})
+			})
+		},
+		getUserBank ({state, commit}, info) {
+			return new Promise( (resolve, reject) => {
+				axios.get('userBank',info).then( res => {
+					console.log(res)
+					commit('USERBANKLIST', res.data)
+					resolve(res)
+				}).catch( err => {
+					// console.log(err)
+					reject(err)
+				})
+			})
+		},
+		updateUserBank ({state, commit}, info) {
+			return new Promise( (resolve, reject) => {
+				axios.post('userBank/update',info).then( res => {
+					console.log(res)
+					resolve(res)
+				}).catch( err => {
+					// console.log(err)
+					reject(err)
+				})
+			})
+		},
+		addBank ({state, commit}, info) {
+			return new Promise( (resolve, reject) => {
+				axios.post('userBank',info).then( res => {
+					resolve(res)
+				}).catch( err => {
+					reject(err)
+				})
+			})
+		},
 	}
 }
 

@@ -2,6 +2,13 @@ const getters = {
     userName: state => state.user.username,
     userList: state =>state.user.list,
     userTotal: state =>state.user.userTotal,
+    provinceList: state => state.user.provinceList,
+    cityList: state => state.user.cityList,
+    areaList: state => state.user.areaList,
+    bankList: state => state.user.bankList,
+    subBankList: state => state.user.subBankList,
+    userBankList: state => state.user.userBankList,
+    userAddressList: state => state.user.userAddressList,
 
     intergralList: state => state.integral.list,
     intergralTotal: state => state.integral.total,

@@ -35,12 +35,15 @@
                     <div v-else>{{scope.row[scope.column.property] || '无'}}</div>
                 </template>
             </el-table-column>
-            <el-table-column label="操作" header-align="center" align="center" width="200" v-if="proxyFlag!=1">
+            <el-table-column label="操作" header-align="center" align="center" width="460" v-if="proxyFlag!=1">
                 <template slot-scope="scope">
                 <el-button size="mini" @click="changStatus(scope,0)" v-if="scope.row.status==1">禁用</el-button>
                 <el-button size="mini" @click="changStatus(scope,1)" v-else>启用</el-button>
                 <el-button size="mini" @click="changStatus(scope,'',1)" v-if="scope.row.userType==2">取消代理</el-button>
                 <el-button size="mini" @click="changStatus(scope,'',2)" v-else>设为代理</el-button>
+                <el-button size="mini" @click="changStatus(scope,2)">重置密码</el-button>
+                <el-button size="mini" @click="updataBank(scope)">银行卡号</el-button>
+                <el-button size="mini" @click="updataAddress(scope)">收货地址</el-button>
                 <!-- <el-button size="mini" type="danger" @click="del(scope)">删除</el-button> -->
                 </template>
             </el-table-column>
@@ -57,15 +60,21 @@
         :total="userTotal">
     </el-pagination>
     <EditComponent v-if="editShow" :info="userInfo" @close="close"></EditComponent>
+    <UpdataBankComponent v-if="updataBankShow" :infotion="userInfo" @close="close"></UpdataBankComponent>
+    <UpdataAddressComponent v-if="updataAddressShow" :infotion="userInfo" @close="close"></UpdataAddressComponent>
 
 </article>
 </template>
 <script>
     import { mapGetters } from 'vuex'
     import EditComponent from '../edit/index'
+    import UpdataBankComponent from '../updataBank/index'
+    import UpdataAddressComponent from '../updataAddress/index'
     export default {
         components: {
-            EditComponent
+            EditComponent,
+            UpdataBankComponent,
+            UpdataAddressComponent
         },
         data() {
             return {
@@ -76,6 +85,8 @@
                 keywordDays:14,
                 keywordChildCount:'',
                 editShow: false,
+                updataBankShow:false,
+                updataAddressShow:false,
                 userInfo: {},
                 loading: false,
                 pageindex: 1,
@@ -246,7 +257,9 @@
             },
             close () {
                 this.editShow = false;
-                this.getUserList()
+                this.updataBankShow = false;
+                this.updataAddressShow = false;
+                // this.getUserList()
             },
             handleSizeChange(val) {
                 // console.log(`每页 ${val} 条`);
@@ -301,6 +314,9 @@
                 if(type == 1) {
                     str = '是否启用该用户？'
                     successMes = '启用成功'
+                } else if(type == 2) {
+                    str = '是否重置该用户密码？'
+                    successMes = '重置密码成功'
                 } else {
                     str = '是否禁用该用户'
                     successMes = '禁用成功'
@@ -321,13 +337,18 @@
                     let obj={
                         id: scope.row.id,
                     }
-                    if(type || type === 0) {
-                        obj.status  = type
+                    if(type === 2) {
+                        await this.$store.dispatch('resetPassword', obj)
+                    } else {
+                        if(type === 1 || type === 0) {
+                            obj.status  = type
+                        }
+                        if(flag) {
+                            obj.userType  = flag
+                        }
+                        await this.$store.dispatch('updateStatus', obj)
                     }
-                    if(flag) {
-                        obj.userType  = flag
-                    }
-                    await this.$store.dispatch('updateStatus', obj)
+                    
                     this.$message({
                         message: successMes,
                         type: 'success',
@@ -335,12 +356,45 @@
                     });
                     this.getUserList()
                 })
-            }
+            },
+            // 修改银行卡号
+            async updataBank (scope) {
+                await this.$store.dispatch('getUserBank',{id:scope.row.id});
+                this.userInfo = this.userBankList
+                if(this.userInfo) {
+                    this.updataBankShow = true;
+                } else {
+                    this.$message({
+                        message: '该用户未绑定银行卡',
+                        type: 'success',
+                        duration:1500
+                    });
+                }
+                console.log(this.userInfo)
+            },
+            // 修改地址
+            async updataAddress (scope) {
+                await this.$store.dispatch('getAddress',{id:scope.row.id});
+                this.userInfo = this.userAddressList
+                this.userInfo.userId = scope.row.id
+                if(this.userInfo) {
+                    this.updataAddressShow = true;
+                } else {
+                    this.$message({
+                        message: '该用户未填写收获地址',
+                        type: 'success',
+                        duration:1500
+                    });
+                }
+                console.log(this.userInfo)
+            },
         },
         computed: {
             ...mapGetters([
                 'userList',
-                'userTotal'
+                'userTotal',
+                'userBankList',
+                'userAddressList'
             ])
         }
     }
