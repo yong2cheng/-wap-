@@ -376,8 +376,8 @@
             async updataAddress (scope) {
                 await this.$store.dispatch('getAddress',{id:scope.row.id});
                 this.userInfo = this.userAddressList
-                this.userInfo.userId = scope.row.id
                 if(this.userInfo) {
+                    this.userInfo.userId = scope.row.id
                     this.updataAddressShow = true;
                 } else {
                     this.$message({
