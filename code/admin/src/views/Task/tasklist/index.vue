@@ -1,5 +1,10 @@
 <template>
-<article>
+<article 
+    v-loading="loading"
+    element-loading-text="拼命加载中"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)"
+>
     <div class="search">
         <el-input placeholder="请输入任务名称" prefix-icon="el-icon-search" v-model="keyword" @keydown.enter.native="getTaskList" style="width:150px"></el-input>
         <el-select v-model="taskType" placeholder="请选择任务类型" class="block" style="width:120px">
@@ -17,7 +22,7 @@
             value-format="yyyy-MM-dd"
             >
         </el-date-picker>
-        <el-button type="primary" icon="el-icon-search" :loading="loading" @click="pageindex=1;getTaskList()">搜索</el-button>
+        <el-button type="primary" icon="el-icon-search" @click="pageindex=1;getTaskList()">搜索</el-button>
         <el-button type="primary" style="float: right;" @click="getPath('/task/add')">添加</el-button>
     </div>
     <div style="height:calc(100vh - 220px);">
