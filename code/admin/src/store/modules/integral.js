@@ -43,7 +43,7 @@ const integral = {
 		},
 
 		exchangeShooppingList ({commit}, params) {
-			commit('INTERGRALLIST', {'list':[]})
+			// commit('INTERGRALLIST', {'list':[]})
 			return new Promise( (resolve, reject) => {
 				axios.get('integralConvert/query', params).then( res => {
 					console.log(res)
