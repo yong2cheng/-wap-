@@ -11,3 +11,10 @@ logs/
 *.ntvs*
 *.njsproj
 *.sln
+
+package-lock.json
+public/
+public/admin/index.html
+public/client/index.html
+public/client/index.html
+package.json
