@@ -20,7 +20,12 @@
         },
         methods: {
             pay(){
-                var url = "becomeVIP/jsapi?vipType="+this.info.vipType+"&goodsIntegral="+this.info.goodsIntegral+"&goodsId="+this.info.goodsId;
+                var url = ''
+                if(this.info.isRobot === 1) {
+                    url = "buyRobot/jsapi?count="+this.info.robotNum
+                } else {
+                    url = "becomeVIP/jsapi?vipType="+this.info.vipType+"&goodsIntegral="+this.info.goodsIntegral+"&goodsId="+this.info.goodsId;
+                }               
                 this.axios.get(url).then( res => {
                     this.messageInfo = res.data
                     var vm = this;

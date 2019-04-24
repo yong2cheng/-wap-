@@ -12,6 +12,8 @@ const onlineService = () =>
     import('../../views/home/children/onlineService/index')
 const join = () =>
     import('../../views/home/children/join/index')
+const intelligentRobot = () =>
+    import('../../views/home/children/intelligentRobot/index')
 const notOpen = () =>
     import('../../views/home/children/notOpen')
 
@@ -67,6 +69,14 @@ let indexArr = [
                 path: '/join',
                 name: 'join',
                 component: join,
+                meta: {
+                    requiresAuth: true
+                }
+            },
+            { // 智能机器人
+                path: '/intelligentRobot',
+                name: 'intelligentRobot',
+                component: intelligentRobot,
                 meta: {
                     requiresAuth: true
                 }

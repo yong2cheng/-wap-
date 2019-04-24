@@ -19,7 +19,7 @@
                         <li @click="getPath('join','城主加盟')"><img src="../../../images/homeMenu/icon12.png"/><p>城主加盟</p></li>
                         <li @click="getPath('onlineService','人工客服')"><img src="../../../images/homeMenu/icon06.png"/><p>人工客服</p></li>
                         <li @click="getPath('notOpen','发布任务')" style="padding-bottom:0"><img src="../../../images/homeMenu/icon07.png"/><p>发布任务</p></li>
-                        <li @click="getPath('notOpen','免费影视')" style="padding-bottom:0"><img src="../../../images/homeMenu/icon08.png"/><p>免费影视</p></li>
+                        <li @click="getPath('intelligentRobot','智能机器人')" style="padding-bottom:0"><img src="../../../images/homeMenu/icon08.jpg"/><p>智能机器人</p></li>
                         <li @click="getPath('notOpen','淘宝返利')" style="padding-bottom:0"><img src="../../../images/homeMenu/icon09.png"/><p>淘宝返利</p></li>
                     </ul>
                 </div>
