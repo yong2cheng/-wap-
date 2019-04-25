@@ -10,7 +10,7 @@
             <!-- <div class="shopping_count" >
                 <ul class="cf" v-if="taskList.length > 0">
                     <li v-for="(item, index) in taskList" :key="index" class="cf">
-                        <p class="shopping_img"><img :src="'http://vip.xyxzw.cn/api/'+item.goodsPic" alt=""></p>
+                        <p class="shopping_img"><img :src="'http://vip.qicheshijia.com.cn/api/'+item.goodsPic" alt=""></p>
                         <p class="shopping_img shopping_name cf"><span>{{item.goodsName}}</span><em>{{item.goodsIntegral}}积分</em></p>
                         <p class="shopping_oper" @click="exchange(item)">兑换</p>
                     </li>
@@ -20,7 +20,7 @@
             <div class="shopping_count1" >
                 <ul class="cf" v-if="taskList.length > 0">
                     <li v-for="(item, index) in taskList" :key="index" class="cf">
-                        <p class="shopping_img1"><img :src="'http://vip.xyxzw.cn/api/'+item.goodsPic" alt=""></p>
+                        <p class="shopping_img1"><img :src="'http://vip.qicheshijia.com.cn/api/'+item.goodsPic" alt=""></p>
                         <div class="shopping_img1 shopping_name1 cf"><h4>{{item.goodsName}}</h4><em>{{item.goodsIntegral}}积分</em></div>
                         <p class="shopping_img1" @click="exchange(item)"><button class="commom_button inter_button">兑换</button></p>
                     </li>

@@ -24,7 +24,7 @@
             </el-form-item>
             <el-form-item label="任务图片">
                 <el-upload
-                action='http://vip.xyxzw.cn/api/imgUpload/'
+                action='http://vip.qicheshijia.com.cn/api/imgUpload/'
                 list-type="picture-card"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload"

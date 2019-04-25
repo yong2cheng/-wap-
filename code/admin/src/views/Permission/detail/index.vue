@@ -26,7 +26,7 @@
                 {{info.goodsIntegral}}积分
             </el-form-item>
             <el-form-item label="商品图片" prop="isVisible" class="left-item">
-                <img :src="'http://vip.xyxzw.cn/api/'+info.goodsPic" alt="" style="width:100px;height:50px" @click="clickImg($event)">
+                <img :src="'http://vip.qicheshijia.com.cn/api/'+info.goodsPic" alt="" style="width:100px;height:50px" @click="clickImg($event)">
             </el-form-item>
             <el-form-item label="状态" prop="album" style="margin-bottom:10px">
                 {{info.statusName}}
