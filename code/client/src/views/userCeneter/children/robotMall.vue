@@ -21,12 +21,12 @@
                         <template slot="title">
                             <div>
                                 <p class="integral_changeTypeName cf">
-                                    <span class="change_Names">购买数量：5份</span>
+                                    <span class="change_Names">购买数量：{{item.count}}份</span>
                                     <span style="font-size:12px">{{item.createDate}}</span>
                                 </p>
                             </div>
                         </template>
-                        <div class="integral_describe">有效期：2019-4-25至2020-4-25</div>
+                        <div class="integral_describe">有效期：{{item.effectiveRange}}</div>
                     </el-collapse-item>
                 </el-collapse>
                 <NoneData v-else></NoneData>
@@ -75,7 +75,7 @@
                 let obj = {
                     current: this.pageindex
                 }
-                await this.$store.dispatch('getIntegralLog',obj)
+                await this.$store.dispatch('buyRobotList',obj)
             },
         }
     }

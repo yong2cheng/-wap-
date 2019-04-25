@@ -128,11 +128,37 @@ const task = {
 
         // 获取积分列表
         getIntegralLog ({commit, state}, params) {
-            params.size = params.size || state.size 
+            params.size = 20 
             state.loadingMore = true
             state.loadingBol = false
             return new Promise( (resolve, reject) => {
                 axios.get('userIntegralLog/query', params).
+                    then( res => {
+                        state.loadingMore = false;
+                        resolve(res)
+                        if (res.data.list.length <= 0 && params.current > 1) return
+                        if (params.current > 1) {
+                            commit('TASKLIST', state.list.concat(res.data.list))
+                        }else {
+                            commit('TASKLIST', res.data.list)
+                        }
+                        if (res.data.list.length >= state.size) {
+                            state.loadingBol = true;
+                        }
+                    }).catch( err => {
+                        // console.log(err)
+                        reject(err)
+                    })
+            })
+        },
+
+        // 获取智能机器人列表
+        buyRobotList ({commit, state}, params) {
+            params.size = 20 
+            state.loadingMore = true
+            state.loadingBol = false
+            return new Promise( (resolve, reject) => {
+                axios.get('buyRobot/query', params).
                     then( res => {
                         state.loadingMore = false;
                         resolve(res)
