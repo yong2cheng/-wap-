@@ -71,6 +71,7 @@ export const asyncRouterMap = [
             { path: 'list', component: _import_('Integral/integrallist/index'), name: '积分列表' },
             { path: 'statistics', component: _import_('Integral/integralStatistics/index'), name: '积分统计' },
             { path: 'exchange', component: _import_('Integral/integrallExchange/index'), name: '积分兑换列表' },
+            { path: 'robot', component: _import_('Integral/robotList/index'), name: 'AI机器人购买列表' },
         ]
     },
     {

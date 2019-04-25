@@ -35,6 +35,7 @@
                         </p>
                     </li> -->
                     <li @click="getPath('/userCeneter/integralRecord')"><img src="../../../images/userCeneterMenu/caiwu.png"/><span>积分记录</span></li>
+                    <li @click="getPath('/userCeneter/robotMall')"><img src="../../../images/homeMenu/icon08.jpg"/><span>AI机器人</span></li>
                     <li @click="getPath('/userCeneter/integralMall')"><img src="../../../images/userCeneterMenu/users_07.png"/><span>积分商城</span></li>
                     <li @click="getPath('/userCeneter/integraExchangeHistory')"><img src="../../../images/userCeneterMenu/help.png"/><span>积分兑换记录</span></li>
                     <li @click="getPath('/userCeneter/vipAwards')"><img src="../../../images/userCeneterMenu/users_08.png"/><span>会员奖品</span></li>

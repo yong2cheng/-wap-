@@ -5,6 +5,8 @@ const indexMain = () =>
     import('../../views/userCeneter/index/index')
 const integralMall = () =>
     import('../../views/userCeneter/children/integralMall')
+const robotMall = () =>
+    import('../../views/userCeneter/children/robotMall')
 const integralRecord = () =>
     import('../../views/userCeneter/children/integralRecord')
 const integraExchangeHistory = () =>
@@ -50,6 +52,14 @@ let indexArr = [
                 path: '/userCeneter/integralMall',
                 name: 'integralMall',
                 component: integralMall,
+                meta: {
+                    requiresAuth: true
+                }
+            },
+            { // AL机器人
+                path: '/userCeneter/robotMall',
+                name: 'robotMall',
+                component: robotMall,
                 meta: {
                     requiresAuth: true
                 }

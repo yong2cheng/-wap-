@@ -18,7 +18,7 @@
                         <li @click="getPath('notOpen','签到赚分')"><img src="../../../images/homeMenu/icon05.png"/><p>签到赚分</p></li>
                         <li @click="getPath('onlineService','人工客服')"><img src="../../../images/homeMenu/icon06.png"/><p>人工客服</p></li>
                         <li @click="getPath('notOpen','发布任务')" style="padding-bottom:0"><img src="../../../images/homeMenu/icon07.png"/><p>发布任务</p></li>
-                        <li @click="getPath('intelligentRobot','智能机器人')" style="padding-bottom:0"><img src="../../../images/homeMenu/icon08.jpg"/><p>智能机器人</p></li>
+                        <li @click="getPath('intelligentRobot','智能机器人')" style="padding-bottom:0"><img src="../../../images/homeMenu/icon08.jpg" style="height:1rem;margin-bottom:0.2rem"/><p>AI机器人</p></li>
                         <li @click="getPath('notOpen','淘宝返利')" style="padding-bottom:0"><img src="../../../images/homeMenu/icon09.png"/><p>淘宝返利</p></li>
                     </ul>
                 </div>

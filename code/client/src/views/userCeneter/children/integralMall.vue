@@ -191,6 +191,8 @@
     float: left;
     width:50%;
     background: #fff;
+    border: 1px solid #eee;
+    box-sizing: border-box;
 }
 .shopping_count1 .shopping_img1 em {
     color: #FE4B1C;
