@@ -68,6 +68,19 @@ const integral = {
 			})
 		},
 
+		buyRobotList ({commit}, params) {
+			return new Promise( (resolve, reject) => {
+				axios.get('buyRobot/query', params).then( res => {
+					console.log(res)
+					commit('INTERGRALLIST', res.data)
+					resolve(res)
+				}).catch( err => {
+					// console.log(err)
+					reject(err)
+				})
+			})
+		},
+
 		// 跟新积分兑换发货状态
         updateIntegralConvert ({commit, state}, params) {
             return new Promise( (resolve, reject) => {

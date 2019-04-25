@@ -6,8 +6,8 @@
     element-loading-background="rgba(0, 0, 0, 0.8)"
 >
     <div class="search">
-        <el-input placeholder="请输入用户名" prefix-icon="el-icon-search" v-model="keyword" @keydown.enter.native="getIntegralStatisticsList" style="width:150px"></el-input>
-        <el-input placeholder="请输入真实姓名" prefix-icon="el-icon-search" v-model="keywordRealName" @keydown.enter.native="getIntegralStatisticsList" style="width:150px"></el-input>
+        <el-input placeholder="请输入用户名" prefix-icon="el-icon-search" v-model="keyword" @keydown.enter.native="buyRobotList" style="width:150px"></el-input>
+        <el-input placeholder="请输入真实姓名" prefix-icon="el-icon-search" v-model="keywordRealName" @keydown.enter.native="buyRobotList" style="width:150px"></el-input>
         <el-date-picker
             v-model="dateValue"
             type="daterange"
@@ -17,7 +17,7 @@
             value-format="yyyy-MM-dd"
             >
             </el-date-picker>
-        <el-button type="primary" icon="el-icon-search"  @click="pageindex=1;getIntegralStatisticsList()">搜索</el-button>
+        <el-button type="primary" icon="el-icon-search"  @click="pageindex=1;buyRobotList()">搜索</el-button>
     </div>
     <div style="height:calc(100vh - 256px);">
         <el-table ref="multipleTable" :data="intergralList" tooltip-effect="dark" stripe border height="100%">
@@ -45,7 +45,7 @@
             </el-table-column> -->
         </el-table>
     </div>
-    <div class="collect_data">汇总：充值{{totalRecharge}}分，增加{{totalIncrease}}分，减少{{-totalReduce}}分，合计{{totalJia}}分</div>
+    <div class="collect_data">汇总：充值{{totalRecharge}}分</div>
     <el-pagination
         class="pagination"
         @size-change="handleSizeChange"
@@ -101,8 +101,8 @@
                         minWidth:80                 
                     },
                     {
-                        label: '积分增加',
-                        prop: 'statisticsIncreaseIntegral',
+                        label: '购买份数',
+                        prop: 'count',
                         hidden: false,
                         headerAlign: 'center',
                         align: 'center',
@@ -111,8 +111,8 @@
                         minWidth:100                  
                     },
                     {
-                        label: '积分减少',
-                        prop: 'statisticsReduceIntegral',
+                        label: '支付金额',
+                        prop: 'payMoney',
                         hidden: false,
                         headerAlign: 'center',
                         align: 'center',
@@ -121,20 +121,31 @@
                         minWidth:80                  
                     },
                     {
-                        label: '积分合计',
-                        prop: 'statisticsIntegral',
+                        label: '购买时间',
+                        prop: 'createDate',
                         hidden: false,
                         headerAlign: 'center',
                         align: 'center',
                         width: '',
-                        sort: true                  
+                        sort: true,
+                        minWidth:120                    
+                    },
+                    {
+                        label: '有效期',
+                        prop: 'effectiveRange',
+                        hidden: false,
+                        headerAlign: 'center',
+                        align: 'center',
+                        width: '',
+                        sort: true ,
+                        minWidth:180                  
                     }
                 ],
                 multipleSelection: []
             }
         },
         mounted () {
-            this.getIntegralStatisticsList()
+            this.buyRobotList()
         },
 
         methods: {
@@ -144,14 +155,14 @@
             handleSizeChange(val) {
                 // console.log(`每页 ${val} 条`);
                 this.pagesize = val;
-                this.getIntegralStatisticsList()
+                this.buyRobotList()
             },
             handleCurrentChange(val) {
                 // console.log(`当前页: ${val}`);
                 this.pageindex = val;
-                this.getIntegralStatisticsList()
+                this.buyRobotList()
             },
-            async getIntegralStatisticsList () {
+            async buyRobotList () {
                 let obj = {
                         current: this.pageindex,
                         size: this.pagesize,
@@ -168,7 +179,7 @@
                 }
                 this.loading = true;
                 try {
-                    await this.$store.dispatch('getIntegralStatisticsList', obj)
+                    await this.$store.dispatch('buyRobotList', obj)
                     this.loading = false;
                 }catch(e) {
                     this.loading = false;
