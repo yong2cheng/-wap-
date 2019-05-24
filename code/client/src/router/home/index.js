@@ -10,8 +10,6 @@ const earnCommission = () =>
     import('../../views/home/children/earnCommission/index')
 const onlineService = () =>
     import('../../views/home/children/onlineService/index')
-const join = () =>
-    import('../../views/home/children/join/index')
 const intelligentRobot = () =>
     import('../../views/home/children/intelligentRobot/index')
 const notOpen = () =>
@@ -65,16 +63,6 @@ let indexArr = [
                     requiresAuth: true
                 }
             },
-<<<<<<< HEAD
-=======
-            { // 
-                path: '/join',
-                name: 'join',
-                component: join,
-                meta: {
-                    requiresAuth: true
-                }
-            },
             { // 智能机器人
                 path: '/intelligentRobot',
                 name: 'intelligentRobot',
@@ -83,7 +71,6 @@ let indexArr = [
                     requiresAuth: true
                 }
             },
->>>>>>> bb3dcac... 购买只能机器人
             { // 暂未开放
                 path: '/notOpen',
                 name: 'notOpen',
