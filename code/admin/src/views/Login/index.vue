@@ -7,14 +7,14 @@
 				<el-input type="text" placeholder="请输入用户名" class="username" v-model="loginInfo.username" @keydown.enter.native="login"/>
 			</el-form-item>
 			<el-form-item prop="password">
-				<Icon name="login_password" class="icon-pwd"></Icon>
+				<Icon name="login_password" class="icon-pwd"></Icon>&nbsp;
 				<el-input type="password" placeholder="请输入密码" class="pwd" v-model="loginInfo.password" @keydown.enter.native="login"/>
 			</el-form-item>
-			<el-form-item prop="password">
+			<!-- <el-form-item prop="password">
 				<Icon name="login_password" class="icon-pwd"></Icon>
 				<el-input placeholder="请输入验证码" v-model="loginInfo.graphValidateCode" @keydown.enter.native="login"  style="display:inline-block;width:calc(100% - 122px);"/>
 				<div class="number_code" @click="getValidateCodeLogin"><img :src="codeImg"/></div>
-			</el-form-item>
+			</el-form-item> -->
 			<el-button type="primary" class="submit" @click="login" :loading="loading">登录</el-button>
 		</el-form>
 	</div>
@@ -30,7 +30,7 @@
 					loginInfo: {
 						username: "",
 						password: "",
-						graphValidateCode:""
+						// graphValidateCode:""
 					},
 					codeImg:''
 				};
@@ -52,9 +52,9 @@
 					} else if (!this.loginInfo.password) {
 						this.msg = "请输入密码";
 					}
-					else if (!this.loginInfo.graphValidateCode) {
-						this.msg = "请输入验证码";
-					}
+					// else if (!this.loginInfo.graphValidateCode) {
+					// 	this.msg = "请输入验证码";
+					// }
 					if (this.msg) {
 						this.$message({
 							message: this.msg,
