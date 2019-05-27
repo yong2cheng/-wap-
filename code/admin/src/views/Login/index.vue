@@ -41,7 +41,7 @@
 			methods: {
 				// 获取登陆验证码
 				getValidateCodeLogin() {
-					this.codeImg= "http://vip.31d461.cn/api/validateCode?"+Math.random()
+					this.codeImg= "http://localhost:8080/api/validateCode?"+Math.random()
 					// this.codeImg= "http://2x3r233961.iask.in/api/validateCode?"+Math.random()
 				},
 				async login() {

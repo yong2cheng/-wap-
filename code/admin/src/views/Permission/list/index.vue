@@ -40,15 +40,19 @@
                     <div v-else>{{scope.row[scope.column.property] || '无'}}</div>
                 </template>
             </el-table-column>
-            <el-table-column label="操作" header-align="center" align="center" width="460" v-if="proxyFlag!=1">
+            <el-table-column label="操作" header-align="center" align="center" width="560" v-if="proxyFlag!=1">
                 <template slot-scope="scope">
                 <el-button size="mini" @click="changStatus(scope,0)" v-if="scope.row.status==1">禁用</el-button>
                 <el-button size="mini" @click="changStatus(scope,1)" v-else>启用</el-button>
-                <el-button size="mini" @click="changStatus(scope,'',1)" v-if="scope.row.userType==2">取消代理</el-button>
-                <el-button size="mini" @click="changStatus(scope,'',2)" v-else>设为代理</el-button>
+                <!-- <el-button size="mini" @click="changStatus(scope,'',1)" v-if="scope.row.userType==2">取消代理</el-button>
+                <el-button size="mini" @click="changStatus(scope,'',2)" v-else>设为代理</el-button> -->
+                <el-button size="mini" v-if="scope.row.vipType==1">已激活</el-button>
+                <el-button size="mini" @click="changStatus(scope,3,1)" v-else>待激活</el-button>
                 <el-button size="mini" @click="changStatus(scope,2)">重置密码</el-button>
                 <el-button size="mini" @click="updataBank(scope)">银行卡号</el-button>
-                <el-button size="mini" @click="updataAddress(scope)">收货地址</el-button>
+                <!-- <el-button size="mini" @click="updataAddress(scope)">收货地址</el-button> -->
+                <el-button size="mini" @click="updataAliPay(scope)">支付宝</el-button>
+                <el-button size="mini" @click="updataVipEndDate(scope)">调整有效期</el-button>
                 <!-- <el-button size="mini" type="danger" @click="del(scope)">删除</el-button> -->
                 </template>
             </el-table-column>
@@ -67,7 +71,8 @@
     <EditComponent v-if="editShow" :info="userInfo" @close="close"></EditComponent>
     <UpdataBankComponent v-if="updataBankShow" :infotion="userInfo" @close="close"></UpdataBankComponent>
     <UpdataAddressComponent v-if="updataAddressShow" :infotion="userInfo" @close="close"></UpdataAddressComponent>
-
+    <UpdataAliPayComponent v-if="updataAliPayShow" :infotion="userInfo" @close="close"></UpdataAliPayComponent>
+    <UpdataVipEndDateComponent v-if="updataVipEndDateShow" :infotion="userInfo" @close="close"></UpdataVipEndDateComponent>
 </article>
 </template>
 <script>
@@ -75,11 +80,15 @@
     import EditComponent from '../edit/index'
     import UpdataBankComponent from '../updataBank/index'
     import UpdataAddressComponent from '../updataAddress/index'
+    import UpdataAliPayComponent from '../updataAliPay/index'
+    import UpdataVipEndDateComponent from '../updataVipEndDate/index'
     export default {
         components: {
             EditComponent,
             UpdataBankComponent,
-            UpdataAddressComponent
+            UpdataAddressComponent,
+            UpdataAliPayComponent,
+            UpdataVipEndDateComponent
         },
         data() {
             return {
@@ -92,6 +101,8 @@
                 editShow: false,
                 updataBankShow:false,
                 updataAddressShow:false,
+                updataAliPayShow:false,
+                updataVipEndDateShow:false,
                 userInfo: {},
                 loading: false,
                 pageindex: 1,
@@ -195,6 +206,16 @@
                         minWidth:'110px'                  
                     },
                     {
+                        label: '到期时间',
+                        prop: 'vipEndDate',
+                        hidden: false,
+                        headerAlign: 'center',
+                        align: 'center',
+                        width: '',
+                        sort: false ,
+                        minWidth:'150px'               
+                    },
+                    {
                         label: '注册时间',
                         prop: 'createDate',
                         hidden: false,
@@ -264,7 +285,9 @@
                 this.editShow = false;
                 this.updataBankShow = false;
                 this.updataAddressShow = false;
-                // this.getUserList()
+                this.updataAliPayShow = false;
+                this.updataVipEndDateShow = false;
+                this.getUserList()
             },
             handleSizeChange(val) {
                 // console.log(`每页 ${val} 条`);
@@ -326,12 +349,12 @@
                     str = '是否禁用该用户'
                     successMes = '禁用成功'
                 }
-                if(flag == 1) {
+                if(flag === 0) {
                     str = '是否把该用户取消代理？'
                     successMes = '取消代理成功'
-                } else if(flag == 2){
-                    str = '是否把该用户设为代理'
-                    successMes = '设为代理成功'
+                } else if(flag == 1){
+                    str = '是否激活该用户'
+                    successMes = '激活成功'
                 }
                 this.$confirm(str, '提示', {
                     confirmButtonText: '确定',
@@ -345,13 +368,17 @@
                     if(type === 2) {
                         await this.$store.dispatch('resetPassword', obj)
                     } else {
-                        if(type === 1 || type === 0) {
-                            obj.status  = type
+                        if(type === 3) {
+                            await this.$store.dispatch('updateActivation', obj)
+                        } else {
+                            if(type === 1 || type === 0) {
+                                obj.status  = type
+                            }
+                            if(flag) {
+                                obj.userType  = flag
+                            }
+                            await this.$store.dispatch('updateStatus', obj)
                         }
-                        if(flag) {
-                            obj.userType  = flag
-                        }
-                        await this.$store.dispatch('updateStatus', obj)
                     }
                     
                     this.$message({
@@ -391,6 +418,37 @@
                         duration:1500
                     });
                 }
+                console.log(this.userInfo)
+            },
+            // 修改支付宝
+            async updataAliPay (scope) {
+                // await this.$store.dispatch('getUserAliPay',{id:scope.row.id});
+                this.userInfo = scope.row
+                if(this.userInfo.alipayCard) {
+                    this.updataAliPayShow = true;
+                } else {
+                    this.$message({
+                        message: '该用户未绑定支付宝',
+                        type: 'success',
+                        duration:1500
+                    });
+                }
+                console.log(this.userInfo)
+            },
+            // 修改到期日期
+            async updataVipEndDate (scope) {
+                // await this.$store.dispatch('getUserAliPay',{id:scope.row.id});
+                this.userInfo = scope.row
+                this.updataVipEndDateShow = true;
+                // if(this.userInfo.alipayCard) {
+                //     this.updataAliPayShow = true;
+                // } else {
+                //     this.$message({
+                //         message: '该用户未绑定支付宝',
+                //         type: 'success',
+                //         duration:1500
+                //     });
+                // }
                 console.log(this.userInfo)
             },
         },

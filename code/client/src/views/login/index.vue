@@ -13,9 +13,9 @@
                 <el-form :model="ruleForm1" label-width="100px" class="login_ruleForm">
                     <el-input v-model="ruleForm1.username" placeholder="用户名/手机号" style="margin:10px 0"></el-input>
                     <el-input type="password" v-model="ruleForm1.password" autocomplete="off" placeholder="输入密码" style="margin-bottom:10px"></el-input>
-                    <el-input v-model="ruleForm1.graphValidateCode" placeholder="输入验证码" style="display:inline-block;width:calc(100% - 100px)"></el-input>
-                    <div class="number_code" @click.stop="getValidateCodeLogin"><img :src="codeImg1"/></div>
-                    <el-button type="primary" @click.stop="userLogin()" style="margin-top:30px;">登录</el-button>
+                    <!-- <el-input v-model="ruleForm1.graphValidateCode" placeholder="输入验证码" style="display:inline-block;width:calc(100% - 100px)"></el-input> -->
+                    <!-- <div class="number_code" @click.stop="getValidateCodeLogin"><img :src="codeImg1"/></div> -->
+                    <el-button type="primary" @click.stop="userLogin()">登录</el-button>
                 </el-form>
             </div>
         </div>
@@ -44,6 +44,9 @@
         },
         mounted () {
             this.getValidateCodeLogin()
+            this.ruleForm1.username = sessionStorage.getItem("userName");
+            this.ruleForm1.password = sessionStorage.getItem("password");
+            console.log(this.ruleForm1)
         },
         computed: {
 
@@ -51,7 +54,7 @@
         methods: {
             // 获取登陆验证码
             getValidateCodeLogin() {
-                this.codeImg1= "http://vip.31d461.cn/api/validateCode?"+Math.random()
+                this.codeImg1= "http://localhost:8080/api/validateCode?"+Math.random()
                 // this.codeImg1= "http://2x3r233961.iask.in/api/validateCode?"+Math.random()
             },
             getValidateCodeRegister() {
@@ -76,7 +79,7 @@
             getOpenId() {
                 let ua = navigator.userAgent.toLowerCase();//获取判断用的对象
                 if (ua.match(/MicroMessenger/i) == "micromessenger") { //在微信中打开
-                    let url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxed39f9ff11a48cf0&redirect_uri=http://vip.31d461.cn/api/wechat/get/callback&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect";
+                    let url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8b891a04a3eef4c4&redirect_uri=localhost:8080/api/wechat/get/callback&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect";
                     window.location.replace(url);
                 } else {
                     this.$router.push('/')

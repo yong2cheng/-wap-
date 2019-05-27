@@ -8,6 +8,9 @@
     <div class="search">
         <el-input placeholder="请输入用户名" prefix-icon="el-icon-search" v-model="keyword" @keydown.enter.native="exchangeShooppingList" style="width:150px"></el-input>
         <el-input placeholder="请输入真实姓名" prefix-icon="el-icon-search" v-model="keywordRealName" @keydown.enter.native="exchangeShooppingList" style="width:150px"></el-input>
+        <el-select v-model="status" placeholder="请选择用户状态" class="block" style="width:150px;margin-bottom:5px;">
+            <el-option v-for="(item,index) in userStatusArr" :key="index" :label="item.name" :value="item.status"></el-option>
+        </el-select>
         <el-date-picker
             v-model="dateValue"
             type="daterange"
@@ -36,11 +39,11 @@
                     <div v-else>{{scope.row[scope.column.property] || '无'}}</div>
                 </template>
             </el-table-column>
-            <el-table-column label="操作" header-align="center" align="center" width="235">
+            <el-table-column label="操作" header-align="center" align="center" width="135">
                 <template slot-scope="scope">
-                <el-button size="mini" @click="getDetail(scope)">详情</el-button>
-                <el-button size="mini" @click="deliverGoods(scope)" v-if="scope.row.status==1 && proxyFlag!=1">发货</el-button>
-                <el-button size="mini" @click="refund(scope)" v-if="scope.row.status==3 && proxyFlag !=1">退款</el-button>
+                <!-- <el-button size="mini" @click="getDetail(scope)">详情</el-button> -->
+                <el-button size="mini" @click="cash(scope)" v-if="scope.row.status===0">待处理</el-button>
+                <el-button size="mini" v-if="scope.row.status==1">已处理</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -83,6 +86,7 @@
                     status:'',
                     id:''
                 },
+                status:'',
                 dateValue:'',
                 keyword: '',
                 keywordRealName:'',
@@ -121,8 +125,8 @@
                         minWidth:80                
                     },
                     {
-                        label: '商品名称',
-                        prop: 'goodsName',
+                        label: '提现金额',
+                        prop: 'cashOutIntegral',
                         hidden: false,
                         headerAlign: 'center',
                         align: 'center',
@@ -131,18 +135,37 @@
                         minWidth:100                  
                     },
                     {
-                        label: '商品积分',
-                        prop: 'goodsIntegral',
+                        label: '提现方式',
+                        prop: 'cashOutWayName',
                         hidden: false,
                         headerAlign: 'center',
                         align: 'center',
                         width: '',
                         sort: true,
-                        minWidth:80                  
+                        minWidth:100                  
                     },
                     {
-                        label: '状态',
+                        label: '提现账号',
+                        prop: 'cashOutCard',
+                        hidden: false,
+                        headerAlign: 'center',
+                        align: 'center',
+                        width: '',
+                        sort: true,
+                    },
+                    {
+                        label: '提现状态',
                         prop: 'statusName',
+                        hidden: false,
+                        headerAlign: 'center',
+                        align: 'center',
+                        width: '',
+                        sort: true,     
+                        minWidth:80             
+                    },
+                    {
+                        label: '银行名称',
+                        prop: 'subBranchName',
                         hidden: false,
                         headerAlign: 'center',
                         align: 'center',
@@ -150,7 +173,7 @@
                         sort: true                  
                     },
                     {
-                        label: '创建时间',
+                        label: '提现时间',
                         prop: 'createDate',
                         hidden: false,
                         headerAlign: 'center',
@@ -159,7 +182,18 @@
                         sort: true                  
                     }
                 ],
-                multipleSelection: []
+                multipleSelection: [],
+                userStatusArr:[
+                {
+                    name:'所有状态',
+                    status:''
+                },{
+                    name:'待处理',
+                    status:0
+                },{
+                    name:'已处理',
+                    status:1
+                }],
             }
         },
         mounted () {
@@ -195,9 +229,12 @@
                 if(this.keywordRealName) {
                     obj.realName = this.keywordRealName
                 }
+                if(this.status || this.status===0) {
+                    obj.status = this.status
+                }
                 this.loading = true;
                 try {
-                    await this.$store.dispatch('exchangeShooppingList', obj)
+                    await this.$store.dispatch('integralCashOutList', obj)
                     this.loading = false;
                 }catch(e) {
                     this.loading = false;
@@ -238,6 +275,25 @@
                     await this.$store.dispatch('updateIntegralConvert', this.deliverInfo)
                     this.$message({
                         message: '退款成功',
+                        type: 'success',
+                        duration:1500
+                    });
+                    this.exchangeShooppingList()
+                })
+            },
+
+            async cash(scope) {
+                this.$confirm('是否完成该账号的返现？', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning',
+                    center: true,
+                    customClass:'message_width'
+                }).then(async () => {
+                    this.loading = true;
+                    await this.$store.dispatch('updateIntegralCashOut', {id:scope.row.id})
+                    this.$message({
+                        message: '返现成功',
                         type: 'success',
                         duration:1500
                     });

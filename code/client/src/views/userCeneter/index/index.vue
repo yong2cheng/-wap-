@@ -1,14 +1,14 @@
 <template>
     <div>
         <div class="user_center_wrapper">
-            <div class="site-header">
-                <div>
+            <div class="site-header cf">
+                <div class="user_img">
                     <!-- <router-link :to="{path:'/'}"><img src="../../../images/user.jpg" class="user_img"/></router-link> -->
-                    <img src="../../../images/user.jpg" class="user_img"/>
+                    <img src="../../../images/user.jpg"/>
                 </div>
                 <div class="user_info">
                     <p>{{userInfo.username}}【{{userInfo.vipTypeName}}】</p>
-                    <p>一级：{{firstNumber}}人&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;二级：{{secondNumber}}人</p>
+                    <span>推广人数：{{firstNumber}}人</span>
                     <!-- <p>编号：176</p> -->
                 </div>
                 <!-- <div class="member-intro">
@@ -18,8 +18,11 @@
                 <!-- <router-link :to="{path:'/userCeneter/userSetting'}"><img src="../../../images/setting.png" class="setting_img"/></router-link> -->
             </div>
             <div class="middle_count">
-                <ul>
-                    <li><img src="../../../images/userCeneterMenu/money.png"/><span>积分:<em style="color:#fd571d" >{{userInfo.integral}}</em></span></li>
+                <ul class="cf">
+                    <li class="cf">
+                        <span style="margin-left:17px;color:#999">积分:<em style="font-size:0.4rem;color:#333;margin-left: 0.1rem;" >{{userInfo.integral}}</em></span>
+                        <span style="float:right;margin-right:17px;border:1px solid #4781fe;padding: 0.1rem 0.2rem;margin-top: 18.5px;" @click="getPath('/userCeneter/cashWithdrawal')">提现</span>
+                    </li>
                     <!-- <li style="height:90px;padding:20px 0;box-sizing:border-box">
                         <p>
                             <em>0</em><em>发布</em>
@@ -34,21 +37,23 @@
                             <em>0</em><em>发布</em>
                         </p>
                     </li> -->
-                    <li @click="getPath('/userCeneter/integralRecord')"><img src="../../../images/userCeneterMenu/caiwu.png"/><span>积分记录</span></li>
-                    <li @click="getPath('/userCeneter/robotMall')"><img src="../../../images/homeMenu/icon08.jpg"/><span>AI机器人</span></li>
-                    <li @click="getPath('/userCeneter/integralMall')"><img src="../../../images/userCeneterMenu/users_07.png"/><span>积分商城</span></li>
-                    <li @click="getPath('/userCeneter/integraExchangeHistory')"><img src="../../../images/userCeneterMenu/help.png"/><span>积分兑换记录</span></li>
-                    <li @click="getPath('/userCeneter/vipAwards')"><img src="../../../images/userCeneterMenu/users_08.png"/><span>会员奖品</span></li>
-                    <li @click="getPath('/userSetting/harvestAddress/index')"><img src="../../../images/userCeneterMenu/sz3.png"/><span>我的收货地址</span></li>
-                    <li @click="getPath('/userSetting/myBankCard/index')"><img src="../../../images/userCeneterMenu/sz2.png"/><span>我的银行卡</span></li>
-                    <!-- <li @click="getPath('/userSetting/alipay/index')"><img src="../../../images/userCeneterMenu/sz1.jpg"/><span>绑定支付宝</span></li> -->
-                    <li @click="getPath('/userSetting/updataPassword/index')"><img src="../../../images/userCeneterMenu/sz4.png"/><span>修改密码</span></li>
+                    <li @click="getPath('/userCeneter/integralRecord')"><img src="../../../images/userCeneterMenu/caiwu.png"/><span>积分记录</span><i></i></li>
+                    <li @click="getPath('/onlineService')"><img src="../../../images/userCeneterMenu/lxkf.png"/><span>联系客服</span><i></i></li>
+                    <!-- <li @click="getPath('/userCeneter/robotMall')"><img src="../../../images/homeMenu/icon08.jpg"/><span>AI机器人</span></li> -->
+                    <!-- <li @click="getPath('/userCeneter/integralMall')"><img src="../../../images/userCeneterMenu/users_07.png"/><span>积分商城</span></li> -->
+                    <li @click="getPath('/userCeneter/withdrawalsRecord')"><img src="../../../images/userCeneterMenu/txjl.png"/><span>提现记录</span><i></i></li>
+                    <!-- <li @click="getPath('/userCeneter/integraExchangeHistory')"><img src="../../../images/userCeneterMenu/help.png"/><span>积分兑换记录</span></li> -->
+                    <!-- <li @click="getPath('/userCeneter/vipAwards')"><img src="../../../images/userCeneterMenu/users_08.png"/><span>会员奖品</span></li> -->
+                    <!-- <li @click="getPath('/userSetting/harvestAddress/index')"><img src="../../../images/userCeneterMenu/sz3.png"/><span>我的收货地址</span></li> -->
+                    <li @click="getPath('/userSetting/myBankCard/index')"><img src="../../../images/userCeneterMenu/wdyhk.png"/><span>我的银行卡</span><i></i></li>
+                    <li @click="getPath('/userSetting/alipay/index')"><img src="../../../images/userCeneterMenu/zfb.png"/><span>绑定支付宝</span><i></i></li>
+                    <li @click="getPath('/userSetting/updataPassword/index')"><img src="../../../images/userCeneterMenu/xgmm.png"/><span>修改密码</span><i></i></li>
                     <!-- <li><img src="../../images/userCeneterMenu/help.png"/><span>新手引导</span></li> -->
                     <!-- <li><img src="../../images/userCeneterMenu/caiwu.png"/><span>财务管理</span></li>  -->
-                    <button class="tc_login" @click="removeCookie">退出登陆</button>
-                    <div style="height:1.4rem"></div>
                 </ul>
             </div>
+            <div style="background:#fff"><button class="tc_login" @click="removeCookie">退出登陆</button></div>
+            <div style="height:2rem"></div>
         </div>
         <footer-common></footer-common>
     </div>
@@ -103,27 +108,37 @@
     }
     .user_center_wrapper .site-header {
         position: relative;
-        height: 205px;
+        height: 135px;
         box-sizing: border-box;
-        padding: 36px 20px 0;
-        background: #FE4B1C;
+        padding: 35px 20px;
+        background: #107cea;
         background-size: 100% 100%;
     }
     .user_center_wrapper .site-header .user_img {
-        width: 94px;
-        height: 94px;
-        border-radius: 100%;
-        border: 2px solid #FE4B1C;
-        margin: 0 auto;
+        float: left;
+    }
+    .user_center_wrapper .site-header .user_img img{
         display: block;
+        width: 64px;
+        height: 64px;
+        border-radius: 100%;
+        border: 2px solid #5faaf7;
+        margin: 0 auto;
     }
     .user_info {
-        text-align: center;
-        margin-top: 0.1rem
+        float: left;
+        /* text-align: center; */
+        margin: 0.1rem 0 0 0.3rem;
     }
     .user_info p {
-        /* font-size: 0.3rem; */
+        font-size: 0.3rem;
         color: #fff;
+    }
+    .user_info span {
+        font-size: 0.3rem;
+        color: #fff;
+        padding: 0.05rem 0.1rem;
+        border: 1px solid #fff;
     }
     .setting_img {
         position: absolute;
@@ -165,22 +180,33 @@
         color:#fff;
         font-size: 0.3rem;
     }
+    .user_center_wrapper .middle_count ul {
+        margin-top: 0.2rem;
+    }
     .user_center_wrapper .middle_count ul li {
         float: left;
         width:100%;
         height: 70px;
-        border-bottom: 1px solid #e9e9e9;
-        background: #fff
+        background: #fff;
+        margin-bottom: 0.2rem;
     }
     .user_center_wrapper .middle_count ul li img{
         float: left;
-        width: 36px;
-        height: 36px;
-        margin: 17px;
+        width: 26px;
+        height: 22px;
+        margin: 22px 17px;
     }
     .user_center_wrapper .middle_count ul li span{
         float: left;
         margin-top: 22.5px;
+    }
+    .user_center_wrapper .middle_count ul li i{
+        float:right;
+        width:13px;
+        height:14px;
+        background:url("../../../images/homeMenu/jt.png") no-repeat center;
+        margin-right:17px;
+        margin: 28px 17px;
     }
     .user_center_wrapper .middle_count ul li p{
         float: left;

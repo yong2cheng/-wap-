@@ -131,6 +131,16 @@ const user = {
 					})
 			})
 		},
+		updateActivation ({commit}, info) {
+			return new Promise( (resolve, reject) => {
+				axios.post('user/activation', info)
+					.then( res => {
+						resolve(res)
+					}).catch( err => {
+						reject(err)
+					})
+			})
+		},
 		resetPassword ({commit}, info) {
 			return new Promise( (resolve, reject) => {
 				axios.post('user/resetPassword', info)
@@ -165,6 +175,16 @@ const user = {
 		updateUser ({commit}, info) {
 			info.pwd = md5(info.pwd)
 			info.old_pwd = md5(info.old_pwd)
+			return new Promise( (resolve, reject) => {
+				axios.post('user/update', info)
+					.then( res => {
+						resolve(res)
+					}).catch( err => {
+						reject(err)
+					})
+			})
+		},
+		updateUserDetail ({commit}, info) {
 			return new Promise( (resolve, reject) => {
 				axios.post('user/update', info)
 					.then( res => {

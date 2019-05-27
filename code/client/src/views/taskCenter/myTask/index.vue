@@ -31,7 +31,7 @@
                 <span>
                     <el-upload
                         class="upload_img"
-                        action='http://vip.31d461.cn/api/imgUpload/'
+                        action='http://localhost:8080/api/imgUpload/'
                         list-type="picture-card"
                         :on-success="handleAvatarSuccess"
                         :before-upload="beforeAvatarUpload"

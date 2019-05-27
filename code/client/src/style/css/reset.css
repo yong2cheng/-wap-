@@ -1,6 +1,6 @@
 *{ margin:0; padding:0}
 html {font-size:10px;}
-body {margin:0;padding:0;color:#555;font-weight:normal; font-family:"微软雅黑";overflow-x:hidden;}
+body {margin:0;padding:0;color:#555;font-weight:normal; font-family:"微软雅黑";overflow-x:hidden;background: #e9eff7 !important;}
 div,header,menu,footer,ul, li, h1, h2, h3, h4, h5, h6, p,a, span, input, button,i,em {margin:0;padding:0;list-style:none;outline:none;font-weight:normal; border:0; font-family:"微软雅黑"}
 img {border:0;}
 em, i {font-style:normal}

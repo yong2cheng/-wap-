@@ -4,7 +4,7 @@
             <div class="new-header">
                 <div class="container cl">
                     <img src="../../../images/back.png" style="float: left;" @click="$router.back(-1)"/>
-                    <div class="container_detail">积分详情</div>
+                    <div class="container_detail">积分记录</div>
                 </div>
             </div>
             <div class="integral_count" >

@@ -14,6 +14,8 @@ const join = () =>
     import('../../views/home/children/join/index')
 const intelligentRobot = () =>
     import('../../views/home/children/intelligentRobot/index')
+const checkProduct = () =>
+    import('../../views/home/children/checkProduct/index')
 const notOpen = () =>
     import('../../views/home/children/notOpen')
 
@@ -22,7 +24,7 @@ let indexArr = [
         path: '/',
         component: homeCenter,
         meta: {
-            requiresAuth: false
+            requiresAuth: true
         },
         children: [
             {
@@ -30,7 +32,7 @@ let indexArr = [
                 name: 'indexMain',
                 component: indexMain,
                 meta: {
-                    requiresAuth: false
+                    requiresAuth: true
                 }
             },
             { // 
@@ -77,6 +79,14 @@ let indexArr = [
                 path: '/intelligentRobot',
                 name: 'intelligentRobot',
                 component: intelligentRobot,
+                meta: {
+                    requiresAuth: true
+                }
+            },
+            { // 智能机器人
+                path: '/checkProduct',
+                name: 'checkProduct',
+                component: checkProduct,
                 meta: {
                     requiresAuth: true
                 }

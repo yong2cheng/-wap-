@@ -61,6 +61,20 @@ const sysSetting = {
 				})
 			})
 		},
+		getRebate ({commit}, params) {
+			return new Promise( (resolve, reject) => {
+				axios.get('systemConfig/query').then( res => {
+					let dataArr = [res.data]
+					res.data = dataArr
+					console.log(res)
+					commit('TASKREWARD', res.data)
+					resolve(res)
+				}).catch( err => {
+					// console.log(err)
+					reject(err)
+				})
+			})
+		},
 
 		getNotice ({commit}, params) {
 			return new Promise( (resolve, reject) => {
@@ -98,7 +112,17 @@ const sysSetting = {
 					})
 			})
 		},
-
+		updatevRebate ({commit}, info) {
+			return new Promise( (resolve, reject) => {
+				axios.post('systemConfig/update', info)
+					.then( res => {
+						commit('OPERTIONSTATUS', res.code)
+						resolve(res)
+					}).catch( err => {
+						reject(err)
+					})
+			})
+		},
 		updatevNotice ({commit}, info) {
 			return new Promise( (resolve, reject) => {
 				axios.post('notice/update', info)

@@ -11,6 +11,10 @@ const integralRecord = () =>
     import('../../views/userCeneter/children/integralRecord')
 const integraExchangeHistory = () =>
     import('../../views/userCeneter/children/integraExchangeHistory')
+const cashWithdrawal = () =>
+    import('../../views/userCeneter/children/cashWithdrawal')
+const withdrawalsRecord = () =>
+    import('../../views/userCeneter/children/withdrawalsRecord')
 const vipAwards = () =>
     import('../../views/userCeneter/children/vipAwards')
 const userSetting = () =>
@@ -76,6 +80,22 @@ let indexArr = [
                 path: '/userCeneter/integraExchangeHistory',
                 name: 'integraExchangeHistory',
                 component: integraExchangeHistory,
+                meta: {
+                    requiresAuth: true
+                }
+            },
+            { // 提现
+                path: '/userCeneter/cashWithdrawal',
+                name: 'cashWithdrawal',
+                component: cashWithdrawal,
+                meta: {
+                    requiresAuth: true
+                }
+            },
+            { // 提现记录
+                path: '/userCeneter/withdrawalsRecord',
+                name: 'withdrawalsRecord',
+                component: withdrawalsRecord,
                 meta: {
                     requiresAuth: true
                 }

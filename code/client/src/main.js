@@ -9,8 +9,11 @@ import 'element-ui/lib/theme-chalk/index.css'
 import axios from './utils/fetch'
 import clipboard from 'clipboard';
 // import './utils/appback.js'
-import Mui from 'vue-awesome-mui';
+// import Mui from 'vue-awesome-mui';
 import 'vue-awesome-mui/mui/dist/css/mui.css';
+import VideoPlayer from 'vue-video-player'
+import 'video.js/dist/video-js.css'
+import 'vue-video-player/src/custom-theme.css'
 
 import * as filters from './filters'
 Object.keys(filters).forEach(key => {
@@ -18,12 +21,13 @@ Object.keys(filters).forEach(key => {
 })
 
 import customComponents from './custom-components'
+Vue.use(VideoPlayer)
 Vue.use(ElementUI)
 Vue.use(customComponents)
-Vue.use(Mui);
+// Vue.use(Mui);
 Vue.prototype.axios = axios
 Vue.prototype.clipboard = clipboard;
-Vue.prototype.mui = Mui;
+// Vue.prototype.mui = Mui;
 
 new Vue({
     el: '#app',

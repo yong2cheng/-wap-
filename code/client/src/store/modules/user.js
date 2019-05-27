@@ -107,6 +107,8 @@ const user = {
 					console.log(document.cookie)
 					// console.log(res)
 					state.token = getToken();
+					sessionStorage.setItem("userName",info.username);
+					sessionStorage.setItem("password",info.password);
 					resolve(res)
 				}).catch( err => {
 					// console.log(err)
@@ -121,7 +123,6 @@ const user = {
 				}).then( res => {
 					console.log(res)
 					commit('USERINFO', res.data)
-					sessionStorage.setItem("userName",res.data.username);
 					resolve(res)
 				}).catch( err => {
 					// console.log(err)

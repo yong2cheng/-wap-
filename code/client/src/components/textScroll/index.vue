@@ -1,17 +1,18 @@
 <template>
     <div class="text_scroll_wrap" id="text_scroll">
-        <div class="notice_tip">
-            <p class="notice_wrapper" style="margin:0;"><img class="notice_mark" src="../../images/homeMenu/icon11.png" />公告</p>
-        </div>
         <div id="box">
             <div id="marquee" style="height:100%">{{text}}</div>
+        </div>
+        <div class="notice_tip">
+            <!-- <p class="notice_wrapper" style="margin:0;"><img class="notice_mark" src="../../images/homeMenu/icon11.png" />公告</p> -->
+            <p class="notice_wrapper cf"><img class="notice_mark" src="../../images/homeMenu/icon11.png" /><span>{{createDate}}</span></p>
         </div>
         <div id="node">{{text}}</div>
     </div>
 </template>
 <script>
 export default {
-    props: ['lists'], // 父组件传入数据， 数组形式 [ ""，""]
+    props: ['lists','createDate'], // 父组件传入数据， 数组形式 [ ""，""]
     data () {
         return {
             text: '' // 数组文字转化后的字符串
@@ -65,6 +66,7 @@ export default {
     float: left;
     width:calc(100% - 1.22rem);
     margin-left: 0.3rem;
+    height: 100%;
 }
 .text_scroll_wrap #box {
     width: 1000000%;
@@ -79,17 +81,23 @@ export default {
 .text_scroll_wrap .notice_tip{
     /* float: left; */
     width:calc(100% - 1.22rem);
-    padding-top: 0.2rem;
+    padding-top: 0.1rem;
     /* padding-left: 0.3rem; */
 }
 .text_scroll_wrap  .notice_tip .notice_wrapper {
     line-height: 0.4rem;
     font-size: .28rem;
 }
+.text_scroll_wrap  .notice_tip .notice_wrapper span{
+    float: left;
+    line-height: 0.3rem;
+    font-size: .3rem;
+}
 .text_scroll_wrap .notice_tip .notice_wrapper .notice_mark{
-    margin: 0 0.05rem 0.05rem;
-    width: 0.15rem;
-    height: 0.15rem;
+    float: left;
+    margin: 0 0.1rem 0 0;
+    width: 0.3rem;
+    height: 0.3rem;
 }
 .text_scroll_wrap .notice_tip .notice_content {
     line-height: 0.4rem;

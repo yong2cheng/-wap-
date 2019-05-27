@@ -21,7 +21,7 @@ let router = new Router({
 })
 router.beforeEach((to, from, next) => {
   //to即将进入的目标路由对象，from当前导航正要离开的路由， next  :  下一步执行的函数钩子
-  if (to.path === '/login' || to.path === '/' || to.path === '/register') {
+  if (to.path === '/login' || to.path === '/register') {
     next()
   } // 如果即将进入登录路由，则直接放行
   else { //进入的不是登录路由

@@ -56,6 +56,20 @@ const integral = {
 			})
 		},
 
+		integralCashOutList ({commit}, params) {
+			// commit('INTERGRALLIST', {'list':[]})
+			return new Promise( (resolve, reject) => {
+				axios.get('integralCashOut/query', params).then( res => {
+					console.log(res)
+					commit('INTERGRALLIST', res.data)
+					resolve(res)
+				}).catch( err => {
+					// console.log(err)
+					reject(err)
+				})
+			})
+		},
+
 		getIntegralStatisticsList ({commit}, params) {
 			return new Promise( (resolve, reject) => {
 				axios.get('userIntegralLog/statistics', params).then( res => {
@@ -86,6 +100,18 @@ const integral = {
         updateIntegralConvert ({commit, state}, params) {
             return new Promise( (resolve, reject) => {
                 axios.post('integralConvert/update', params).
+                    then( res => {
+                        resolve(res)
+                    }).catch( err => {
+                        // console.log(err)
+                        reject(err)
+                    })
+            })
+		},
+		// 跟新提货状态
+        updateIntegralCashOut ({commit, state}, params) {
+            return new Promise( (resolve, reject) => {
+                axios.post('integralCashOut/update', params).
                     then( res => {
                         resolve(res)
                     }).catch( err => {

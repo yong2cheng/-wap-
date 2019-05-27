@@ -22,7 +22,7 @@
             </el-form-item>
             <el-form-item label="任务图片">
                 <el-upload
-                action='http://vip.31d461.cn/api/imgUpload/'
+                action='http://localhost:8080/api/imgUpload/'
                 list-type="picture-card"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload"
