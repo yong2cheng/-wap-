@@ -28,8 +28,8 @@
                     </ul>
                 </div>
                 <div class="middle_count">
-                    <ul class="cf" @click="getPath('checkProduct','查看项目')">
-                        <li class="cf">
+                    <ul class="cf">
+                        <li class="cf" @click="getPath('checkProduct','查看项目')">
                             <img src="../../../images/homeMenu/product.png" alt="">
                             <p>
                                 <span>查看项目</span>

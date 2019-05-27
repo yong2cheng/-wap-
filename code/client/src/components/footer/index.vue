@@ -8,9 +8,10 @@
                     首页
                 </p>
             </li>
-            <li @click="getPath('/taskCenter/index')">
-                <img src="../../images/homeMenu/working.png" v-if="working"/>
-                <img src="../../images/homeMenu/worked.png" v-else/>
+            <!-- <li @click="getPath('/taskCenter/index')"> -->
+            <li>
+                <img src="../../images/homeMenu/wjh.png" v-if="!userInfo.vipType"/>
+                <img src="../../images/homeMenu/yjh.png" v-else/>
             </li>
             <li @click="getPath('/userCeneter/index')">
                 <img src="../../images/homeMenu/my.png" v-if="!isUserCenter"/>
@@ -24,6 +25,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
     export default {
     	data(){
             return{
@@ -50,7 +52,9 @@
             }
         },
         computed: {
-            
+            ...mapGetters([
+                'userInfo'
+            ])
         },
         methods: {
             getPath(path) {
