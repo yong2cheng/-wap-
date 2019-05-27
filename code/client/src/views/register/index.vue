@@ -3,7 +3,7 @@
         <div class="login_wrapper">
             <div class="site-header">
                 <router-link :to="{path:'/'}"><img src="../../images/close.png" class="login_img"/></router-link>
-                <img  src="../../images/banner.jpeg" class="bannerImg"/>
+                <img  src="../../images/banner .png" class="bannerImg"/>
             </div>
             <div class="middle_count">
                 <ul class="cf">
@@ -128,8 +128,8 @@
         font-size:0.3rem
     }
     .login_wrapper .middle_count .current_select{
-        color: #FF471B;
-        border-bottom: 2px solid #FF471B; 
+        color: #4781fe;
+        border-bottom: 2px solid #4781fe; 
     }
     .login_wrapper .middle_count {
         position: relative;
@@ -146,8 +146,8 @@
         padding: 0 10px;
     }
     .login_wrapper .login_ruleForm .el-button--primary{
-        background-color: #FE4B1C;
-        border-color:#FE4B1C;
+        background-color: #4781fe;
+        border-color:#4781fe;
         width: 100%;
         border-radius: 3px;
     }
@@ -178,7 +178,7 @@
     }
     .send_message {
         text-align: center;
-        background: #FE4B1C;
+        background: #4781fe;
         color: #fff;
         border-radius: 3px;
     }
@@ -188,7 +188,7 @@
         height: 100%;
         font-size: .3rem;
         color: #fff;
-        background: #fe4b1c;
+        background: #4781fe;
         border-radius: 3px;
     }
     .tjr_name{
