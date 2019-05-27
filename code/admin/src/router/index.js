@@ -28,7 +28,7 @@ export const constantRouterMap = [
         children: [
             { path: 'list', component: _import_('Permission/list/index'), name: '用户列表' },
             // { path: 'add', component: _import_('Permission/add/index'), name: '添加管理员' }
-            { path: 'vipAwards', component: _import_('Permission/vipAwards/index'), name: 'vip奖品管理' },
+            // { path: 'vipAwards', component: _import_('Permission/vipAwards/index'), name: 'vip奖品管理' },
         ]
     },
 ]

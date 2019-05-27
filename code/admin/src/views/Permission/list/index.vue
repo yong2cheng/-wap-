@@ -8,12 +8,12 @@
     <div class="search">
         <el-input placeholder="请输入用户名" prefix-icon="el-icon-search" v-model="keyword" @keydown.enter.native="getUserList" style="width:150px;margin-bottom:5px;"></el-input>
         <el-input placeholder="请输入真实姓名" prefix-icon="el-icon-search" v-model="keywordRealName" @keydown.enter.native="getUserList" style="width:150px;margin-bottom:5px;"></el-input>
-        <el-input placeholder="请输入注册多少天内" prefix-icon="el-icon-search" v-model="keywordDays" @keydown.enter.native="getUserList" style="width:180px;margin-bottom:5px;"></el-input>
-        <el-input placeholder="请输入下线人数小于多少人" prefix-icon="el-icon-search" v-model="keywordChildCount" @keydown.enter.native="getUserList" style="width:215px;margin-bottom:5px;"></el-input>
-        <el-select v-model="vipType" placeholder="请选择会员类型" class="block" style="width:150px;margin-bottom:5px;">
+        <!-- <el-input placeholder="请输入注册多少天内" prefix-icon="el-icon-search" v-model="keywordDays" @keydown.enter.native="getUserList" style="width:180px;margin-bottom:5px;"></el-input> -->
+        <!-- <el-input placeholder="请输入下线人数小于多少人" prefix-icon="el-icon-search" v-model="keywordChildCount" @keydown.enter.native="getUserList" style="width:215px;margin-bottom:5px;"></el-input> -->
+        <el-select v-model="vipType" placeholder="请选择用户激活状态" class="block" style="width:150px;margin-bottom:5px;">
             <el-option v-for="(item,index) in vipTypeArr" :key="index" :label="item.name" :value="item.vipType"></el-option>
         </el-select>
-        <el-select v-model="userStatus" placeholder="请选择用户状态" class="block" style="width:150px;margin-bottom:5px;">
+        <el-select v-model="userStatus" placeholder="请选择用户启用状态" class="block" style="width:150px;margin-bottom:5px;">
             <el-option v-for="(item,index) in userStatusArr" :key="index" :label="item.name" :value="item.status"></el-option>
         </el-select>
         <el-date-picker
@@ -124,10 +124,10 @@
                         hidden: false,
                         headerAlign: 'center',
                         align: 'center',
-                        minWidth:'100px'                 
+                        minWidth:'110px'                 
                     },
                     {
-                        label: '真实姓名',
+                        label: '姓名',
                         prop: 'realName',
                         hidden: false,
                         headerAlign: 'center',
@@ -136,24 +136,24 @@
                         minWidth:'75px'                 
                     },
                     {
-                        label: '会员类型名称',
+                        label: '激活状态',
                         prop: 'vipTypeName',
                         hidden: false,
                         headerAlign: 'center',
                         align: 'center',
                         width: '',
                         sort: false,
-                        minWidth:'110px'                  
+                        minWidth:'90px'                  
                     },
                     {
-                        label: '用户状态',
+                        label: '启用状态',
                         prop: 'status',
                         hidden: false,
                         headerAlign: 'center',
                         align: 'center',
                         width: '',
                         sort: false,
-                        minWidth:'75px'                  
+                        minWidth:'90px'                  
                     },
                     {
                         label: '用户积分',
@@ -183,7 +183,7 @@
                         align: 'center',
                         width: '',
                         sort: false,
-                        minWidth:'75px'                   
+                        minWidth:'70px'                   
                     },
                     {
                         label: '上级手机号',
@@ -193,7 +193,7 @@
                         align: 'center',
                         width: '',
                         sort: false,
-                        minWidth:'100px'                  
+                        minWidth:'110px'                  
                     },
                     {
                         label: '下线人数',
@@ -203,7 +203,7 @@
                         align: 'center',
                         width: '',
                         sort: true,
-                        minWidth:'110px'                  
+                        minWidth:'80px'                  
                     },
                     {
                         label: '到期时间',
@@ -214,41 +214,43 @@
                         width: '',
                         sort: false ,
                         minWidth:'150px'               
-                    },
-                    {
-                        label: '注册时间',
-                        prop: 'createDate',
-                        hidden: false,
-                        headerAlign: 'center',
-                        align: 'center',
-                        width: '',
-                        sort: false ,
-                        minWidth:'150px'               
                     }
+                    // {
+                    //     label: '注册时间',
+                    //     prop: 'createDate',
+                    //     hidden: false,
+                    //     headerAlign: 'center',
+                    //     align: 'center',
+                    //     width: '',
+                    //     sort: false ,
+                    //     minWidth:'150px'               
+                    // }
                 ],
                 vipTypeArr:[
                 {
-                    name:'所有会员',
+                    name:'激活状态',
                     vipType:''
                 },
                 {
-                    name:'非会员',
+                    name:'待激活',
                     vipType:0
                 },
                 {
-                    name:'普通会员',
+                    name:'已激活',
                     vipType:1
-                },{
-                    name:'高级会员',
-                    vipType:2
-                },{
-                    name:'体验会员',
-                    vipType:3
-                }],
+                }
+                // {
+                //     name:'高级会员',
+                //     vipType:2
+                // },{
+                //     name:'体验会员',
+                //     vipType:3
+                // }
+                ],
                 vipType:'',
                 userStatusArr:[
                 {
-                    name:'所有状态',
+                    name:'启用状态',
                     status:''
                 },{
                     name:'禁用',

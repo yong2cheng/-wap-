@@ -114,7 +114,7 @@
                         hidden: false,
                         headerAlign: 'center',
                         align: 'center',
-                        width: ''                 
+                        minWidth:'110px'                 
                     },
                     {
                         label: '真实姓名',
@@ -122,7 +122,7 @@
                         hidden: false,
                         headerAlign: 'center',
                         align: 'center',
-                        minWidth:80                
+                        minWidth:'75px'                
                     },
                     {
                         label: '提现金额',
@@ -132,7 +132,7 @@
                         align: 'center',
                         width: '',
                         sort: true,
-                        minWidth:100                  
+                        minWidth:'55px'                  
                     },
                     {
                         label: '提现方式',
@@ -142,7 +142,7 @@
                         align: 'center',
                         width: '',
                         sort: true,
-                        minWidth:100                  
+                        minWidth:'55px'                  
                     },
                     {
                         label: '提现账号',
@@ -169,7 +169,7 @@
                         hidden: false,
                         headerAlign: 'center',
                         align: 'center',
-                        width: '',
+                        minWidth:'190px',
                         sort: true                  
                     },
                     {

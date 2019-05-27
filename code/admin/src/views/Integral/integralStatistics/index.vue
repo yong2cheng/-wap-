@@ -33,8 +33,7 @@
                             v-for="(tag, index) in scope.row.roles" :key="index">{{tag}}</el-tag>
                     </div>
                     <div v-else-if="scope.column.property === 'avatar'"><img :src="scope.row[scope.column.property]" alt="" style="height: 40px;"></div>
-                    
-                    <div v-else>{{scope.row[scope.column.property]}}</div>
+                    <div v-else>{{scope.row[scope.column.property] || '无'}}</div>
                 </template>
             </el-table-column>
             <!-- <el-table-column label="操作" header-align="center" align="center" width="250">
@@ -45,7 +44,8 @@
             </el-table-column> -->
         </el-table>
     </div>
-    <div class="collect_data">汇总：充值{{totalRecharge}}分，增加{{totalIncrease}}分，减少{{-totalReduce}}分，合计{{totalJia}}分</div>
+    <!-- <div class="collect_data">汇总：充值{{totalRecharge}}分，增加{{totalIncrease}}分，减少{{-totalReduce}}分，合计{{totalJia}}分</div> -->
+    <div class="collect_data">汇总：增加{{totalIncrease}}分，减少{{-totalReduce}}分，合计{{totalJia}}分</div>
     <el-pagination
         class="pagination"
         @size-change="handleSizeChange"
