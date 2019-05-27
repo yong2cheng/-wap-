@@ -104,7 +104,7 @@
 }
 .integral_count .integral_changeTypeName em {
     float: right;
-    color: #FE4B1C;
+    color: #409EFF;
     /* font-size: 0.3rem; */
 }
 

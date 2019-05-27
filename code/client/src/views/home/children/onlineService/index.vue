@@ -4,7 +4,7 @@
             <div class="new-header">
                 <div class="container cl">
                     <img src="../../../../images/back.png" style="float: left;" @click="$router.back(-1)"/>
-                    <div class="container_detail">{{$route.query.name}}</div>
+                    <div class="container_detail">人工客服</div>
                 </div>
             </div>
             <div class="wrapper_count" >
