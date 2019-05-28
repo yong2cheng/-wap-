@@ -73,8 +73,8 @@
                     type: 'success',
                     duration:1500
                 });
-                // this.getOpenId()
-                // this.$router.push('/')
+                this.getOpenId()
+                this.$router.push('/')
             },
             getOpenId() {
                 let ua = navigator.userAgent.toLowerCase();//获取判断用的对象
