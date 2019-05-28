@@ -48,7 +48,7 @@ function checkCode(res) {
     }
 }
 
-const prefix = 'http://localhost:8080/api/'
+const prefix = 'http://vip.yuziyule.cn/api/'
 // var prefix = 'http://2x3r233961.iask.in/api/'
 export default {
     get(url, params) {

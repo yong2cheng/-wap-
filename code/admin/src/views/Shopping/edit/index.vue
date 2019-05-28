@@ -11,7 +11,7 @@
             <el-form-item label="商品图片">
                 <el-upload
                 class="upload_img"
-                action='http://localhost:8080/api/imgUpload/'
+                action='http://vip.yuziyule.cn/api/imgUpload/'
                 list-type="picture-card"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload"

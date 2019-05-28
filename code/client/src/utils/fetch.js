@@ -50,7 +50,7 @@ function checkCode(res) {
     }
 }
 
-var prefix = 'http://localhost:8080/api/'
+var prefix = 'http://vip.yuziyule.cn/api/'
 // var prefix = 'http://2x3r233961.iask.in/api/'
 export default {
     get(url, params) {
@@ -58,7 +58,7 @@ export default {
         if(url.indexOf("https://open")>=0) {
             prefix=''
         } else {
-            prefix = 'http://localhost:8080/api/'
+            prefix = 'http://vip.yuziyule.cn/api/'
             // prefix = 'http://2x3r233961.iask.in/api/'
         }
         return axios({

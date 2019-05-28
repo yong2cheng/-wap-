@@ -70,7 +70,7 @@
             },
             // 获取注册验证码
             getValidateCodeRegister() {
-                this.codeImg2= "http://localhost:8080/api/validateCode?"+Math.random()
+                this.codeImg2= "http://vip.yuziyule.cn/api/validateCode?"+Math.random()
                 // this.codeImg2= "http://2x3r233961.iask.in/api/validateCode?"+Math.random()
             },
             // 发送短信

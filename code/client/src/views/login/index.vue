@@ -54,7 +54,7 @@
         methods: {
             // 获取登陆验证码
             getValidateCodeLogin() {
-                this.codeImg1= "http://localhost:8080/api/validateCode?"+Math.random()
+                this.codeImg1= "http://vip.yuziyule.cn/api/validateCode?"+Math.random()
                 // this.codeImg1= "http://2x3r233961.iask.in/api/validateCode?"+Math.random()
             },
             getValidateCodeRegister() {
@@ -73,13 +73,13 @@
                     type: 'success',
                     duration:1500
                 });
-                this.getOpenId()
+                // this.getOpenId()
                 // this.$router.push('/')
             },
             getOpenId() {
                 let ua = navigator.userAgent.toLowerCase();//获取判断用的对象
                 if (ua.match(/MicroMessenger/i) == "micromessenger") { //在微信中打开
-                    let url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8b891a04a3eef4c4&redirect_uri=localhost:8080/api/wechat/get/callback&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect";
+                    let url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8b891a04a3eef4c4&redirect_uri=vip.yuziyule.cn/api/wechat/get/callback&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect";
                     window.location.replace(url);
                 } else {
                     this.$router.push('/')
