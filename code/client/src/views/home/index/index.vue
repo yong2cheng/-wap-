@@ -12,7 +12,8 @@
                 <div class="middle_menu">
                     <ul class="cf">
                         <li><img src="../../../images/homeMenu/projectRevenue.png"/><p><span>{{todayIncrease}}元</span><em>今日收益</em></p></li>
-                        <li v-if="working"><img src="../../../images/homeMenu/working.png"/><p>工作中</p></li>
+                        <li v-if="!userInfo.vipType"><img src="../../../images/homeMenu/wjh.png"/><p>待激活</p></li>
+                        <li v-else-if="working"><img src="../../../images/homeMenu/working.png"/><p>工作中</p></li>
                         <li v-else><img src="../../../images/homeMenu/worked.png"/><p>工作完成</p></li>
                         <li><img src="../../../images/homeMenu/totalRevenue.png"/><p><span>{{totalIncrease}}元</span><em>总收益</em></p></li>
                         <!-- <li @click="getPath('becomeVip','成为VIP')"><img src="../../../images/homeMenu/icon01.png"/><p>成为VIP</p></li>
@@ -97,7 +98,8 @@
         computed: {
             ...mapGetters([
                 'noticelist',
-                'noticetotal'
+                'noticetotal',
+                'userInfo'
             ])
         },
         methods: {
