@@ -73,7 +73,7 @@
                     type: 'success',
                     duration:1500
                 });
-                this.getOpenId()
+                // this.getOpenId()
                 this.$router.push('/')
             },
             getOpenId() {
