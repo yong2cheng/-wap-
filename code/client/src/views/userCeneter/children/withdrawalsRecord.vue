@@ -19,8 +19,8 @@
                 <el-collapse accordion v-if="taskList.length > 0">
                     <el-collapse-item v-for="(item, index) in taskList" :key="index" class="integral_list">
                         <template slot="title">
-                            <div>
-                                <p class="integral_changeTypeName cf">
+                            <div style="width: 100%;">
+                                <p class="integral_changeTypeName cf" style="margin-bottom:0">
                                     <span class="change_Name"> <i>提现金额：</i>{{item.cashOutIntegral}}积分</span>
                                     <!-- <span style="font-size:12px">{{item.createDate}}</span> -->
                                     <em>{{item.statusName}}</em>
